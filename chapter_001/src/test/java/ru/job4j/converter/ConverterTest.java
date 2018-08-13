@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class GitConverterTest {
+public class ConverterTest {
 
     @Test
     public void when60RubleToDollarThen1() {

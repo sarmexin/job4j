@@ -12,7 +12,7 @@ public class Max {
      * @param question Принимает два числа.
      * @return максимальное число.
      */
-	public int max (int first, int second){
+	public int max(int first, int second) {
 	    return (first > second) ? first : second;
 	}
 }

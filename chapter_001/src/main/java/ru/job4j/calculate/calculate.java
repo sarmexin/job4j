@@ -7,7 +7,7 @@ package ru.job4j.calculate;
  * @version $Id$
  * @since 0.1
  */
-public class Calcugitlate {
+public class Calculate {
     /**
      * Main.
      * @param args - args.

@@ -18,25 +18,25 @@ public class CalculatorTest {
 	@Test
     public void whenDiv2On2Then1() {
         Calculator calc = new Calculator();
-        calc.div(1D, 1D);
+        calc.div(10, 5);
         double result = calc.getResult();
-        double expected = 2D;
+        double expected = 2;
         assertThat(result, is(expected));
     }
 	@Test
     public void whenSubtract4On2Then2() {
         Calculator calc = new Calculator();
-        calc.subtract(1D, 1D);
+        calc.subtract(10, 7);
         double result = calc.getResult();
-        double expected = 2D;
+        double expected = 3;
         assertThat(result, is(expected));
     }
 	@Test
     public void whenMultiple2On3Then6() {
         Calculator calc = new Calculator();
-        calc.multiple(1D, 1D);
+        calc.multiple(10, 3);
         double result = calc.getResult();
-        double expected = 2D;
+        double expected = 30;
         assertThat(result, is(expected));
     }
 }

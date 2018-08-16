@@ -9,7 +9,7 @@ package ru.job4j.max;
 public class Max {
 	/**
      * Находит максимальное из двух чисел.
-     * @param question Принимает два числа.
+     * @param first second Принимает два числа.
      * @return максимальное число.
      */
 	public int max(int first, int second) {

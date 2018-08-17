@@ -5,11 +5,12 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 /**
- * @author Petr Arsentev (mailto:parsentev@yandex.ru)
+ * @author Sergey Gavrilov (mailto:sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
 public class DummyBotTest {
+	
     @Test
     public void whenGreetBot() {
         DummyBot bot = new DummyBot();

@@ -27,7 +27,7 @@ public class Point {
 	
 	/**
 	* Функция вычисления расстояния между точками.
-	* @param Point that  
+	* @param that
 	* @return расстояние между точками
 	*/
     public double distanceTo(Point that) {

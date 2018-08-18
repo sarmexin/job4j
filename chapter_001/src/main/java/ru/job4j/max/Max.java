@@ -3,7 +3,7 @@ package ru.job4j.max;
 /**
  * @author Sergey Gavrilov (mailto:sarmexin@gmail.com)
  * @version $Id$
- * @since 0.1
+ * @since 0.11
  */
  public class Max {
 	 

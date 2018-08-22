@@ -25,4 +25,22 @@ public class TriangleTest {
  //Проверяем результат и ожидаемое значение.
  assertThat(result, closeTo(expected, 0.1));
  }
+@Test
+public void name() throws Exception {
+ Triangle triangle = new Triangle(null, null, null);
+ boolean result = triangle.exist(6, 4, 2);
+ assertFalse(result);
+}
+@Test
+public void name1() throws Exception {
+ Triangle triangle = new Triangle(null, null, null);
+ boolean result = triangle.exist(2, 6, 4);
+ assertFalse(result);
+}
+@Test
+public void name2() throws Exception {
+ Triangle triangle = new Triangle(null, null, null);
+ boolean result = triangle.exist(4, 2, 6);
+ assertFalse(result);
+}
 }

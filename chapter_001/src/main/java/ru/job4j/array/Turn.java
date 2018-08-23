@@ -20,7 +20,9 @@ public class Turn {
             store = array[index];
             array[index] = array[array.length - index - 1];
             array[array.length - index - 1] = store;
-            if ((array.length % 2 != 0) & (array.length / 2 == index)) break;
+            if ((array.length % 2 != 0) & (array.length / 2 == index)) {
+                break;
+            }
         }
         return array;
     }

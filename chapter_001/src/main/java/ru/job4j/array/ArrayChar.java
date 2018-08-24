@@ -4,19 +4,21 @@ package ru.job4j.array;
 /**
  * Обертка над строкой.
  * ArrayChar.
+ *
  * @author Sergey Gavrilov (sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
- public class ArrayChar {
+public class ArrayChar {
     private char[] data;
-    
+
     public ArrayChar(String line) {
         this.data = line.toCharArray();
     }
 
     /**
      * Проверяет. что слово начинается с префикса.
+     *
      * @param prefix префикс.
      * @return если слово начинается с префикса
      */

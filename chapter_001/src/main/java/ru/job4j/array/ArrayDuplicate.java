@@ -20,7 +20,7 @@ public class ArrayDuplicate {
         String time;
         int number = 0;
         for (int index = 0; index < array.length - number; index++) {
-            for (int index2 = 0; index2 < array.length - 2 - number; index2++) {
+            for (int index2 = 0; index2 < array.length - number; index2++) {
                 if (index == index2) {
                     index2++;
                 }
@@ -31,10 +31,6 @@ public class ArrayDuplicate {
                     number++;
                 }
             }
-        }
-
-        if (array[0] == array[1]) {
-            number++;
         }
         return Arrays.copyOf(array, array.length - number);
     }

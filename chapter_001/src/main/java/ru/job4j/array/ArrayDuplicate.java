@@ -32,6 +32,10 @@ public class ArrayDuplicate {
                 }
             }
         }
+
+        if (array[0] == array[1]) {
+            number++;
+        }
         return Arrays.copyOf(array, array.length - number);
     }
 }

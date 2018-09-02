@@ -1,13 +1,19 @@
 package ru.job4j.array;
 
 /**
- * Sheck.
+ * Check.
  *
  * @author Sergey Gavrilov (sarmexin@gmail.com)
  * @version $Id$
  * @since 0.2
  */
 public class Check {
+    /**
+     * Method mono.
+     *
+     * @param data[].
+     * @return result.
+     */
     public boolean mono(boolean[] data) {
         boolean result = true;
         int sheck = 0;

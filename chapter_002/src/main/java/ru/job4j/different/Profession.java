@@ -6,7 +6,7 @@ public class Profession {
 }
 
 class Doctor extends Profession {
-    public void treat() {
+    public void treat(Patient name) {
     }
 }
 
@@ -22,7 +22,7 @@ class Engineer extends Profession {
 class House {
 }
 
-class Teacher {
+class Teacher extends Profession {
     public void learn() {
     }
 }

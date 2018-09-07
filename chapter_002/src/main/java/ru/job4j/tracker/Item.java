@@ -30,7 +30,7 @@ public class Item {
         return created;
     }
 
-    public void setId(String id) {         // готов
+    public void setId(String id) {
         this.id = id;
     }
 }

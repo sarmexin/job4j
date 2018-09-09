@@ -11,11 +11,6 @@ public class Tracker {
      * Массив для хранение заявок.
      */
     private final Item[] items = new Item[100];
-    private Item[] itemsAll;
-    private Item[] itemsName;
-    private Item itemId = new Item();
-
-
 
     /**
      * Указатель ячейки для новой заявки.
@@ -55,8 +50,9 @@ public class Tracker {
      * @param item
      */
     public void replace(String id, Item item) {
-        for (int index = 0; index != this.items.length; index++) {
+        for (int index = 0; index != position; index++) {
             if (this.items[index].getId().equals(id)) {
+                item.setId(id);
                 this.items[index] = item;
                 break;
             }
@@ -69,7 +65,7 @@ public class Tracker {
      * @param id
      */
     public void delete(String id) {
-        for (int index = 0; index != this.items.length; index++) {
+        for (int index = 0; index != position; index++) {
             if (this.items[index].getId().equals(id)) {
                 System.arraycopy(items, (index + 1), items, index, (position - index));
                 position--;
@@ -81,12 +77,10 @@ public class Tracker {
     /**
      * Получение списка всех заявок
      *
-     * @return
+     * @return Возвращает копию массива items без null елементов
      */
     public Item[] findAll() {
-         System.arraycopy(this.items, 0, itemsAll, 0, position);
-        return itemsAll;
-
+        return Arrays.copyOf(items, position);
     }
 
     /**
@@ -96,17 +90,22 @@ public class Tracker {
      * @return
      */
     public Item[] findByName(String key) {
-        int index2 = 0;
-        for (int index = 0; index !=items.length; index++) {
+        int counter = 0;
+        int counter2 = 0;
+        for (int index = 0; index != position; index++) {
             if (this.items[index].getName().equals(key)) {
-                itemsName[index2++] = this.items[index];
-                if (this.items[index] == null) {
-                    break;
-                }
+                counter++;
             }
         }
-        return itemsName;
+        Item[] result = new Item[counter];
+        for (int index = 0; index != position; index++) {
+            if (this.items[index].getName().equals(key)) {
+                result[counter2++] = items[index];
+            }
+        }
+        return result;
     }
+
 
     /**
      * получение заявки по id
@@ -115,14 +114,13 @@ public class Tracker {
      * @return
      */
     public Item findById(String id) {
-        for (int index = 0; index != items.length; index++) {
+        Item result = null;
+        for (int index = 0; index != position; index++) {
             if (this.items[index].getId().equals(id)) {
-                itemId = items[index];
-            } else {
-                itemId =  null;
+                result = items[index];
+                break;
             }
-            break;
         }
-        return itemId;
+        return result;
     }
 }

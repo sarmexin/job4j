@@ -3,6 +3,9 @@ package ru.job4j.tracker;
 import java.util.*;
 
 /**
+ * Tracker.
+ *
+ * @author Sergey Gavrilov (sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
@@ -23,7 +26,7 @@ public class Tracker {
     private static final Random RN = new Random();
 
     /**
-     * Метод реализаущий добавление заявки в хранилище
+     * Метод реализаущий добавление заявки в хранилище.
      *
      * @param item новая заявка
      */
@@ -44,7 +47,7 @@ public class Tracker {
     }
 
     /**
-     * Метод редактирующий заявки в хранилище
+     * Метод редактирующий заявки в хранилище.
      *
      * @param id
      * @param item
@@ -60,7 +63,7 @@ public class Tracker {
     }
 
     /**
-     * Метод удаляющий заявку в хранилище
+     * Метод удаляющий заявку в хранилище.
      *
      * @param id
      */
@@ -75,19 +78,19 @@ public class Tracker {
     }
 
     /**
-     * Получение списка всех заявок
+     * Получение списка всех заявок.
      *
-     * @return Возвращает копию массива items без null елементов
+     * @return Возвращает копию массива items без null елементов.
      */
     public Item[] findAll() {
         return Arrays.copyOf(items, position);
     }
 
     /**
-     * Получение списка по имени
+     * Получение списка по имени.
      *
      * @param key
-     * @return
+     * @return массив заявок
      */
     public Item[] findByName(String key) {
         int counter = 0;
@@ -111,7 +114,7 @@ public class Tracker {
      * получение заявки по id
      *
      * @param id
-     * @return
+     * @return заявку
      */
     public Item findById(String id) {
         Item result = null;

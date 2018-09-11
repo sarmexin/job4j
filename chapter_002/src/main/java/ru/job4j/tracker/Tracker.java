@@ -47,19 +47,41 @@ public class Tracker {
     }
 
     /**
+     * Метод проверяющий введёный Id с Id заявок в хранилище.
+     *
+     * @param id
+     * @return
+     */
+    public boolean checkId(String id) {
+        boolean result = false;
+        for (int index = 0; index != position; index++) {
+            if (this.items[index].getId().equals(id)) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+    /**
      * Метод редактирующий заявки в хранилище.
      *
      * @param id
      * @param item
      */
-    public void replace(String id, Item item) {
-        for (int index = 0; index != position; index++) {
-            if (this.items[index].getId().equals(id)) {
-                item.setId(id);
-                this.items[index] = item;
-                break;
+    public boolean replace(String id, Item item) {
+        boolean result = false;
+        if (this.checkId(id)) {
+            for (int index = 0; index != position; index++) {
+                if (this.items[index].getId().equals(id)) {
+                    item.setId(id);
+                    this.items[index] = item;
+                    result = true;
+                    break;
+                }
             }
         }
+        return result;
     }
 
     /**
@@ -67,14 +89,19 @@ public class Tracker {
      *
      * @param id
      */
-    public void delete(String id) {
-        for (int index = 0; index != position; index++) {
-            if (this.items[index].getId().equals(id)) {
-                System.arraycopy(items, (index + 1), items, index, (position - index));
-                position--;
-                break;
+    public boolean delete(String id) {
+        boolean result = false;
+        if (this.checkId(id)) {
+            for (int index = 0; index != position; index++) {
+                if (this.items[index].getId().equals(id)) {
+                    System.arraycopy(items, (index + 1), items, index, (position - index));
+                    position--;
+                    result = true;
+                    break;
+                }
             }
         }
+        return result;
     }
 
     /**

@@ -40,6 +40,9 @@ public class Item {
         this.name = name;
         this.desc = description;
     }
+    public String toString() {
+        return "Id: " + this.getId() + " name: " + this.getName() + " desc: " + this.getDescription() + " created " + this.getCreated();
+    }
 
     /**
      * @return возвращает Id.

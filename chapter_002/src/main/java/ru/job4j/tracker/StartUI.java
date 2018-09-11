@@ -17,7 +17,7 @@ public class StartUI {
      */
     private static final String FA = "1";
     /**
-     * Константа для редактирования заявки
+     * Константа для редактирования заявки.
      */
     private static final String EI = "2";
     /**

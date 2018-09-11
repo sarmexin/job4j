@@ -18,7 +18,7 @@ public class Item {
     }
 
     /**
-     * Конструктор инициализирующий поля.
+     * Конструктор инициализирующий поля
      *
      * @param name
      * @param description

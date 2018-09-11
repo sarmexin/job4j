@@ -138,7 +138,7 @@ public class Tracker {
 
 
     /**
-     * получение заявки по id
+     * получение заявки по id.
      *
      * @param id
      * @return заявку

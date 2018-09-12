@@ -46,22 +46,7 @@ public class Tracker {
         return String.valueOf(System.currentTimeMillis() + RN.nextInt());
     }
 
-    /**
-     * Метод проверяющий введёный Id с Id заявок в хранилище.
-     *
-     * @param id
-     * @return
-     */
-    public boolean checkId(String id) {
-        boolean result = false;
-        for (int index = 0; index != position; index++) {
-            if (this.items[index].getId().equals(id)) {
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
+
 
     /**
      * Метод редактирующий заявки в хранилище.
@@ -71,7 +56,7 @@ public class Tracker {
      */
     public boolean replace(String id, Item item) {
         boolean result = false;
-        if (this.checkId(id)) {
+        if (this.findById(id) != null) {
             for (int index = 0; index != position; index++) {
                 if (this.items[index].getId().equals(id)) {
                     item.setId(id);
@@ -91,7 +76,7 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        if (this.checkId(id)) {
+        if (this.findById(id) != null) {
             for (int index = 0; index != position; index++) {
                 if (this.items[index].getId().equals(id)) {
                     System.arraycopy(items, (index + 1), items, index, (position - index));
@@ -120,17 +105,11 @@ public class Tracker {
      * @return массив заявок
      */
     public Item[] findByName(String key) {
-        int counter = 0;
-        int counter2 = 0;
-        for (int index = 0; index != position; index++) {
-            if (this.items[index].getName().equals(key)) {
-                counter++;
-            }
-        }
-        Item[] result = new Item[counter];
-        for (int index = 0; index != position; index++) {
-            if (this.items[index].getName().equals(key)) {
-                result[counter2++] = items[index];
+        Item[] result = new Item[this.position];
+        int j = 0;
+        for (int i = 0; i < this.position; i++) {
+            if (this.items[i].getName().equals(key)) {
+                result[j++] = items[i];
             }
         }
         return result;

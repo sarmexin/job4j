@@ -40,6 +40,12 @@ public class Item {
         this.name = name;
         this.desc = description;
     }
+
+    /**
+     * Переопределение метода toString.
+     *
+     * @return
+     */
     public String toString() {
         return "Id: " + this.getId() + " name: " + this.getName() + " desc: " + this.getDescription() + " created " + this.getCreated();
     }

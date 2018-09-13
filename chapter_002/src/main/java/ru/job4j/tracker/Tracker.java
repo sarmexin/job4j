@@ -76,7 +76,6 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        if (this.findById(id) != null) {
             for (int index = 0; index != position; index++) {
                 if (this.items[index].getId().equals(id)) {
                     System.arraycopy(items, (index + 1), items, index, (position - index));
@@ -85,7 +84,6 @@ public class Tracker {
                     break;
                 }
             }
-        }
         return result;
     }
 
@@ -112,7 +110,7 @@ public class Tracker {
                 result[j++] = items[i];
             }
         }
-        return result;
+        return Arrays.copyOf(result, j);
     }
 
 

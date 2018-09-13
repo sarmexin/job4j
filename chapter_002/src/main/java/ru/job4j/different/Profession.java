@@ -1,8 +1,8 @@
 package ru.job4j.different;
 
 public class Profession {
-    String name;
-    String profession;
+    private String name;
+    private String profession;
 }
 
 class Doctor extends Profession {
@@ -11,11 +11,11 @@ class Doctor extends Profession {
 }
 
 class Patient {
-    String name;
+    private String name;
 }
 
 class Engineer extends Profession {
-    public void build(House house) {
+    void build(House house) {
     }
 }
 

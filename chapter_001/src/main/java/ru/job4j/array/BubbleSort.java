@@ -11,7 +11,7 @@ public class BubbleSort {
     /**
      * Method sort.
      *
-     * @param array[].
+     * @param array
      * @return array[].
      */
     public int[] sort(int[] array) {

@@ -13,7 +13,7 @@ public class ArrayDuplicate {
     /**
      * Method remove.
      *
-     * @param array.
+     * @param array
      * @return array.
      */
     public String[] remove(String[] array) {

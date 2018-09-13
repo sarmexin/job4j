@@ -11,7 +11,7 @@ public class Check {
     /**
      * Method mono.
      *
-     * @param data[].
+     * @param data
      * @return result.
      */
     public boolean mono(boolean[] data) {

@@ -77,4 +77,16 @@ public class ThreeArraysTest {
         int[] result = ob.addition(arraysTest1, arraysTest2);
         assertThat(result, is(expect));
     }
+    /**
+     * Test addition.
+     */
+    @Test
+    public void theAdditionOfTheArray6() {
+        ThreeArrays ob = new ThreeArrays();
+        int[] arraysTest1 = new int[]{};
+        int[] arraysTest2 = new int[]{};
+        int[] expect = new int[]{};
+        int[] result = ob.addition(arraysTest1, arraysTest2);
+        assertThat(result, is(expect));
+    }
 }

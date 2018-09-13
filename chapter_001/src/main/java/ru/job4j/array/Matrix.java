@@ -11,7 +11,7 @@ public class Matrix {
     /**
      * Method multiple.
      *
-     * @param size.
+     * @param size
      * @return table[][].
      */
     public int[][] multiple(int size) {

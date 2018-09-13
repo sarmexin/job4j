@@ -18,13 +18,15 @@ public class ThreeArrays {
     public int[] addition(int[] array, int[] arrayTwo) {
         int[] arrayThree = new int[array.length + arrayTwo.length];
 
+        if (array.length == 0 && arrayTwo.length == 0) {
+            return array;
+        }
+
         if (array.length == 0) {
-            arrayThree = arrayTwo;
-            return arrayThree;
+            return arrayTwo;
         }
         if (arrayTwo.length == 0) {
-            arrayThree = array;
-            return arrayThree;
+            return array;
         }
         int element1 = 0, element2 = 0;
         int time1 = array[element1];

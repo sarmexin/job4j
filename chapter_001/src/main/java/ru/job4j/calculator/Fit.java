@@ -2,11 +2,17 @@ package ru.job4j.calculator;
 
 /**
  * Программа расчета идеального веса..
+ * Fit.
+ *
+ * @author Sergey Gavrilov (sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
  */
 public class Fit {
 
     /**
      * Идеальный вес для мужщины.
+     *
      * @param height Рост.
      * @return идеальный вес.
      */
@@ -16,6 +22,7 @@ public class Fit {
 
     /**
      * Идеальный вес для женщины.
+     *
      * @param height Рост.
      * @return идеальный вес.
      */

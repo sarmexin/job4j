@@ -1,10 +1,21 @@
 package ru.job4j.loop;
 
 import org.junit.Test;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Test.
+ *
+ * @author Sergey Gavrilov (mailto:sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class BoardTest {
+    /**
+     * Test getProperty.
+     */
     @Test
     public void whenPaintBoardWithWidthThreeAndHeightThreeThenStringWithThreeColsAndThreeRows() {
         Board board = new Board();
@@ -13,6 +24,10 @@ public class BoardTest {
         String expected = String.format("X X%s X %sX X%s", line, line, line);
         assertThat(result, is(expected));
     }
+
+    /**
+     * Test getProperty.
+     */
     @Test
     public void whenPaintBoardWithWidthFiveAndHeightFourThenStringWithFiveColsAndFourRows() {
         Board board = new Board();

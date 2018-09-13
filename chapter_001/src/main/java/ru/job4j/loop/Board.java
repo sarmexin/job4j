@@ -1,6 +1,18 @@
 package ru.job4j.loop;
 
+/**
+ * Board.
+ *
+ * @author Sergey Gavrilov (mailto:sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class Board {
+    /**
+     * @param width
+     * @param height
+     * @return screen.toString()
+     */
     public String paint(int width, int height) {
         StringBuilder screen = new StringBuilder();
         String ln = System.lineSeparator();

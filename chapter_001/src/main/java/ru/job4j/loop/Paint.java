@@ -5,9 +5,14 @@ package ru.job4j.loop;
  * @version $Id$
  * @since 0.1
  */
+
 import java.util.function.BiPredicate;
 
 public class Paint {
+    /**
+     * @param height
+     * @return loopBy
+     */
     public String rightTrl(int height) {
         return this.loopBy(
                 height,
@@ -16,6 +21,10 @@ public class Paint {
         );
     }
 
+    /**
+     * @param height
+     * @return loopBy
+     */
     public String leftTrl(int height) {
         return this.loopBy(
                 height,
@@ -24,6 +33,10 @@ public class Paint {
         );
     }
 
+    /**
+     * @param height
+     * @return loopBy
+     */
     public String pyramid(int height) {
         return this.loopBy(
                 height,
@@ -32,6 +45,11 @@ public class Paint {
         );
     }
 
+    /**
+     * @param height
+     * @param weight
+     * @return toString
+     */
     private String loopBy(int height, int weight, BiPredicate<Integer, Integer> predict) {
         StringBuilder screen = new StringBuilder();
         for (int row = 0; row != height; row++) {

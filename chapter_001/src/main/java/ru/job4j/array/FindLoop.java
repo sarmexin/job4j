@@ -11,8 +11,9 @@ public class FindLoop {
     /**
      * Method indexOf.
      *
-     * @param int[] data, int el.
-     * @return rst.
+     * @param data
+     * @param el
+     * @return rst
      */
     public int indexOf(int[] data, int el) {
         int rst = -1;

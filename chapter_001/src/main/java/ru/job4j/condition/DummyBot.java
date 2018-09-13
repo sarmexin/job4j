@@ -1,6 +1,8 @@
 package ru.job4j.condition;
 
 /**
+ * DummyBot.
+ *
  * @author Sergey Gavrilov (mailto:sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1
@@ -8,6 +10,7 @@ package ru.job4j.condition;
 public class DummyBot {
     /**
      * Отвечает на 2 вопроса.
+     *
      * @param question Вопрос от клиента.
      * @return Ответ.
      */
@@ -19,5 +22,5 @@ public class DummyBot {
             rsl = "До скорой встречи.";
         }
         return rsl;
-     }
+    }
 }

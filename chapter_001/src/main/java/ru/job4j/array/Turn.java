@@ -11,7 +11,7 @@ public class Turn {
     /**
      * Method turn
      *
-     * @param array[]
+     * @param array
      * @return array
      */
     public int[] turn(int[] array) {

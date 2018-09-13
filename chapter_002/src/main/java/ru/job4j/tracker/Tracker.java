@@ -47,7 +47,6 @@ public class Tracker {
     }
 
 
-
     /**
      * Метод редактирующий заявки в хранилище.
      *
@@ -76,14 +75,14 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-            for (int index = 0; index != position; index++) {
-                if (this.items[index].getId().equals(id)) {
-                    System.arraycopy(items, (index + 1), items, index, (position - index));
-                    position--;
-                    result = true;
-                    break;
-                }
+        for (int index = 0; index != position; index++) {
+            if (this.items[index].getId().equals(id)) {
+                System.arraycopy(items, (index + 1), items, index, (position - index));
+                position--;
+                result = true;
+                break;
             }
+        }
         return result;
     }
 

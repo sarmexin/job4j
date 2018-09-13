@@ -154,8 +154,8 @@ public class StartUI {
      */
     private void findItemById() {
         String id = this.input.ask("Введите Id заяки :");
-            Item item = tracker.findById(id);
-            if (item != null) {
+        Item item = tracker.findById(id);
+        if (item != null) {
             System.out.println(item);
         } else {
             System.out.println("Заявки с Id : " + id + " не найдено.");

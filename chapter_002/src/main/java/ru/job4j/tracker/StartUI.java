@@ -27,11 +27,11 @@ public class StartUI {
     /**
      * Константа для удаления заявки.
      */
-    private static final String FINDID = "4";
+    private static final String FIND_BY_ID = "4";
     /**
      * Константа для поиска заявки по имени.
      */
-    private static final String FINDNAME = "5";
+    private static final String FIND_BY_NAME = "5";
     /**
      * Константа для выхода из цикла.
      */
@@ -73,9 +73,9 @@ public class StartUI {
                 this.editItem();
             } else if (DELETE.equals(answer)) {
                 this.deleteItem();
-            } else if (FINDID.equals(answer)) {
+            } else if (FIND_BY_ID.equals(answer)) {
                 this.findItemById();
-            } else if (FINDNAME.equals(answer)) {
+            } else if (FIND_BY_NAME.equals(answer)) {
                 this.findItemByName();
             } else if (EXIT.equals(answer)) {
                 exit = true;
@@ -119,7 +119,7 @@ public class StartUI {
             this.tracker.replace(id, item);
             System.out.println("Заявка : " + id + " изменена.");
         } else {
-            System.out.println("Заявки с таким Id не найдено.");
+            System.out.println("Заявка с Id : " + id + " не найдена.");
         }
     }
 
@@ -128,11 +128,10 @@ public class StartUI {
      */
     private void deleteItem() {
         String id = this.input.ask("Введите Id заяки :");
-        if (this.tracker.findById(id) != null) {
-            this.tracker.delete(id);
+        if (this.tracker.delete(id)) {
             System.out.println("Заявка : " + id + " удалена");
         } else {
-            System.out.println("Заявки с таким Id не найдено.");
+            System.out.println("Заявка с Id : " + id + " не найдена.");
         }
     }
 
@@ -155,8 +154,8 @@ public class StartUI {
      */
     private void findItemById() {
         String id = this.input.ask("Введите Id заяки :");
-        if (this.tracker.findById(id) != null) {
             Item item = tracker.findById(id);
+            if (item != null) {
             System.out.println(item);
         } else {
             System.out.println("Заявки с Id : " + id + " не найдено.");
@@ -168,8 +167,9 @@ public class StartUI {
      */
     private void findItemByName() {
         String name = this.input.ask("Введите имя заявки :");
-        if (this.tracker.findByName(name).length != 0) {
-            for (Item str : this.tracker.findByName(name)) {
+        Item[] array = this.tracker.findByName(name);
+        if (array.length != 0) {
+            for (Item str : array) {
                 System.out.println(str);
             }
         } else {

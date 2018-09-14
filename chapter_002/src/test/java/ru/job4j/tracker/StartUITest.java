@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertNull;
 
 /**
  * Test.
@@ -35,8 +36,7 @@ public class StartUITest {
         String result = item2.getId();
         Input input = new StubInput(new String[]{"1", "3", item2.getId(), "1", "6"});
         new StartUI(input, tracker).init();
-        Item test = null;
-        assertThat(tracker.findById(result), is(test));
+        assertNull(tracker.findById(result));
     }
 
     /**

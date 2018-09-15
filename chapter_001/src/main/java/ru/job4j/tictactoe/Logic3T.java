@@ -33,39 +33,38 @@ public class Logic3T {
      */
     public boolean fillBy(Predicate<Figure3T> predicate, int startX, int startY, int deltaX, int deltaY) {
         boolean result = true;
-        if ((deltaX == 1 && deltaY == 1) || (deltaX == -1 && deltaY == 1)) {
-            for (int index = 0; index != this.table.length; index++) {
-                Figure3T cell = this.table[startX][startY];
-                startX += deltaX;
-                startY += deltaY;
-                if (!predicate.test(cell)) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-        if ((deltaX == 0 && deltaY == 1) || (deltaX == 1 && deltaY == 0)) {
-            for (int i = 0; i != this.table.length; i++) {
-                int startX1 = startX;
-                int startY1 = startY;
-                if (deltaX == 1) {
-                    startY1 += i;
-                } else {
-                    startX1 += i;
-                }
-                result = true;
-                for (int index = 0; index != this.table.length; index++) {
-                    Figure3T cell = this.table[startX1][startY1];
-                    startX1 += deltaX;
-                    startY1 += deltaY;
-                    if (!predicate.test(cell)) {
-                        result = false;
+        for (int index = 0; index != this.table.length; index++) {
+            Figure3T cell = this.table[startX][startY];
+            if ((deltaX == 0 && deltaY == 1) || (deltaX == 1 && deltaY == 0)) {
+                for (int i = 0; i != this.table.length; i++) {
+                    int startX1 = startX;
+                    int startY1 = startY;
+                    if (deltaX == 1) {
+                        startY1 += i;
+                    } else {
+                        startX1 += i;
+                    }
+                    result = true;
+                    for (int j = 0; j != this.table.length; j++) {
+                        cell = this.table[startX1][startY1];
+                        startX1 += deltaX;
+                        startY1 += deltaY;
+                        if (!predicate.test(cell)) {
+                            result = false;
+                            break;
+                        }
+                    }
+                    if (result == true) {
                         break;
                     }
                 }
-                if (result == true) {
-                    break;
-                }
+                break;
+            }
+            startX += deltaX;
+            startY += deltaY;
+            if (!predicate.test(cell)) {
+                result = false;
+                break;
             }
         }
         return result;

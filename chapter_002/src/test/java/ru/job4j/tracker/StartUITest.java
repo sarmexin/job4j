@@ -1,6 +1,12 @@
 package ru.job4j.tracker;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.StringJoiner;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -44,15 +50,292 @@ public class StartUITest {
      */
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
-        // создаём Tracker
         Tracker tracker = new Tracker();
-        //Напрямую добавляем заявку
         Item item = tracker.add(new Item("test name", "desc"));
-        //создаём StubInput с последовательностью действий(производим замену заявки)
         Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
-        // создаём StartUI и вызываем метод init()
         new StartUI(input, tracker).init();
-        // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.findById(item.getId()).getDescription(), is("test replace"));
     }
+
+    PrintStream stdout = System.out;
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    Tracker tracker = new Tracker();
+    Item item1 = tracker.add(new Item("name1", "desc1"));
+    Item item2 = tracker.add(new Item("name2", "desc2"));
+    Item item3 = tracker.add(new Item("name1", "desc3"));
+
+    @Before
+    public void loadOutput() {
+        System.setOut(new PrintStream(this.out));
+    }
+
+    @After
+    public void backOutput() {
+        System.out.println("execute after method");
+    }
+
+    /**
+     * Test Show Item.
+     */
+    @Test
+    public void whenUserAddItemThenShowAllItems() {
+        Input input = new StubInput(new String[]{"1", "6"});
+        System.setOut(new PrintStream(out));
+        new StartUI(input, tracker).init();
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append("Меню.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items.")
+                                .append(System.lineSeparator())
+                                .append("2. Edit Item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete Item")
+                                .append(System.lineSeparator())
+                                .append("4. Find Item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Programm")
+                                .append(System.lineSeparator())
+                                .append("-------------Список всех заявок --------------------")
+                                .append(System.lineSeparator())
+                                .append(item1)
+                                .append(System.lineSeparator())
+                                .append(item2)
+                                .append(System.lineSeparator())
+                                .append(item3)
+                                .append(System.lineSeparator())
+                                .append("Меню.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items.")
+                                .append(System.lineSeparator())
+                                .append("2. Edit Item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete Item")
+                                .append(System.lineSeparator())
+                                .append("4. Find Item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Programm")
+                                .append(System.lineSeparator())
+                                .toString()
+                )
+        );
+    }
+
+    /**
+     * Test Find Item by Id.
+     */
+    @Test
+    public void whenUserAddItemThenFindItemById() {
+        Input input = new StubInput(new String[]{"4", item2.getId(), "6"});
+        System.setOut(new PrintStream(out));
+        new StartUI(input, tracker).init();
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append("Меню.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items.")
+                                .append(System.lineSeparator())
+                                .append("2. Edit Item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete Item")
+                                .append(System.lineSeparator())
+                                .append("4. Find Item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Programm")
+                                .append(System.lineSeparator())
+                                .append(item2)
+                                .append(System.lineSeparator())
+                                .append("Меню.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items.")
+                                .append(System.lineSeparator())
+                                .append("2. Edit Item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete Item")
+                                .append(System.lineSeparator())
+                                .append("4. Find Item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Programm")
+                                .append(System.lineSeparator())
+                                .toString()
+                )
+        );
+    }
+
+    /**
+     * Test Not find Item by Id.
+     */
+    @Test
+    public void whenUserAddItemThenNotFindItemById() {
+        Input input = new StubInput(new String[]{"4", "12345", "6"});
+        System.setOut(new PrintStream(out));
+        new StartUI(input, tracker).init();
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append("Меню.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items.")
+                                .append(System.lineSeparator())
+                                .append("2. Edit Item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete Item")
+                                .append(System.lineSeparator())
+                                .append("4. Find Item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Programm")
+                                .append(System.lineSeparator())
+                                .append("Заявки с Id : " + "12345" + " не найдено.")
+                                .append(System.lineSeparator())
+                                .append("Меню.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items.")
+                                .append(System.lineSeparator())
+                                .append("2. Edit Item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete Item")
+                                .append(System.lineSeparator())
+                                .append("4. Find Item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Programm")
+                                .append(System.lineSeparator())
+                                .toString()
+                )
+        );
+    }
+
+    /**
+     * Test Find Item by name.
+     */
+    @Test
+    public void whenUserAddItemThenFindItemByName() {
+        Input input = new StubInput(new String[]{"5", item1.getName(), "6"});
+        System.setOut(new PrintStream(out));
+        new StartUI(input, tracker).init();
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append("Меню.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items.")
+                                .append(System.lineSeparator())
+                                .append("2. Edit Item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete Item")
+                                .append(System.lineSeparator())
+                                .append("4. Find Item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Programm")
+                                .append(System.lineSeparator())
+                                .append(item1)
+                                .append(System.lineSeparator())
+                                .append(item3)
+                                .append(System.lineSeparator())
+                                .append("Меню.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items.")
+                                .append(System.lineSeparator())
+                                .append("2. Edit Item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete Item")
+                                .append(System.lineSeparator())
+                                .append("4. Find Item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Programm")
+                                .append(System.lineSeparator())
+                                .toString()
+                )
+        );
+    }
+
+    /**
+     * Test Not find Item by name.
+     */
+    @Test
+    public void whenUserAddItemThenNotFindItemByName() {
+        Input input = new StubInput(new String[]{"5", "12345", "6"});
+        System.setOut(new PrintStream(out));
+        new StartUI(input, tracker).init();
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append("Меню.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items.")
+                                .append(System.lineSeparator())
+                                .append("2. Edit Item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete Item")
+                                .append(System.lineSeparator())
+                                .append("4. Find Item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Programm")
+                                .append(System.lineSeparator())
+                                .append("Заявки с именем : " + "12345" + " не найдено.")
+                                .append(System.lineSeparator())
+                                .append("Меню.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items.")
+                                .append(System.lineSeparator())
+                                .append("2. Edit Item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete Item")
+                                .append(System.lineSeparator())
+                                .append("4. Find Item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Programm")
+                                .append(System.lineSeparator())
+                                .toString()
+                )
+        );
+    }
 }
+
+

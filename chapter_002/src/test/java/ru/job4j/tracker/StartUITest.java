@@ -26,7 +26,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();     // создаём Tracker
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});   //создаём StubInput с последовательностью действий
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
         assertThat(tracker.findAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
@@ -40,7 +40,7 @@ public class StartUITest {
         Item item1 = tracker.add(new Item("name2", "desc2"));
         Item item2 = tracker.add(new Item("name3", "desc3"));
         String result = item2.getId();
-        Input input = new StubInput(new String[]{"1", "n", "3", item2.getId(), "n", "1", "y"});
+        Input input = new StubInput(new String[]{"1", "3", item2.getId(), "1", "6"});
         new StartUI(input, tracker).init();
         assertNull(tracker.findById(result));
     }
@@ -52,7 +52,7 @@ public class StartUITest {
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "y"});
+        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getDescription(), is("test replace"));
     }
@@ -79,7 +79,7 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenShowAllItems() {
-        Input input = new StubInput(new String[]{"1", "y"});
+        Input input = new StubInput(new String[]{"1", "6"});
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(
@@ -108,6 +108,20 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append(item3)
                                 .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items")
+                                .append(System.lineSeparator())
+                                .append("2. Edit item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete item")
+                                .append(System.lineSeparator())
+                                .append("4. Find item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Program")
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -118,7 +132,7 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenFindItemById() {
-        Input input = new StubInput(new String[]{"4", item2.getId(), "y"});
+        Input input = new StubInput(new String[]{"4", item2.getId(), "6"});
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(
@@ -141,6 +155,20 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append(item2)
                                 .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items")
+                                .append(System.lineSeparator())
+                                .append("2. Edit item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete item")
+                                .append(System.lineSeparator())
+                                .append("4. Find item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Program")
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -151,7 +179,7 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenNotFindItemById() {
-        Input input = new StubInput(new String[]{"4", "12345", "y"});
+        Input input = new StubInput(new String[]{"4", "12345", "6"});
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(
@@ -174,6 +202,20 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append("Заявки с Id : " + "12345" + " не найдено.")
                                 .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items")
+                                .append(System.lineSeparator())
+                                .append("2. Edit item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete item")
+                                .append(System.lineSeparator())
+                                .append("4. Find item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Program")
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -184,7 +226,7 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenFindItemByName() {
-        Input input = new StubInput(new String[]{"5", item1.getName(), "y"});
+        Input input = new StubInput(new String[]{"5", item1.getName(), "6"});
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(
@@ -209,6 +251,20 @@ public class StartUITest {
                                 .append(System.lineSeparator())
                                 .append(item3)
                                 .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items")
+                                .append(System.lineSeparator())
+                                .append("2. Edit item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete item")
+                                .append(System.lineSeparator())
+                                .append("4. Find item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Program")
+                                .append(System.lineSeparator())
                                 .toString()
                 )
         );
@@ -219,7 +275,7 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenNotFindItemByName() {
-        Input input = new StubInput(new String[]{"5", "12345", "y"});
+        Input input = new StubInput(new String[]{"5", "12345", "6"});
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(
@@ -241,6 +297,20 @@ public class StartUITest {
                                 .append("6. Exit Program")
                                 .append(System.lineSeparator())
                                 .append("Заявки с именем : " + "12345" + " не найдено.")
+                                .append(System.lineSeparator())
+                                .append("0. Add new Item.")
+                                .append(System.lineSeparator())
+                                .append("1. Show all items")
+                                .append(System.lineSeparator())
+                                .append("2. Edit item")
+                                .append(System.lineSeparator())
+                                .append("3. Delete item")
+                                .append(System.lineSeparator())
+                                .append("4. Find item by Id")
+                                .append(System.lineSeparator())
+                                .append("5. Find items by name")
+                                .append(System.lineSeparator())
+                                .append("6. Exit Program")
                                 .append(System.lineSeparator())
                                 .toString()
                 )

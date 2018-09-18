@@ -13,7 +13,11 @@ import static java.lang.Long.valueOf;
  * @since 0.1
  */
 public class StartUI {
-
+    /**
+     * Флажок для выхода.
+     * Программа работает до тех пор, пока значение истинно.
+     */
+    public boolean working = true;
     /**
      * Получение данных от пользователя.
      */
@@ -41,14 +45,17 @@ public class StartUI {
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         List<Integer> range = new ArrayList<>();
-        menu.fillActions();
+        menu.fillActions(this);
         for (int i = 0; i < menu.getActionsLength(); i++) {
             range.add(i);
         }
         do {
             menu.show();
             menu.select((input.ask("select:")));
-        } while (!"y".equals(this.input.ask("Exit?(y): ")));
+        } while (this.working);
+    }
+    public void stop() {
+        this.working = false;
     }
 
 

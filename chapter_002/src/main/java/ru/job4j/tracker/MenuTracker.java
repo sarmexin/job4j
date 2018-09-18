@@ -5,6 +5,7 @@ import java.util.List;
 
 
 public class MenuTracker {
+
     /**
      * @param хранит ссылку на объект .
      */
@@ -41,14 +42,14 @@ public class MenuTracker {
     /**
      * Метод заполняет массив.
      */
-    public void fillActions() {
-        this.actions.add(new AddAction());
-        this.actions.add(new ShowItems());
-        this.actions.add(new MenuTracker.EditItem());
-        this.actions.add(new MenuTracker.DeleteItem());
-        this.actions.add(new FindItemById());
-        this.actions.add(new FindItemsByName());
-        this.actions.add(new ExitProgram());
+    public void fillActions(StartUI ui) {
+        this.actions.add(new AddAction(0, "Add new Item."));
+        this.actions.add(new ShowItems(1, "Show all items"));
+        this.actions.add(new MenuTracker.EditItem(2, "Edit item"));
+        this.actions.add(new MenuTracker.DeleteItem(3, "Delete item"));
+        this.actions.add(new FindItemById(4, "Find item by Id"));
+        this.actions.add(new FindItemsByName(5, "Find items by name"));
+        this.actions.add(new ExitProgram(ui, 6, "Exit Program"));
     }
 
     /**
@@ -75,9 +76,16 @@ public class MenuTracker {
      * Метод реализующий вывод списка всех заявок из хранилища.
      */
     private class ShowItems implements UserAction {
+        private int key;
+        private String name;
+
+        public ShowItems(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
         @Override
         public int key() {
-            return 1;
+            return key;
         }
 
         @Override
@@ -90,7 +98,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "1. Show all items";
+            return String.format("%d. %s", key, name);
         }
     }
 
@@ -98,9 +106,16 @@ public class MenuTracker {
      * Метод реализующий изменение заявки по Id в хранилище.
      */
     private static class EditItem implements UserAction {
+        private int key;
+        private String name;
+
+        public EditItem(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
         @Override
         public int key() {
-            return 2;
+            return key;
         }
 
         @Override
@@ -121,7 +136,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "2. Edit item";
+            return String.format("%d. %s", key, name);
         }
     }
 
@@ -129,9 +144,16 @@ public class MenuTracker {
      * Метод реализующий удаление заявки по Id в хранилище.
      */
     private static class DeleteItem implements UserAction {
+        private int key;
+        private String name;
+
+        public DeleteItem(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
         @Override
         public int key() {
-            return 3;
+            return key;
         }
 
         @Override
@@ -146,7 +168,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "3. Delete item";
+            return String.format("%d. %s", key, name);
         }
     }
 
@@ -154,9 +176,16 @@ public class MenuTracker {
      * Метод реализующий вывод заявки по Id из хранилища.
      */
     public class FindItemById implements UserAction {
+        private int key;
+        private String name;
+
+        public FindItemById(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
         @Override
         public int key() {
-            return 4;
+            return key;
         }
 
         @Override
@@ -172,7 +201,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "4. Find item by Id";
+            return String.format("%d. %s", key, name);
         }
     }
 
@@ -180,9 +209,16 @@ public class MenuTracker {
      * Метод реализующий вывод списка заявок по имени заявки из хранилища.
      */
     private class FindItemsByName implements UserAction {
+        private int key;
+        private String name;
+
+        public FindItemsByName(int key, String name) {
+            this.key = key;
+            this.name = name;
+        }
         @Override
         public int key() {
-            return 5;
+            return key;
         }
 
         @Override
@@ -200,7 +236,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "5. Find items by name";
+            return String.format("%d. %s", key, name);
         }
     }
 
@@ -208,19 +244,29 @@ public class MenuTracker {
      *
      */
     private class ExitProgram implements UserAction {
+        private int key;
+        private String name;
+        private final StartUI ui;
+
+        public ExitProgram(StartUI ui,int key, String name) {
+            this.ui = ui;
+            this.key = key;
+            this.name = name;
+        }
         @Override
         public int key() {
-            return 6;
+            return key;
         }
 
         @Override
         public void execute(Input input, Tracker tracker) {
+            this.ui.stop();
 
         }
 
         @Override
         public String info() {
-            return "6. Exit Program";
+            return String.format("%d. %s", key, name);
         }
     }
 

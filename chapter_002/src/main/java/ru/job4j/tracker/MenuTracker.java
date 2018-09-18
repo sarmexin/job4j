@@ -71,6 +71,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Метод реализующий вывод списка всех заявок из хранилища.
+     */
     private class ShowItems implements UserAction {
         @Override
         public int key() {
@@ -91,6 +94,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Метод реализующий изменение заявки по Id в хранилище.
+     */
     private static class EditItem implements UserAction {
         @Override
         public int key() {
@@ -119,6 +125,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Метод реализующий удаление заявки по Id в хранилище.
+     */
     private static class DeleteItem implements UserAction {
         @Override
         public int key() {
@@ -141,6 +150,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Метод реализующий вывод заявки по Id из хранилища.
+     */
     public class FindItemById implements UserAction {
         @Override
         public int key() {
@@ -164,6 +176,9 @@ public class MenuTracker {
         }
     }
 
+    /**
+     * Метод реализующий вывод списка заявок по имени заявки из хранилища.
+     */
     private class FindItemsByName implements UserAction {
         @Override
         public int key() {
@@ -188,6 +203,10 @@ public class MenuTracker {
             return "5. Find items by name";
         }
     }
+
+    /**
+     *
+     */
     private class ExitProgram implements UserAction {
         @Override
         public int key() {

@@ -40,7 +40,7 @@ public class StartUITest {
         Item item1 = tracker.add(new Item("name2", "desc2"));
         Item item2 = tracker.add(new Item("name3", "desc3"));
         String result = item2.getId();
-        Input input = new StubInput(new String[]{"1","n", "3", item2.getId(),"n", "1", "y"});
+        Input input = new StubInput(new String[]{"1", "n", "3", item2.getId(), "n", "1", "y"});
         new StartUI(input, tracker).init();
         assertNull(tracker.findById(result));
     }

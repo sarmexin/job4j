@@ -42,13 +42,13 @@ public class MenuTracker {
      * Метод заполняет массив.
      */
     public void fillActions() {
-        this.actions.add(new AddAction(0, "Add program"));
-        this.actions.add(new ShowItems(1, "Show all items"));
-        this.actions.add(new MenuTracker.EditItem(2, "Edit item"));
-        this.actions.add(new MenuTracker.DeleteItem(3, "Delete item"));
-        this.actions.add(new FindItemById(4, "Find item by Id"));
-        this.actions.add(new FindItemsByName(5, "Find items by name"));
-        this.actions.add(new ExitProgram(6, "Exit Program"));
+        this.actions.add(new AddAction());
+        this.actions.add(new ShowItems());
+        this.actions.add(new MenuTracker.EditItem());
+        this.actions.add(new MenuTracker.DeleteItem());
+        this.actions.add(new FindItemById());
+        this.actions.add(new FindItemsByName());
+        this.actions.add(new ExitProgram());
     }
 
     /**
@@ -56,8 +56,8 @@ public class MenuTracker {
      *
      * @param key ключ операции
      */
-    public void select(int key) {
-        this.actions.get(key).execute(this.input, this.tracker);
+    public void select(String key) {
+        this.actions.get(Integer.parseInt(key)).execute(this.input, this.tracker);
     }
 
     /**
@@ -71,10 +71,127 @@ public class MenuTracker {
         }
     }
 
-    public class ShowItems implements UserAction {
+    private class ShowItems implements UserAction {
         @Override
-        public String key() {
-            return SHOW;
+        public int key() {
+            return 1;
+        }
+
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            System.out.println("-------------Список всех заявок --------------------");
+            for (Item str : tracker.findAll()) {
+                System.out.println(str);
+            }
+        }
+
+        @Override
+        public String info() {
+            return "1. Show all items";
+        }
+    }
+
+    private static class EditItem implements UserAction {
+        @Override
+        public int key() {
+            return 2;
+        }
+
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            String id = input.ask("Введите Id заяки :");
+            if (tracker.findById(id) != null) {
+                Item item = tracker.findById(id);
+                System.out.println(item);
+                String desc = input.ask("Введите новое описание :");
+                item.setDesc(desc);
+                System.out.println(item);
+                tracker.replace(id, item);
+                System.out.println("Заявка : " + id + " изменена.");
+            } else {
+                System.out.println("Заявка с Id : " + id + " не найдена.");
+            }
+        }
+
+        @Override
+        public String info() {
+            return "2. Edit item";
+        }
+    }
+
+    private static class DeleteItem implements UserAction {
+        @Override
+        public int key() {
+            return 3;
+        }
+
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            String id = input.ask("Введите Id заяки :");
+            if (tracker.delete(id)) {
+                System.out.println("Заявка : " + id + " удалена");
+            } else {
+                System.out.println("Заявка с Id : " + id + " не найдена.");
+            }
+        }
+
+        @Override
+        public String info() {
+            return "3. Delete item";
+        }
+    }
+
+    public class FindItemById implements UserAction {
+        @Override
+        public int key() {
+            return 4;
+        }
+
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            String id = input.ask("Введите Id заяки :");
+            Item item = tracker.findById(id);
+            if (item != null) {
+                System.out.println(item);
+            } else {
+                System.out.println("Заявки с Id : " + id + " не найдено.");
+            }
+        }
+
+        @Override
+        public String info() {
+            return "4. Find item by Id";
+        }
+    }
+
+    private class FindItemsByName implements UserAction {
+        @Override
+        public int key() {
+            return 5;
+        }
+
+        @Override
+        public void execute(Input input, Tracker tracker) {
+            String name = input.ask("Введите имя заявки :");
+            Item[] array = tracker.findByName(name);
+            if (array.length != 0) {
+                for (Item str : array) {
+                    System.out.println(str);
+                }
+            } else {
+                System.out.println("Заявки с именем : " + name + " не найдено.");
+            }
+        }
+
+        @Override
+        public String info() {
+            return "5. Find items by name";
+        }
+    }
+    private class ExitProgram implements UserAction {
+        @Override
+        public int key() {
+            return 6;
         }
 
         @Override
@@ -84,7 +201,8 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return "Add new Item.";
+            return "6. Exit Program";
         }
     }
+
 }

@@ -1,4 +1,8 @@
 package ru.job4j.tracker;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.lang.Long.valueOf;
 
 /**
  * StartUI.
@@ -8,34 +12,7 @@ package ru.job4j.tracker;
  * @since 0.1
  */
 public class StartUI {
-    /**
-     * Константа меню для добавления новой заявки.
-     */
-    private static final String ADD = "0";
-    /**
-     * Константа для получения списка всех заявок.
-     */
-    private static final String SHOW = "1";
-    /**
-     * Константа для редактирования заявки.
-     */
-    private static final String EDIT = "2";
-    /**
-     * Константа для удаления заявки.
-     */
-    private static final String DELETE = "3";
-    /**
-     * Константа для удаления заявки.
-     */
-    private static final String FIND_BY_ID = "4";
-    /**
-     * Константа для поиска заявки по имени.
-     */
-    private static final String FIND_BY_NAME = "5";
-    /**
-     * Константа для выхода из цикла.
-     */
-    private static final String EXIT = "6";
+
     /**
      * Получение данных от пользователя.
      */
@@ -61,121 +38,18 @@ public class StartUI {
      * Основой цикл программы.
      */
     public void init() {
-        boolean exit = false;
-        while (!exit) {
-            this.showMenu();
-            String answer = this.input.ask("Введите пункт меню : ");
-            if (ADD.equals(answer)) {
-                this.createItem();
-            } else if (SHOW.equals(answer)) {
-                this.getList();
-            } else if (EDIT.equals(answer)) {
-                this.editItem();
-            } else if (DELETE.equals(answer)) {
-                this.deleteItem();
-            } else if (FIND_BY_ID.equals(answer)) {
-                this.findItemById();
-            } else if (FIND_BY_NAME.equals(answer)) {
-                this.findItemByName();
-            } else if (EXIT.equals(answer)) {
-                exit = true;
+            MenuTracker menu = new MenuTracker(this.input, this.tracker);
+            List<Integer> range = new ArrayList<>();
+            menu.fillActions();
+            for (int i = 0; i < menu.getActionsLength(); i++) {
+                range.add(i);
             }
-        }
+            do {
+                menu.show();
+                menu.select((input.ask("select:")));
+            } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
 
-    /**
-     * Метод реализует добавленяи новый заявки в хранилище.
-     */
-    private void createItem() {
-        System.out.println("------------ Добавление новой заявки --------------");
-        String name = this.input.ask("Введите имя заявки :");
-        String desc = this.input.ask("Введите описание заявки :");
-        Item item = new Item(name, desc);
-        this.tracker.add(item);
-        System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
-    }
-
-    /**
-     * Метод реализующий вывод списка всех заявок из хранилища.
-     */
-    private void getList() {
-        System.out.println("-------------Список всех заявок --------------------");
-        for (Item str : tracker.findAll()) {
-            System.out.println(str);
-        }
-    }
-
-    /**
-     * Метод реализующий изменение заявки по Id в хранилище.
-     */
-    private void editItem() {
-        String id = this.input.ask("Введите Id заяки :");
-        if (this.tracker.findById(id) != null) {
-            Item item = this.tracker.findById(id);
-            System.out.println(item);
-            String desc = this.input.ask("Введите новое описание :");
-            item.setDesc(desc);
-            System.out.println(item);
-            this.tracker.replace(id, item);
-            System.out.println("Заявка : " + id + " изменена.");
-        } else {
-            System.out.println("Заявка с Id : " + id + " не найдена.");
-        }
-    }
-
-    /**
-     * Метод реализующий удаление заявки по Id в хранилище.
-     */
-    private void deleteItem() {
-        String id = this.input.ask("Введите Id заяки :");
-        if (this.tracker.delete(id)) {
-            System.out.println("Заявка : " + id + " удалена");
-        } else {
-            System.out.println("Заявка с Id : " + id + " не найдена.");
-        }
-    }
-
-    /**
-     * Метод реализующий вывод меню.
-     */
-    private void showMenu() {
-        System.out.println("Меню.");
-        System.out.println("0. Add new Item.");
-        System.out.println("1. Show all items.");
-        System.out.println("2. Edit Item");
-        System.out.println("3. Delete Item");
-        System.out.println("4. Find Item by Id");
-        System.out.println("5. Find items by name");
-        System.out.println("6. Exit Programm");
-    }
-
-    /**
-     * Метод реализующий вывод заявки по Id из хранилища.
-     */
-    private void findItemById() {
-        String id = this.input.ask("Введите Id заяки :");
-        Item item = tracker.findById(id);
-        if (item != null) {
-            System.out.println(item);
-        } else {
-            System.out.println("Заявки с Id : " + id + " не найдено.");
-        }
-    }
-
-    /**
-     * Метод реализующий вывод списка заявок по имени заявки из хранилища.
-     */
-    private void findItemByName() {
-        String name = this.input.ask("Введите имя заявки :");
-        Item[] array = this.tracker.findByName(name);
-        if (array.length != 0) {
-            for (Item str : array) {
-                System.out.println(str);
-            }
-        } else {
-            System.out.println("Заявки с именем : " + name + " не найдено.");
-        }
-    }
 
     /**
      * Запускт программы.

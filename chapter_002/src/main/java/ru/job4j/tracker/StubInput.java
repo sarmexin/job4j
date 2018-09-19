@@ -1,5 +1,10 @@
 package ru.job4j.tracker;
 
+/**
+ * @author Sergey Gavrilov (mailto:sermexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class StubInput implements Input {
 
     /**
@@ -22,15 +27,6 @@ public class StubInput implements Input {
     }
 
     /**
-     * Давайте рассмотрим, как работает этот метод.
-     * у нас есть объект в котором содержатся заранее продуманные ответы.
-     * При последовательном вызове метода ask нам надо возвращать соответствующие данные.
-     * Как если бы мы симулировали поведение пользователя.
-     * Для этого при каждом вызове метода ask мы увеличиваем счетчик и
-     * при следующем вызове он вернет нам новое значение.
-     */
-
-    /**
      * Method ask.
      *
      * @param question Вопрос пользователю.
@@ -39,5 +35,10 @@ public class StubInput implements Input {
     @Override
     public String ask(String question) {
         return this.value[position++];
+    }
+
+    @Override
+    public int ask(String question, int[] range) {
+        throw new UnsupportedOperationException("Unsupported operation");
     }
 }

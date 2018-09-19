@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * @author Sergey Gavrilov (sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class MenuTracker {
 
     /**
@@ -57,8 +62,8 @@ public class MenuTracker {
      *
      * @param key ключ операции
      */
-    public void select(String key) {
-        this.actions.get(Integer.parseInt(key)).execute(this.input, this.tracker);
+    public void select(int key) {
+        this.actions.get(key).execute(this.input, this.tracker);
     }
 
     /**
@@ -83,6 +88,7 @@ public class MenuTracker {
             this.key = key;
             this.name = name;
         }
+
         @Override
         public int key() {
             return key;
@@ -113,6 +119,7 @@ public class MenuTracker {
             this.key = key;
             this.name = name;
         }
+
         @Override
         public int key() {
             return key;
@@ -151,6 +158,7 @@ public class MenuTracker {
             this.key = key;
             this.name = name;
         }
+
         @Override
         public int key() {
             return key;
@@ -183,6 +191,7 @@ public class MenuTracker {
             this.key = key;
             this.name = name;
         }
+
         @Override
         public int key() {
             return key;
@@ -216,6 +225,7 @@ public class MenuTracker {
             this.key = key;
             this.name = name;
         }
+
         @Override
         public int key() {
             return key;
@@ -248,11 +258,12 @@ public class MenuTracker {
         private String name;
         private final StartUI ui;
 
-        public ExitProgram(StartUI ui,int key, String name) {
+        public ExitProgram(StartUI ui, int key, String name) {
             this.ui = ui;
             this.key = key;
             this.name = name;
         }
+
         @Override
         public int key() {
             return key;

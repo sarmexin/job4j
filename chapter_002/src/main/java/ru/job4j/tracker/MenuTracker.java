@@ -45,6 +45,18 @@ public class MenuTracker {
     }
 
     /**
+     *
+     * @return Массив range.
+     */
+    public int[] getRange() {
+        int[] range = new int[this.getActionsLength()];
+        for (int i = 0; i < this.getActionsLength(); i++) {
+            range[i] = i;
+        }
+        return range;
+    }
+
+    /**
      * Метод заполняет массив.
      */
     public void fillActions(StartUI ui) {

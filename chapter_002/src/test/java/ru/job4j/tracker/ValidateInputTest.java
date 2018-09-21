@@ -11,9 +11,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 /**
- * //TODO add comments.
+ * Test. Проверяет валидацию.
  *
- * @author Petr Arsentev (mailto:parsentev@yandex.ru)
+ * @author Sergey Gavrilov (mailto:sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
@@ -31,14 +31,32 @@ public class ValidateInputTest {
         System.setOut(this.out);
     }
 
+    /**
+     * Test ValidateInput. Проверяет на исключение MenuOutException.
+     */
     @Test
     public void whenInvalidInput() {
-        ValidateInput input = new ValidateInput(new StubInput(new String[] {"invalid", "1"}));
-        input.ask("select", new int[] {});
+        ValidateInput input = new ValidateInput(new StubInput(new String[]{"invalid", "1"}));
+        input.ask("select", new int[]{1});
         assertThat(
                 this.mem.toString(),
                 is(
                         String.format("Please enter validate data again.%n")
+                )
+        );
+    }
+
+    /**
+     * Test ValidateInput. Проверяет на исключение NumberFormatException.
+     */
+    @Test
+    public void whenSelectKeyInput() {
+        ValidateInput input = new ValidateInput(new StubInput(new String[]{"2", "1"}));
+        input.ask("select", new int[]{1});
+        assertThat(
+                this.mem.toString(),
+                is(
+                        String.format("Please select key from menu.%n")
                 )
         );
     }

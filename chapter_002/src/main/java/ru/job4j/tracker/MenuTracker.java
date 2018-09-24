@@ -92,20 +92,11 @@ public class MenuTracker {
     /**
      * Метод реализующий вывод списка всех заявок из хранилища.
      */
-    private class ShowItems implements UserAction {
-        private int key;
-        private String name;
+    private class ShowItems extends BaseAction {
 
         public ShowItems(int key, String name) {
-            this.key = key;
-            this.name = name;
+            super(key, name);
         }
-
-        @Override
-        public int key() {
-            return key;
-        }
-
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("-------------Список всех заявок --------------------");
@@ -113,28 +104,17 @@ public class MenuTracker {
                 System.out.println(str);
             }
         }
-
-        @Override
-        public String info() {
-            return String.format("%d. %s", key, name);
-        }
     }
 
     /**
      * Метод реализующий изменение заявки по Id в хранилище.
      */
-    private static class EditItem implements UserAction {
+    private static class EditItem extends BaseAction {
         private int key;
         private String name;
 
         public EditItem(int key, String name) {
-            this.key = key;
-            this.name = name;
-        }
-
-        @Override
-        public int key() {
-            return key;
+            super(key, name);
         }
 
         @Override
@@ -152,28 +132,17 @@ public class MenuTracker {
                 System.out.println("Заявка с Id : " + id + " не найдена.");
             }
         }
-
-        @Override
-        public String info() {
-            return String.format("%d. %s", key, name);
-        }
     }
 
     /**
      * Метод реализующий удаление заявки по Id в хранилище.
      */
-    private static class DeleteItem implements UserAction {
+    private static class DeleteItem extends BaseAction {
         private int key;
         private String name;
 
         public DeleteItem(int key, String name) {
-            this.key = key;
-            this.name = name;
-        }
-
-        @Override
-        public int key() {
-            return key;
+            super(key, name);
         }
 
         @Override
@@ -185,28 +154,17 @@ public class MenuTracker {
                 System.out.println("Заявка с Id : " + id + " не найдена.");
             }
         }
-
-        @Override
-        public String info() {
-            return String.format("%d. %s", key, name);
-        }
     }
 
     /**
      * Метод реализующий вывод заявки по Id из хранилища.
      */
-    public class FindItemById implements UserAction {
+    public class FindItemById extends BaseAction {
         private int key;
         private String name;
 
         public FindItemById(int key, String name) {
-            this.key = key;
-            this.name = name;
-        }
-
-        @Override
-        public int key() {
-            return key;
+            super(key, name);
         }
 
         @Override
@@ -219,28 +177,17 @@ public class MenuTracker {
                 System.out.println("Заявки с Id : " + id + " не найдено.");
             }
         }
-
-        @Override
-        public String info() {
-            return String.format("%d. %s", key, name);
-        }
     }
 
     /**
      * Метод реализующий вывод списка заявок по имени заявки из хранилища.
      */
-    private class FindItemsByName implements UserAction {
+    private class FindItemsByName extends BaseAction {
         private int key;
         private String name;
 
         public FindItemsByName(int key, String name) {
-            this.key = key;
-            this.name = name;
-        }
-
-        @Override
-        public int key() {
-            return key;
+            super(key, name);
         }
 
         @Override
@@ -254,11 +201,6 @@ public class MenuTracker {
             } else {
                 System.out.println("Заявки с именем : " + name + " не найдено.");
             }
-        }
-
-        @Override
-        public String info() {
-            return String.format("%d. %s", key, name);
         }
     }
 

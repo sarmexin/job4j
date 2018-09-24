@@ -59,12 +59,12 @@ public class StartUITest {
 
     private String ls = System.lineSeparator();
     private StringBuilder menu =
-            new StringBuilder("0. Add new Item.").append(ls)
-                    .append("1. Show all items").append(ls)
-                    .append("2. Edit item").append(ls)
-                    .append("3. Delete item").append(ls)
-                    .append("4. Find item by Id").append(ls)
-                    .append("5. Find items by name").append(ls)
+            new StringBuilder("0 : Add new Item.").append(ls)
+                    .append("1 : Show all items").append(ls)
+                    .append("2 : Edit item").append(ls)
+                    .append("3 : Delete item").append(ls)
+                    .append("4 : Find item by Id").append(ls)
+                    .append("5 : Find items by name").append(ls)
                     .append("6. Exit Program").append(ls);
     PrintStream stdout = System.out;
     ByteArrayOutputStream out = new ByteArrayOutputStream();

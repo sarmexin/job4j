@@ -5,10 +5,7 @@ package ru.job4j.tracker;
  * @version $Id$
  * @since 0.1
  */
-public class AddAction implements UserAction {
-    private int key;
-    private String name;
-
+class AddAction extends BaseAction {
     /**
      * Кщнструктор.
      *
@@ -16,16 +13,7 @@ public class AddAction implements UserAction {
      * @param name
      */
     public AddAction(int key, String name) {
-        this.key = key;
-        this.name = name;
-    }
-
-    /**
-     * @return Возвращает ключ.
-     */
-    @Override
-    public int key() {
-        return key;
+        super(key, name);
     }
 
     /**
@@ -42,13 +30,5 @@ public class AddAction implements UserAction {
         Item item = new Item(name, desc);
         tracker.add(item);
         System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
-    }
-
-    /**
-     * @return Возвращает информацию о действии.
-     */
-    @Override
-    public String info() {
-        return String.format("%d. %s", key, name);
     }
 }

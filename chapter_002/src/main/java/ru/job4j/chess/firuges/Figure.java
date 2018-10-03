@@ -1,6 +1,6 @@
 package ru.job4j.chess.firuges;
 
-public interface Figure {
+public interface  Figure {
     Cell position();
 
     Cell[] way(Cell source, Cell dest);

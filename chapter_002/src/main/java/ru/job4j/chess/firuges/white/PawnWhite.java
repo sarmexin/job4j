@@ -6,7 +6,7 @@ import ru.job4j.chess.firuges.Figure;
 /**
  * //TODO add comments.
  *
- * @author Petr Arsentev (parsentev@yandex.ru)
+ * @author Sergey gavrilov (sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1
  */

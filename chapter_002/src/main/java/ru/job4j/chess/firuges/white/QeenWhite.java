@@ -5,7 +5,7 @@ import ru.job4j.chess.firuges.Figure;
 
 /**
  *
- * @author Petr Arsentev (parsentev@yandex.ru)
+ * @author Petr Sergey gavrilov (sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1
  */

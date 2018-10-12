@@ -17,8 +17,9 @@ public class CoffeeMachine {
      */
     int[] changes(int value, int price) {
         int number = 0, index = 0, deliv = 0;
-        int[] delivery = new int[50];
-        for (int i = 1; i != 5; i++) {
+        int n =  (value - price) / money[money.length - 1] + 4;
+        int[] delivery = new int[n];
+        for (int i = 1; i != money.length + 1; i++) {
             number = (value - price - deliv) / money[money.length - i];
             for (int j = 0; j != number; j++) {
                 delivery[index++] = money[money.length - i];
@@ -28,10 +29,6 @@ public class CoffeeMachine {
                 break;
             }
         }
-
         return Arrays.copyOf(delivery, index);
-
     }
-
 }
-//public static void main(String[] args) {

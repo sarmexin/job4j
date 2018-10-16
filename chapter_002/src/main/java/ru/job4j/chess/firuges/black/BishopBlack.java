@@ -1,6 +1,6 @@
 package ru.job4j.chess.firuges.black;
 
-import ru.job4j.chess.OccupiedWayException;
+import ru.job4j.chess.ImpossibleMoveException;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
@@ -24,19 +24,22 @@ public class BishopBlack implements Figure {
     }
 
     @Override
-    public Cell[] way(Cell source, Cell dest) throws OccupiedWayException {
+    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
         if (Math.abs(source.x - dest.x) != Math.abs(source.y - dest.y)) {
-            System.out.println((source.x - dest.x) + "  " + (source.y - dest.y));
-            throw new OccupiedWayException("Так ходить нельзя");
+            throw new ImpossibleMoveException("Так ходить нельзя");
         }
         Cell[] steps = new Cell[Math.abs(source.x - dest.x)];
-        int deltaX = 0, deltaY = 0;
-        deltaX = Integer.compare(dest.x, source.x);
-        deltaY = Integer.compare(dest.y, source.y);
+        int deltaX = Integer.compare(dest.x, source.x);
+        int deltaY = Integer.compare(dest.y, source.y);
+        int x, y, x1 = source.x, y1 = source.y;
         for (int i = 1; i < steps.length + 1; i++) {
-            if ((source.x + deltaX * i) >= 0 && (source.x + deltaX * i) <= 7 && (source.y + deltaY * i) >= 0 && (source.y + deltaY * i) <= 7 && source.x + deltaX * (i - 1) != dest.x && source.y + deltaY * (i - 1) != dest.y) {
-                steps[i - 1] = Cell.findCell(source.x + deltaX * i, source.y + deltaY * i);
+            x = source.x + deltaX * i;
+            y = source.y + deltaY * i;
+            if (x >= 0 && x <= 7 && y >= 0 && y <= 7 && x1 != dest.x && y1 != dest.y) {
+                steps[i - 1] = Cell.findCell(x, y);
             }
+            x1 = x;
+            y1 = y;
         }
         return steps;
     }

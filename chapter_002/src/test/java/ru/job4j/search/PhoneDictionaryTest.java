@@ -16,6 +16,7 @@ import static org.junit.Assert.assertThat;
  */
 public class PhoneDictionaryTest {
     /**
+     *
      * Проверка на нахождение совпадений в телефонном справочнике.
      * Test find
      */

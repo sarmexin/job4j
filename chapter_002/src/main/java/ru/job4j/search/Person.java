@@ -1,6 +1,7 @@
 package ru.job4j.search;
 
 /**
+ *
  * @author Sergey gavrilov (sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1

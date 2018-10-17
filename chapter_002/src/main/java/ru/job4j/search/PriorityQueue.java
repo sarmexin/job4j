@@ -6,7 +6,6 @@ import java.util.List;
 
 public class PriorityQueue {
     private LinkedList<Task> tasks = new LinkedList<>();
-    private List<Task> result = new ArrayList<>();
 
     /**
      * Метод должен вставлять в нужную позицию элемент.
@@ -17,10 +16,14 @@ public class PriorityQueue {
      */
     public void put(Task task) {
         if (tasks.size() != 0) {
-            int j = tasks.size();
-            for (int i = 0; i != j; i++) {
+            for (int i = 0; i != tasks.size(); i++) {
                 if (tasks.get(i).getPriority() > task.getPriority()) {
                     tasks.add(i, task);
+                    break;
+                }
+                if (tasks.get(i).getPriority() == task.getPriority() && tasks.get(i + 1).getPriority() > task.getPriority())   {
+                    tasks.add(i + 1, task);
+                    break;
                 }
             }
             if (tasks.get(tasks.size() - 1).getPriority() < task.getPriority()) {

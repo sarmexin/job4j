@@ -31,15 +31,11 @@ public class BishopBlack implements Figure {
         Cell[] steps = new Cell[Math.abs(source.x - dest.x)];
         int deltaX = Integer.compare(dest.x, source.x);
         int deltaY = Integer.compare(dest.y, source.y);
-        int x, y, x1 = source.x, y1 = source.y;
+        int x, y;
         for (int i = 1; i < steps.length + 1; i++) {
             x = source.x + deltaX * i;
             y = source.y + deltaY * i;
-            if (x >= 0 && x <= 7 && y >= 0 && y <= 7 && x1 != dest.x && y1 != dest.y) {
-                steps[i - 1] = Cell.findCell(x, y);
-            }
-            x1 = x;
-            y1 = y;
+            steps[i - 1] = Cell.findCell(x, y);
         }
         return steps;
     }

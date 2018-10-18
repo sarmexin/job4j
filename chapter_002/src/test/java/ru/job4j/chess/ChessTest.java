@@ -13,20 +13,14 @@ public class ChessTest {
     /**
      * Test Нельзя идти, на пути есть фигуры
      */
-    @Test
+    @Test(expected = OccupiedWayException.class)
     public void figureCannotGoInTheWayOfAFigure() {
-        try {
             Logic logic = new Logic();
             Figure pawnBlack = new PawnBlack(Cell.B2);
             Figure bishopBlack = new BishopBlack(Cell.C1);
             logic.add(pawnBlack);
             logic.add(bishopBlack);
             logic.move(Cell.C1, Cell.A3);
-
-        } catch (OccupiedWayException OWE) {
-            int a = 1;
-            assertThat(a, is(1));
-        }
     }
     /**
      * Test Фигура может так ходить
@@ -44,19 +38,13 @@ public class ChessTest {
     /**
      * Test фигура так пойти не может, на конечной точке фигура
      */
-    @Test
+    @Test(expected = FigureNotFoundException.class)
     public void figureCannotGoLikeThatIsWorthAFigureAtTheEnd() {
-        try {
             Logic logic = new Logic();
             Figure pawnBlack = new PawnBlack(Cell.A3);
             Figure bishopBlack = new BishopBlack(Cell.C1);
             logic.add(pawnBlack);
             logic.add(bishopBlack);
             logic.move(Cell.C1, Cell.A3);
-
-        } catch (FigureNotFoundException FNFE) {
-            int a = 1;
-            assertThat(a, is(1));
         }
-    }
 }

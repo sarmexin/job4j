@@ -1,5 +1,6 @@
 package ru.job4j.list;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,10 +31,27 @@ public class ConvertList2Array {
             }
         }
         if (list.size() % rows != 0) {
-            for ( int a = 0; a != cells - j; a++) {
+            for (int a = 0; a != cells - j; a++) {
                 array[cells - 1][j + a] = 0;
             }
         }
         return array;
     }
+
+    /**
+     * Метод создаёт один List<Integer> из List<int[]>
+     *
+     * @param list
+     * @return
+     */
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> result = new ArrayList<>();
+        for (int[] el : list) {
+            for (int i : el) {
+                result.add(i);
+            }
+        }
+        return result;
+    }
+
 }

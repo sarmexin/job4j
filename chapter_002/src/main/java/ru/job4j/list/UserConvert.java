@@ -17,9 +17,11 @@ public class UserConvert {
      */
     public HashMap<Integer, User> process(List<User> list) {
         HashMap<Integer, User> element = new HashMap<>();
+        int code;
         for (User el : list) {
-            el.setId(el.hashCode());
-            element.put(el.hashCode(), el);
+            code = el.hashCode();
+            el.setId(code);
+            element.put(code, el);
         }
         return element;
     }

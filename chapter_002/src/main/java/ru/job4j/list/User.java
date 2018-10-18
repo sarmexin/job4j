@@ -10,16 +10,29 @@ import java.util.Objects;
  * @since 0.1
  */
 public class User {
-    private Integer id;
+    private int id;
     private String name;
     private String city;
 
-    public User(String name, String city) {
+    public User(int id, String name, String city) {
         this.name = name;
         this.city = city;
+        this.id = id;
     }
 
-    public void setId(Integer id) {
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setId(int id) {
         this.id = id;
     }
 

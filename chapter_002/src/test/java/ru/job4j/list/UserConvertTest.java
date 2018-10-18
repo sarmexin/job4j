@@ -24,10 +24,10 @@ public class UserConvertTest {
     public void test() {
         UserConvert ob = new UserConvert();
         List<User> list = new ArrayList<>();
-        list.add(new User("Вася", "Саратов"));
-        list.add(new User("Рома", "Воронеж"));
-        User user1 = new User("Вася", "Саратов");
-        User user2 = new User("Рома", "Воронеж");
+        list.add(new User(1,"Вася", "Саратов"));
+        list.add(new User(2,"Рома", "Воронеж"));
+        User user1 = new User(1,"Вася", "Саратов");
+        User user2 = new User(2,"Рома", "Воронеж");
         HashMap<Integer, User> result = ob.process(list);
         HashMap<Integer, User> expect = new HashMap<>();
         expect.put(user1.hashCode(), user1);

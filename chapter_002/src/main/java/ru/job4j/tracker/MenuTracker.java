@@ -40,17 +40,21 @@ public class MenuTracker {
      *
      * @return длину массива
      */
-    public int getActionsLength() {
-        return this.actions.size();
-    }
+    // public int getActionsLength() {
+    //     return this.actions.size();
+    // }
 
     /**
      * @return Массив range.
      */
-    public int[] getRange() {
-        int[] range = new int[this.getActionsLength()];
-        for (int i = 0; i < this.getActionsLength(); i++) {
-            range[i] = i;
+    public List<Integer> getRange() {
+        // int[] range = new int[this.getActionsLength()];
+        List<Integer> range = new ArrayList<Integer>();
+        //for (int i = 0; i < this.getActionsLength(); i++) {
+        //    range[i] = i;
+        // }
+        for (int i = 0; i < actions.size(); i++) {
+            range.add(i, i);
         }
         return range;
     }
@@ -207,7 +211,7 @@ public class MenuTracker {
     /**
      *
      */
-    private class ExitProgram implements UserAction {
+    private class ExitProgram extends BaseAction {
         private int key;
         private String name;
         private final StartUI ui;

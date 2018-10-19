@@ -1,13 +1,14 @@
 package ru.job4j.tracker;
 
 public abstract class BaseAction implements UserAction {
-    private final int key;
-    private final String name;
+    private int key;
+    private String name;
 
     protected BaseAction(final int key, final String name) {
         this.key = key;
         this.name = name;
     }
+    protected BaseAction () {}
 
     @Override
     public int key() {

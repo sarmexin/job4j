@@ -6,6 +6,8 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.StringJoiner;
 
 import static org.hamcrest.core.Is.is;
@@ -25,10 +27,15 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
-        Tracker tracker = new Tracker();     // создаём Tracker
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});   //создаём StubInput с последовательностью действий
-        new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
-        assertThat(tracker.findAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
+        Tracker tracker = new Tracker();
+        List<String> list = new ArrayList<>();
+        list.add("0");
+        list.add("test name");
+        list.add("desc");
+        list.add("6");
+        Input input = new StubInput(list);
+        new StartUI(input, tracker).init();
+        assertThat(tracker.findByName("test name").get(0).getName(), is("test name"));
     }
 
     /**
@@ -40,7 +47,13 @@ public class StartUITest {
         Item item1 = tracker.add(new Item("name2", "desc2"));
         Item item2 = tracker.add(new Item("name3", "desc3"));
         String result = item2.getId();
-        Input input = new StubInput(new String[]{"1", "3", item2.getId(), "1", "6"});
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("3");
+        list.add(item2.getId());
+        list.add("1");
+        list.add("6");
+        Input input = new StubInput(list);
         new StartUI(input, tracker).init();
         assertNull(tracker.findById(result));
     }
@@ -52,7 +65,12 @@ public class StartUITest {
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "6"});
+        List<String> list = new ArrayList<>();
+        list.add("2");
+        list.add(item.getId());
+        list.add("test replace");
+        list.add("6");
+        Input input = new StubInput(list);
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getDescription(), is("test replace"));
     }
@@ -88,7 +106,10 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenShowAllItems() {
-        Input input = new StubInput(new String[]{"1", "6"});
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("6");
+        Input input = new StubInput(list);
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(
@@ -115,7 +136,11 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenFindItemById() {
-        Input input = new StubInput(new String[]{"4", item2.getId(), "6"});
+        List<String> list = new ArrayList<>();
+        list.add("4");
+        list.add(item2.getId());
+        list.add("6");
+        Input input = new StubInput(list);
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(
@@ -136,7 +161,11 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenNotFindItemById() {
-        Input input = new StubInput(new String[]{"4", "12345", "6"});
+        List<String> list = new ArrayList<>();
+        list.add("4");
+        list.add("12345");
+        list.add("6");
+        Input input = new StubInput(list);
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(
@@ -157,7 +186,11 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenFindItemByName() {
-        Input input = new StubInput(new String[]{"5", item1.getName(), "6"});
+        List<String> list = new ArrayList<>();
+        list.add("5");
+        list.add(item1.getName());
+        list.add("6");
+        Input input = new StubInput(list);
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(
@@ -180,7 +213,11 @@ public class StartUITest {
      */
     @Test
     public void whenUserAddItemThenNotFindItemByName() {
-        Input input = new StubInput(new String[]{"5", "12345", "6"});
+        List<String> list = new ArrayList<>();
+        list.add("5");
+        list.add("12345");
+        list.add("6");
+        Input input = new StubInput(list);
         System.setOut(new PrintStream(out));
         new StartUI(input, tracker).init();
         assertThat(

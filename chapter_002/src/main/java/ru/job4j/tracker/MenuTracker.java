@@ -45,7 +45,6 @@ public class MenuTracker {
     }
 
     /**
-     *
      * @return Массив range.
      */
     public int[] getRange() {
@@ -97,6 +96,7 @@ public class MenuTracker {
         public ShowItems(int key, String name) {
             super(key, name);
         }
+
         @Override
         public void execute(Input input, Tracker tracker) {
             System.out.println("-------------Список всех заявок --------------------");
@@ -193,8 +193,8 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             String name = input.ask("Введите имя заявки :");
-            Item[] array = tracker.findByName(name);
-            if (array.length != 0) {
+            List<Item> array = tracker.findByName(name);
+            if (array.size() != 0) {
                 for (Item str : array) {
                     System.out.println(str);
                 }

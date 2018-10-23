@@ -38,21 +38,10 @@ public class MenuTracker {
     /**
      * Метод для получения массива меню.
      *
-     * @return длину массива
-     */
-    // public int getActionsLength() {
-    //     return this.actions.size();
-    // }
-
-    /**
-     * @return Массив range.
+     * @return
      */
     public List<Integer> getRange() {
-        // int[] range = new int[this.getActionsLength()];
         List<Integer> range = new ArrayList<Integer>();
-        //for (int i = 0; i < this.getActionsLength(); i++) {
-        //    range[i] = i;
-        // }
         for (int i = 0; i < actions.size(); i++) {
             range.add(i, i);
         }
@@ -230,7 +219,6 @@ public class MenuTracker {
         @Override
         public void execute(Input input, Tracker tracker) {
             this.ui.stop();
-
         }
 
         @Override

@@ -8,7 +8,9 @@ public abstract class BaseAction implements UserAction {
         this.key = key;
         this.name = name;
     }
-    protected BaseAction () {}
+    protected BaseAction() {
+
+    }
 
     @Override
     public int key() {

@@ -41,9 +41,9 @@ public class MenuTracker {
      * @return
      */
     public List<Integer> getRange() {
-        List<Integer> range = new ArrayList<Integer>();
+        List<Integer> range = new ArrayList<>();
         for (int i = 0; i < actions.size(); i++) {
-            range.add(i, i);
+            range.add(i);
         }
         return range;
     }
@@ -103,9 +103,6 @@ public class MenuTracker {
      * Метод реализующий изменение заявки по Id в хранилище.
      */
     private static class EditItem extends BaseAction {
-        private int key;
-        private String name;
-
         public EditItem(int key, String name) {
             super(key, name);
         }
@@ -131,9 +128,6 @@ public class MenuTracker {
      * Метод реализующий удаление заявки по Id в хранилище.
      */
     private static class DeleteItem extends BaseAction {
-        private int key;
-        private String name;
-
         public DeleteItem(int key, String name) {
             super(key, name);
         }
@@ -153,9 +147,6 @@ public class MenuTracker {
      * Метод реализующий вывод заявки по Id из хранилища.
      */
     public class FindItemById extends BaseAction {
-        private int key;
-        private String name;
-
         public FindItemById(int key, String name) {
             super(key, name);
         }
@@ -176,9 +167,6 @@ public class MenuTracker {
      * Метод реализующий вывод списка заявок по имени заявки из хранилища.
      */
     private class FindItemsByName extends BaseAction {
-        private int key;
-        private String name;
-
         public FindItemsByName(int key, String name) {
             super(key, name);
         }
@@ -201,19 +189,16 @@ public class MenuTracker {
      *
      */
     private class ExitProgram extends BaseAction {
-        private int key;
-        private String name;
         private final StartUI ui;
 
         public ExitProgram(StartUI ui, int key, String name) {
+            super(key, name);
             this.ui = ui;
-            this.key = key;
-            this.name = name;
         }
 
         @Override
         public int key() {
-            return key;
+            return this.getKey();
         }
 
         @Override
@@ -223,7 +208,7 @@ public class MenuTracker {
 
         @Override
         public String info() {
-            return String.format("%d. %s", key, name);
+            return String.format("%d. %s", this.getKey(), this.getName());
         }
     }
 

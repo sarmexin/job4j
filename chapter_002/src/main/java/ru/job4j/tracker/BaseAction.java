@@ -8,8 +8,13 @@ public abstract class BaseAction implements UserAction {
         this.key = key;
         this.name = name;
     }
-    protected BaseAction() {
 
+    public int getKey() {
+        return key;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

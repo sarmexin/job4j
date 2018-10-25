@@ -1,4 +1,4 @@
-package ru.job4j.search;
+package ru.job4j.sorting;
 
 import ru.job4j.sorting.User;
 

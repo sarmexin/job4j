@@ -1,9 +1,5 @@
 package ru.job4j.sorting;
 
-import ru.job4j.search.SortNameComparator;
-import ru.job4j.search.UserAgeComparator;
-import ru.job4j.search.UserNameComparator;
-
 import java.util.*;
 
 /**
@@ -12,7 +8,7 @@ import java.util.*;
  * @since 0.1
  */
 public class SortUser {
-    private TreeSet<User> treeSet = new TreeSet<User>();
+    private TreeSet<User> treeSet = new TreeSet<>();
 
     /**
      * Метод который будет возвращать TreeSet пользователей, отсортированных по возрасту в порядке возрастания.
@@ -33,11 +29,8 @@ public class SortUser {
      */
     public List<User> sortNameLength(List<User> list) {
         SortNameComparator sortNameComparator = new SortNameComparator();
-        TreeSet<User> treeSetName = new TreeSet<>(sortNameComparator);
-        treeSetName.addAll(list);
-        List<User> list2 = new ArrayList<>();
-        list2.addAll(treeSetName);
-        return list2;
+        list.sort(sortNameComparator);
+        return list;
     }
 
     /**

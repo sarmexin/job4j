@@ -9,15 +9,18 @@ import java.util.Comparator;
  * @version $Id$
  * @since 0.1
  */
-public class UserAgeComparator implements Comparator<User> {
+public class SortNameComparator implements Comparator<User> {
     /**
-     * Сравнивает возраст.
+     * Сравнивает имена по длине.
      *
      * @param a
      * @param b
      * @return
      */
     public int compare(User a, User b) {
-        return a.getAge().compareTo(b.getAge());
+        if (a.getName().length() == b.getName().length()) {
+            return 0;
+        }
+        return a.getName().length() < b.getName().length() ? -1 : 1;
     }
 }

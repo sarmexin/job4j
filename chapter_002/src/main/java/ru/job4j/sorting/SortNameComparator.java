@@ -21,6 +21,6 @@ public class SortNameComparator implements Comparator<User> {
         if (a.getName().length() == b.getName().length()) {
             return 0;
         }
-        return a.getName().length() < b.getName().length() ? -1 : 1;
+        return b.getName().length() < a.getName().length() ? 1 : -1;
     }
 }

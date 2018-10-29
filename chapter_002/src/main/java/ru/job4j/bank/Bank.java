@@ -68,7 +68,7 @@ public class Bank {
      * Получение всех счетов клиента банка по номеру паспорта.
      *
      * @param passport
-     * @return
+     * @return List<Account>
      */
     public List<Account> getUserAccount(String passport) {
         User user = this.searchByPassport(passport);
@@ -87,29 +87,13 @@ public class Bank {
      * @param destPassport
      * @param destRequisite
      * @param amount
-     * @return
+     * @return boolean
      */
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String destRequisite, double amount) {
         boolean result = true;
-        User user1 = this.searchByPassport(srcPassport);
-        User user2 = this.searchByPassport(destPassport);
-        boolean flag1 = false, flag2 = false;
-        Account srcAccount = null, destAccount = null;
-        for (Account account : this.treeMap.get(user1)) {
-            if (account.getRequisites().equals(srcRequisite)) {
-                srcAccount = account;
-                flag1 = true;
-                break;
-            }
-        }
-        for (Account account : this.treeMap.get(user2)) {
-            if (account.getRequisites().equals(destRequisite)) {
-                destAccount = account;
-                flag2 = true;
-                break;
-            }
-        }
-        if (flag1 && flag2) {
+        Account srcAccount = this.searchByPassportAndRequisites(srcPassport, srcRequisite);
+        Account destAccount = this.searchByPassportAndRequisites(destPassport, destRequisite);
+        if (srcAccount != null && destAccount != null) {
             double srcMoney1 = Double.parseDouble(srcAccount.getValue());
             double destMoney = Double.parseDouble(destAccount.getValue());
             if (srcMoney1 > amount) {
@@ -123,10 +107,29 @@ public class Bank {
     }
 
     /**
+     * Поиск по номеру паспорта и номеру счёта клиента банка.
+     *
+     * @param passport
+     * @param requisites
+     * @return account
+     */
+    private Account searchByPassportAndRequisites(String passport, String requisites) {
+        User user = this.searchByPassport(passport);
+        Account result = null;
+        for (Account account : this.treeMap.get(user)) {
+            if (account.getRequisites().equals(requisites)) {
+                result = account;
+                break;
+            }
+        }
+        return result;
+    }
+
+    /**
      * Поиск по номеру паспорта ключа для treeMap.
      *
      * @param passport
-     * @return
+     * @return user
      */
     private User searchByPassport(String passport) {
         User result = null;

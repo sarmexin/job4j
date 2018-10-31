@@ -1,5 +1,8 @@
 package ru.job4j.tracker;
 
+import java.util.List;
+import java.util.function.Consumer;
+
 /**
  * StartUI.
  *
@@ -35,13 +38,20 @@ public class StartUI {
     }
 
     /**
-     * Основой цикл программы.
+     * Основой цикл программы, с выводом на экран меню.
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillActions(this);
         do {
-            menu.show();
+            Consumer<List<UserAction>> consumer = x -> {
+                for (UserAction action : x) {
+                    if (action != null) {
+                        System.out.println(action.info());
+                    }
+                }
+            };
+            consumer.accept(menu.getActions());
             menu.select((input.ask("select:", menu.getRange())));
         } while (this.working);
     }

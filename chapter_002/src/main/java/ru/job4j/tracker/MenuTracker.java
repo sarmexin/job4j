@@ -35,6 +35,10 @@ public class MenuTracker {
         this.tracker = tracker;
     }
 
+    public List<UserAction> getActions() {
+        return actions;
+    }
+
     /**
      * Метод для получения массива меню.
      *
@@ -73,13 +77,13 @@ public class MenuTracker {
     /**
      * Метод выводит на экран меню.
      */
-    public void show() {
-        for (UserAction action : this.actions) {
-            if (action != null) {
-                System.out.println(action.info());
-            }
-        }
-    }
+//    public void show() {
+//        for (UserAction action : this.actions) {
+//            if (action != null) {
+//                System.out.println(action.info());
+//            }
+//        }
+//    }
 
     /**
      * Метод реализующий вывод списка всех заявок из хранилища.

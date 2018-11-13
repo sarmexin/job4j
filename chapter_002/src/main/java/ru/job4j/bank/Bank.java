@@ -1,6 +1,7 @@
 package ru.job4j.bank;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author Sergey gavrilov (sarmexin@gmail.com)
@@ -73,10 +74,8 @@ public class Bank {
     public List<Account> getUserAccount(String passport) {
         User user = this.searchByPassport(passport);
         List<Account> list = new ArrayList<>();
-        if (user != null) {
-            list.addAll(treeMap.get(user));
-        }
-        return list;
+        return treeMap.get(user).stream()
+                .collect(Collectors.toList());
     }
 
     /**
@@ -116,13 +115,10 @@ public class Bank {
     private Account searchByPassportAndRequisites(String passport, String requisites) {
         User user = this.searchByPassport(passport);
         Account result = null;
-        for (Account account : this.treeMap.get(user)) {
-            if (account.getRequisites().equals(requisites)) {
-                result = account;
-                break;
-            }
-        }
-        return result;
+        Optional<Account> optional = treeMap.get(user).stream()
+                .filter(x -> x.getRequisites().equals(requisites))
+                .findFirst();
+        return optional.get();
     }
 
     /**
@@ -134,11 +130,9 @@ public class Bank {
     private User searchByPassport(String passport) {
         User result = null;
         Set<Map.Entry<User, ArrayList<Account>>> set = treeMap.entrySet();
-        for (Map.Entry<User, ArrayList<Account>> me : set) {
-            if (me.getKey().getPassport().equals(passport)) {
-                result = me.getKey();
-            }
-        }
-        return result;
+        Optional<Map.Entry<User, ArrayList<Account>>> optional = set.stream()
+                .filter(x -> x.getKey().getPassport().equals(passport))
+                .findFirst();
+        return optional.get().getKey();
     }
 }

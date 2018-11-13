@@ -22,7 +22,7 @@ public class CalculatorTest {
     @Test
     public void testLinear() {
         Calculator calculator = new Calculator();
-        List<Double> buffer = calculator.linear(10, 13);
+        List<Double> buffer = calculator.diapason(10, 13, (x) -> x + 10);
         assertThat(buffer, is(Arrays.asList((double) 20, (double) 21, (double) 22)));
     }
 
@@ -32,7 +32,7 @@ public class CalculatorTest {
     @Test
     public void testQuadratic() {
         Calculator calculator = new Calculator();
-        List<Double> buffer = calculator.quadratic(2, 5);
+        List<Double> buffer = calculator.diapason(2, 5, (x) -> Math.pow(x, 2));
         assertThat(buffer, is(Arrays.asList((double) 4, (double) 9, (double) 16)));
     }
 
@@ -42,7 +42,7 @@ public class CalculatorTest {
     @Test
     public void testLogarithmic() {
         Calculator calculator = new Calculator();
-        List<Double> buffer = calculator.logarithmic(10, 13);
+        List<Double> buffer = calculator.diapason(10, 13, (x) -> Math.log(x));
         assertThat(buffer, is(Arrays.asList(2.302585092994046, 2.3978952727983707, 2.4849066497880004)));
     }
 }

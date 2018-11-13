@@ -25,40 +25,4 @@ public class Calculator {
         }
         return buffer;
     }
-
-    /**
-     * Метод, реализует линейную функцию.
-     *
-     * @param start
-     * @param end
-     * @return
-     */
-    public List<Double> linear(int start, int end) {
-        List<Double> buffer = this.diapason(start, end, (x) -> x + 10);
-        return buffer;
-    }
-
-    /**
-     * Метод, реализует квадратичную функцию.
-     *
-     * @param start
-     * @param end
-     * @return
-     */
-    public List<Double> quadratic(int start, int end) {
-        List<Double> buffer = this.diapason(start, end, (x) -> Math.pow(x, 2));
-        return buffer;
-    }
-
-    /**
-     * Метод, реализует логарифмическую функцию.
-     *
-     * @param start
-     * @param end
-     * @return
-     */
-    public List<Double> logarithmic(int start, int end) {
-        List<Double> buffer = this.diapason(start, end, (x) -> Math.log(x));
-        return buffer;
-    }
 }

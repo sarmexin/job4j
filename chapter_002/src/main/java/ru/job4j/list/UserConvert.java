@@ -1,7 +1,11 @@
 package ru.job4j.list;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * @author Sergey Gavrilov (mailto:sermexin@gmail.com)
@@ -16,13 +20,8 @@ public class UserConvert {
      * @return
      */
     public HashMap<Integer, User> process(List<User> list) {
-        HashMap<Integer, User> element = new HashMap<>();
-        int code;
-        for (User el : list) {
-            code = el.hashCode();
-            el.setId(code);
-            element.put(code, el);
-        }
-        return element;
+        HashMap<Integer, User> map = new HashMap<>();
+        Long n = list.stream().peek(x -> map.put(x.hashCode(), x)).count();
+        return map;
     }
 }

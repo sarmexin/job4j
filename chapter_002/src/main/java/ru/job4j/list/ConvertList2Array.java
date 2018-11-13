@@ -2,6 +2,7 @@ package ru.job4j.list;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Sergey Gavrilov (mailto:sermexin@gmail.com)
@@ -17,23 +18,22 @@ public class ConvertList2Array {
      * @return
      */
     public int[][] toArray(List<Integer> list, int rows) {
+        List<Integer> list2 = new ArrayList<>();
+        list2.addAll(list);
         int cells = list.size() / rows;
         if (list.size() % rows != 0) {
             cells++;
+            for (int i = 0; i != cells * rows - list.size(); i++) {
+                list2.add(0);
+            }
         }
         int[][] array = new int[rows][cells];
-        int i = 0, j = 0;
-        for (Integer el : list) {
-            array[i][j++] = el;
-            if (j == cells) {
-                j = 0;
-                i++;
-            }
-        }
-        if (list.size() % rows != 0) {
-            for (int a = 0; a != cells - j; a++) {
-                array[cells - 1][j + a] = 0;
-            }
+        for (int i = 0; i < cells; i++) {
+            List<Integer> result = list2.stream()
+                    .skip(i * cells)
+                    .limit(cells)
+                    .collect(Collectors.toList());
+            array[i] = result.stream().mapToInt(x -> x).toArray();
         }
         return array;
     }
@@ -53,5 +53,4 @@ public class ConvertList2Array {
         }
         return result;
     }
-
 }

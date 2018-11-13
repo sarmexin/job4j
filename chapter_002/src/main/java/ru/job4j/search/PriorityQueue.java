@@ -3,6 +3,10 @@ package ru.job4j.search;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class PriorityQueue {
     private LinkedList<Task> tasks = new LinkedList<>();
@@ -15,32 +19,18 @@ public class PriorityQueue {
      * @param task задача
      */
     public void put(Task task) {
-        /**if (tasks.size() != 0) {
-            for (int i = 0; i != tasks.size(); i++) {
-                if (tasks.get(i).getPriority() > task.getPriority()) {
-                    tasks.add(i, task);
-                    break;
-                }
-                if (tasks.get(i).getPriority() == task.getPriority() && tasks.get(i + 1).getPriority() > task.getPriority())   {
-                    tasks.add(i + 1, task);
-                    break;
-                }
-            }
-            if (tasks.get(tasks.size() - 1).getPriority() < task.getPriority()) {
-                tasks.addLast(task);
-            }
-        } else {
+        Optional<Task> element = tasks.stream()
+                .filter(x -> x.getPriority() >= task.getPriority())
+                .findAny();
+        if (element.isPresent() && tasks.size() == 0) {
             tasks.add(task);
-        }
-         */
-        int i = 0;
-        for (Task t : this.tasks) {
-            if (t.getPriority() > task.getPriority()) {
-                break;
+        } else {
+            if (element.equals(Optional.empty())) {
+                tasks.add(task);
+            } else {
+                tasks.add(tasks.indexOf(element.get()), task);
             }
-            i++;
         }
-        tasks.add(i, task);
     }
 
     public Task take() {

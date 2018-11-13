@@ -1,6 +1,10 @@
 package ru.job4j.tracker;
 
+import ru.job4j.bank.User;
+
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Tracker.
@@ -49,14 +53,10 @@ public class Tracker {
     public boolean replace(String id, Item item) {
         boolean result = false;
         if (this.findById(id) != null) {
-            for (int index = 0; index != items.size(); index++) {
-                if (items.get(index).getId().equals(id)) {
-                    item.setId(id);
-                    items.set(index, item);
-                    result = true;
-                    break;
-                }
-            }
+            result = items.stream()
+                    .filter(x -> x.getId().equals(id))
+                    .map(x -> items.set(items.indexOf(x), item))
+                    .anyMatch(x -> x.getId().equals(id));
         }
         return result;
     }
@@ -68,12 +68,12 @@ public class Tracker {
      */
     public boolean delete(String id) {
         boolean result = false;
-        for (int index = 0; index != items.size(); index++) {
-            if (items.get(index).getId().equals(id)) {
-                items.remove(index);
-                result = true;
-                break;
-            }
+        Optional<Item> optional = items.stream()
+                .filter(x -> x.getId().equals(id))
+                .findFirst();
+        if (optional.isPresent()) {
+            result = true;
+            items.remove(optional.get());
         }
         return result;
     }
@@ -94,13 +94,9 @@ public class Tracker {
      * @return массив заявок
      */
     public List<Item> findByName(String key) {
-        List<Item> items2 = new ArrayList<>();
-        for (Item element : items) {
-            if (element.getName().equals(key)) {
-                items2.add(element);
-            }
-        }
-        return items2;
+        return items.stream()
+                .filter(x -> x.getName().equals(key))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -111,11 +107,9 @@ public class Tracker {
      */
     public Item findById(String id) {
         Item result = null;
-        for (Item element : items) {
-            if (element.getId().equals(id)) {
-                result = element;
-            }
-        }
-        return result;
+        Optional<Item> optional = items.stream()
+                .filter(x -> x.getId().equals(id))
+                .findFirst();
+        return optional.isPresent() ? optional.get() : null;
     }
 }

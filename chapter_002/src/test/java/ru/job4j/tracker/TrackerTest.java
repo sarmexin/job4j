@@ -35,13 +35,13 @@ public class TrackerTest {
     @Test
     public void whenReplaceNameThenReturnNewName() {
         Tracker tracker = new Tracker();
-        Item previous = new Item("test1", "testDescription", 123L);
-        tracker.add(previous);
-        Item next = new Item("test2", "testDescription2", 1234L);
-        tracker.add(next);
-        next.setId(previous.getId());
-        tracker.replace(previous.getId(), next);
-        assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
+        Item previous1 = new Item("test1", "testDescription", 123L);
+        tracker.add(previous1);
+        Item previous2 = new Item("test2", "testDescription2", 1234L);
+        tracker.add(previous2);
+        previous2.setId(previous1.getId());
+        tracker.replace(previous1.getId(), previous2);
+        assertThat(tracker.findById(previous1.getId()).getName(), is("test2"));
     }
 
     /**
@@ -59,6 +59,8 @@ public class TrackerTest {
         tracker.add(previous3);
         Item previous4 = new Item("test4", "testDescription", 123L);
         tracker.add(previous4);
+        Item previous5 = new Item("test5", "testDescription", 123L);
+        tracker.add(previous5);
         String prov = previous3.getId();
         tracker.delete(prov);
         Item previous = null;

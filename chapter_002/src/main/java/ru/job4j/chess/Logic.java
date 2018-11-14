@@ -3,6 +3,14 @@ package ru.job4j.chess;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
+import java.util.Arrays;
+import java.util.OptionalInt;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 /**
  * @author Sergey gavrilov (sarmexin@gmail.com)
  * @version $Id$
@@ -37,7 +45,6 @@ public class Logic {
         return result;
     }
 
-
     public void clean() {
         for (int position = 0; position != this.figures.length; position++) {
             this.figures[position] = null;
@@ -47,11 +54,11 @@ public class Logic {
 
     public int findBy(Cell cell) {
         int rst = -1;
-        for (int index = 0; index != this.figures.length; index++) {
-            if (this.figures[index] != null && this.figures[index].position().equals(cell)) {
-                rst = index;
-                break;
-            }
+        OptionalInt first = IntStream.range(0, figures.length)
+                .filter(i -> this.figures[i] != null && this.figures[i].position().equals(cell))
+                .findFirst();
+        if (first.isPresent()) {
+            rst = first.getAsInt();
         }
         return rst;
     }

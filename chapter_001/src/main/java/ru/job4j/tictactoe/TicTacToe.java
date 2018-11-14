@@ -19,11 +19,11 @@ import javafx.stage.Stage;
 public class TicTacToe extends Application {
     private static final String JOB4J = "Крестики-нолики www.job4j.ru";
     private final int size = 3;
-    private final Figure3T[][] cells = new Figure3T[size][size];
-    private final Logic3T logic = new Logic3T(cells);
+    private final ru.job4j.tictactoe.Figure3T[][] cells = new ru.job4j.tictactoe.Figure3T[size][size];
+    private final ru.job4j.tictactoe.Logic3T logic = new ru.job4j.tictactoe.Logic3T(cells);
 
-    private Figure3T buildRectangle(int x, int y, int size) {
-        Figure3T rect = new Figure3T();
+    private ru.job4j.tictactoe.Figure3T buildRectangle(int x, int y, int size) {
+        ru.job4j.tictactoe.Figure3T rect = new ru.job4j.tictactoe.Figure3T();
         rect.setX(x * size);
         rect.setY(y * size);
         rect.setHeight(size);
@@ -84,7 +84,7 @@ public class TicTacToe extends Application {
 
     private EventHandler<MouseEvent> buildMouseEvent(Group panel) {
         return event -> {
-            Figure3T rect = (Figure3T) event.getTarget();
+            ru.job4j.tictactoe.Figure3T rect = (ru.job4j.tictactoe.Figure3T) event.getTarget();
             if (this.checkState()) {
                 if (event.getButton() == MouseButton.PRIMARY) {
                     rect.take(true);
@@ -97,7 +97,6 @@ public class TicTacToe extends Application {
                             this.buildMarkO(rect.getX(), rect.getY(), 50)
                     );
                 }
-                this.checkWinner();
                 this.checkState();
             }
         };
@@ -107,7 +106,7 @@ public class TicTacToe extends Application {
         Group panel = new Group();
         for (int y = 0; y != this.size; y++) {
             for (int x = 0; x != this.size; x++) {
-                Figure3T rect = this.buildRectangle(x, y, 50);
+                ru.job4j.tictactoe.Figure3T rect = this.buildRectangle(x, y, 50);
                 this.cells[y][x] = rect;
                 panel.getChildren().add(rect);
                 rect.setOnMouseClicked(this.buildMouseEvent(panel));

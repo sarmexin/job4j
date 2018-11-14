@@ -5,6 +5,11 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * @author Sergey Gavrilov (mailto:sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.11
+ */
 public class Logic3TTest {
 
     @Test
@@ -43,7 +48,7 @@ public class Logic3TTest {
     @Test
     public void whenHasOWinnerDiag2() {
         Figure3T[][] table = {
-                {new Figure3T(false), new Figure3T(), new Figure3T(false)},
+                {new Figure3T(), new Figure3T(), new Figure3T(false)},
                 {new Figure3T(true), new Figure3T(false), new Figure3T(true)},
                 {new Figure3T(false), new Figure3T(), new Figure3T(true)},
         };
@@ -54,12 +59,13 @@ public class Logic3TTest {
     @Test
     public void whenHasXHorizontalWinner() {
         Figure3T[][] table = {
-                {new Figure3T(false), new Figure3T(), new Figure3T(true)},
+                {new Figure3T(), new Figure3T(), new Figure3T(true)},
                 {new Figure3T(true), new Figure3T(true), new Figure3T(true)},
-                {new Figure3T(), new Figure3T(false), new Figure3T()},
+                {new Figure3T(), new Figure3T(), new Figure3T()},
         };
         Logic3T login = new Logic3T(table);
-        assertThat(login.isWinnerX(), is(true));
+        boolean b = login.isWinnerX();
+        assertThat(b, is(true));
     }
 
 
@@ -105,11 +111,11 @@ public class Logic3TTest {
                 {new Figure3T(), new Figure3T(false), new Figure3T(true)},
         };
         Logic3T login = new Logic3T(table);
-        assertThat(login.isWinnerO(), is(true));
+        assertThat(login.isWinnerX(), is(true));
     }
 
     @Test
-    public void whenHasXWinner4On4() {
+    public void whenHasOWinner4On4() {
         Figure3T[][] table = {
                 {new Figure3T(), new Figure3T(false), new Figure3T(false), new Figure3T()},
                 {new Figure3T(), new Figure3T(false), new Figure3T(false), new Figure3T(true)},

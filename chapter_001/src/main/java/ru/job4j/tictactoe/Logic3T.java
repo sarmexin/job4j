@@ -22,7 +22,7 @@ public class Logic3T {
     }
 
     /**
-     * Method fillBy.
+     * Проверяет линии на наличие полных совпадений.
      *
      * @param predicate
      * @param startX    Начальная координата по X.
@@ -45,24 +45,33 @@ public class Logic3T {
         return result;
     }
 
+    /**
+     * Проверяет есть ли выигрышныая комбинация у Х.
+     *
+     * @return
+     */
     public boolean isWinnerX() {
         boolean result = true;
-        for (int i = 0; i != this.table.length; i++) {
-            if (!this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 0) ||
-                    !this.fillBy(Figure3T::hasMarkX, 0, 0, 0, 1)) {
+        for (int i = 0; i != table.length; i++) {
+            if (this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 0) ||
+                    this.fillBy(Figure3T::hasMarkX, 0, 0, 0, 1)) {
                 result = false;
                 break;
             }
         }
         return result ||
-                this.fillBy(Figure3T::hasMarkX, 0,0, 1, 1) ||
-                this.fillBy(Figure3T::hasMarkX, this.table.length - 1 , 0, -1, 1);
+                this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1) ||
+                this.fillBy(Figure3T::hasMarkX, this.table.length - 1, 0, -1, 1);
     }
 
-
+    /**
+     * Проверяет есть ли выигрышныая комбинация у О.
+     *
+     * @return
+     */
     public boolean isWinnerO() {
         boolean result = true;
-        for (int i = 0; i != this.table.length; i++) {
+        for (int i = 0; i != table.length; i++) {
             if (!this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 0) ||
                     !this.fillBy(Figure3T::hasMarkO, 0, 0, 0, 1)) {
                 result = false;
@@ -70,26 +79,28 @@ public class Logic3T {
             }
         }
         return result ||
-                this.fillBy(Figure3T::hasMarkO, 0,0, 1, 1) ||
-                this.fillBy(Figure3T::hasMarkO, this.table.length - 1 , 0, -1, 1);
+                !this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 1) ||
+                !this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, -1, 1);
     }
 
+
     /**
-     * Method hasGap.
+     * Проверяет наличие пустых клеток.
      *
      * @return
      */
 
     public boolean hasGap() {
         boolean result = false;
-        for (int index = 0; index < table.length; index++) {
-            for (int index2 = 0; index2 < table.length; index2++) {
-                if (!table[index][index2].hasMarkO() && !table[index][index2].hasMarkX()) {
+        int length = table.length;
+        for (int index = 0; index < length; index++) {
+            for (int index2 = 0; index2 < length; index2++) {
+                if (!table[index][index2].hasMarkX() && !table[index][index2].hasMarkO()) {
                     result = true;
                     break;
                 }
             }
-            if (result == true) {
+            if (result) {
                 break;
             }
         }

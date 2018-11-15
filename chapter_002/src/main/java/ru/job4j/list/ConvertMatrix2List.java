@@ -23,19 +23,9 @@ public class ConvertMatrix2List {
      * @param array
      * @return
      */
-    public List<Integer> toList(int[][] array) {
-        Integer[][] array2 = new Integer[array.length][array.length];
-        int i = 0, j = 0;
-        for (int[] el : array) {
-            for (int el2 : el) {
-                array2[i][j] = Integer.valueOf(array[i][j++]);
-
-            }
-            j = 0;
-            i++;
-        }
-        return Stream.of(array2).flatMap(Stream::of)
-                .collect(Collectors.toList());
-
+    List<Integer> toList(int[][] array) {
+        List<Integer> list = new ArrayList<>();
+        Arrays.stream(array).map(Arrays::stream).forEach(x -> x.forEach(list::add));
+        return list;
     }
 }

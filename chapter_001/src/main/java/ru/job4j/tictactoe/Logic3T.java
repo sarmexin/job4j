@@ -53,15 +53,15 @@ public class Logic3T {
     public boolean isWinnerX() {
         boolean result = true;
         for (int i = 0; i != table.length; i++) {
-            if (this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 0) ||
-                    this.fillBy(Figure3T::hasMarkX, 0, 0, 0, 1)) {
+            if (this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 0)
+                    || this.fillBy(Figure3T::hasMarkX, 0, 0, 0, 1)) {
                 result = false;
                 break;
             }
         }
-        return result ||
-                this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1) ||
-                this.fillBy(Figure3T::hasMarkX, this.table.length - 1, 0, -1, 1);
+        return result
+                || this.fillBy(Figure3T::hasMarkX, 0, 0, 1, 1)
+                || this.fillBy(Figure3T::hasMarkX, this.table.length - 1, 0, -1, 1);
     }
 
     /**
@@ -72,15 +72,15 @@ public class Logic3T {
     public boolean isWinnerO() {
         boolean result = true;
         for (int i = 0; i != table.length; i++) {
-            if (!this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 0) ||
-                    !this.fillBy(Figure3T::hasMarkO, 0, 0, 0, 1)) {
+            if (!this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 0)
+                    || !this.fillBy(Figure3T::hasMarkO, 0, 0, 0, 1)) {
                 result = false;
                 break;
             }
         }
-        return result ||
-                !this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 1) ||
-                !this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, -1, 1);
+        return result
+                || !this.fillBy(Figure3T::hasMarkO, 0, 0, 1, 1)
+                || !this.fillBy(Figure3T::hasMarkO, this.table.length - 1, 0, -1, 1);
     }
 
 

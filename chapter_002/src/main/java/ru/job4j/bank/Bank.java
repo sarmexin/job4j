@@ -122,7 +122,7 @@ public class Bank {
     }
 
     /**
-     * Поиск по номеру паспорта ключа для treeMap.
+     * Поиск по номеру паспорта  - ключа для treeMap.
      *
      * @param passport
      * @return user

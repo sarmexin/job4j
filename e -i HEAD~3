@@ -1,0 +1,23 @@
+[33mcommit f7fd7d4066d542f32701b739187b540962050723[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: sarmexin <mailto:sarmexin@gmail.com>
+Date:   Thu Nov 15 23:31:48 2018 +0300
+
+    тест : объединение нескольких коммитов 3
+
+[33mcommit 44ab614194087443a1fa68e519176b4863a54939[m
+Author: sarmexin <mailto:sarmexin@gmail.com>
+Date:   Thu Nov 15 23:31:06 2018 +0300
+
+    тест : объединение нескольких коммитов 2
+
+[33mcommit 4ee3910fc9d67a76c6a97f91818fce0032dcfa66[m
+Author: sarmexin <mailto:sarmexin@gmail.com>
+Date:   Thu Nov 15 23:29:45 2018 +0300
+
+    тест : объединение нескольких коммитов
+
+[33mcommit 0dd4c26ecbe61bab8b8266f447429b955d9986df[m
+Author: sarmexin <mailto:sarmexin@gmail.com>
+Date:   Thu Nov 15 09:11:15 2018 +0300
+
+    Рефакторинг двухмерный массив в List

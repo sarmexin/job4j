@@ -21,41 +21,21 @@ public class MatrixIterator implements Iterator<Integer> {
     @Override
     public boolean hasNext() {
         boolean result = false;
-        if (flag && array.length > line) {
+        if (flag) {
+            column = 0;
+            flag = false;
+        }
+        if (line < array.length && column < array[line].length) {
             result = true;
-        }
-        if (line < array.length) {
-            if (column < array[line].length) {
-                result = true;
-            }
-        }
-        if (line < array.length) {
-            if (column + 1 == array[line].length) {
-                result = true;
-            }
         }
         return result;
     }
 
     @Override
     public Integer next() {
-        int length = array[line].length;
         if (hasNext()) {
-            if (flag) {
-                column = 0;
-            }
-            if (length == 1) {
+            if (column + 1 == array[line].length) {
                 flag = true;
-            }
-            if (column + 1 == length) {
-                flag = true;
-            }
-            if (column + 1 < length) {
-                if (flag) {
-                    flag = false;
-                }
-            }
-            if (flag) {
                 return array[line++][column];
             } else {
                 return array[line][column++];

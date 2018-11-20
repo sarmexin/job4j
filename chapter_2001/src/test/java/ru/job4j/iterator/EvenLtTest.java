@@ -25,4 +25,16 @@ public class EvenLtTest {
         assertThat(it.next(), is(2));
         assertThat(it.hasNext(), is(false));
     }
+
+    @Test
+    public void test2ForEvenNumber() {
+        Iterator<Integer> it = new EvenLt(new int[]{4, 2, 1, 1, 2});
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(4));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(2));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(2));
+        assertThat(it.hasNext(), is(false));
+    }
 }

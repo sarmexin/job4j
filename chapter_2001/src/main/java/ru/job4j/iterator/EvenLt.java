@@ -18,15 +18,43 @@ public class EvenLt implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        return numbers[index] % 2 == 0;
+        boolean result = false;
+        if (index < numbers.length) {
+            if (numbers[index] % 2 == 0) {
+                result = true;
+            } else {
+                if (this.search() != 0) {
+                    result = true;
+                }
+            }
+        }
+        return result;
     }
 
     @Override
     public Integer next() {
-        if (hasNext()) {
+        if (hasNext() && numbers[index] % 2 == 0) {
             return numbers[index++];
         } else {
-            throw new NoSuchElementException("No such element");
+            if (this.search() != 0) {
+                index = this.search();
+            } else {
+                throw new NoSuchElementException("No such element");
+            }
         }
+        return numbers[index++];
+    }
+
+    private int search() {
+        int result = 0;
+        for (int i = index + 1; i < numbers.length; i++) {
+            if (numbers[i] % 2 == 0) {
+                result = i;
+                break;
+            }
+        }
+        return result;
     }
 }
+
+//throw new NoSuchElementException("No such element");

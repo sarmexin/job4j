@@ -3,6 +3,11 @@ package ru.job4j.iterator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * @author Sergey gavrilov (sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class MatrixIterator implements Iterator<Integer> {
     private int[][] array;
     private int column = 0;

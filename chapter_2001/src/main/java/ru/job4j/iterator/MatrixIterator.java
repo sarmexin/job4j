@@ -12,7 +12,6 @@ public class MatrixIterator implements Iterator<Integer> {
     private int[][] array;
     private int column = 0;
     private int line = 0;
-    private boolean flag = true;
 
     public MatrixIterator(int[][] array) {
         this.array = array;
@@ -21,27 +20,26 @@ public class MatrixIterator implements Iterator<Integer> {
     @Override
     public boolean hasNext() {
         boolean result = false;
-        if (flag) {
-            column = 0;
-            flag = false;
-        }
-        if (line < array.length && column < array[line].length) {
-            result = true;
+        if (line == array.length) {
+            result = false;
+        } else {
+            if (line < array.length || column < array[line].length) {
+                result = true;
+            }
         }
         return result;
     }
 
     @Override
     public Integer next() {
-        if (hasNext()) {
-            if (column + 1 == array[line].length) {
-                flag = true;
-                return array[line++][column];
-            } else {
-                return array[line][column++];
-            }
-        } else {
+        if (!hasNext()) {
             throw new NoSuchElementException("No such element");
         }
+        int result = array[line][column++];
+        if (column == array[line].length) {
+            column = 0;
+            line++;
+        }
+        return result;
     }
 }

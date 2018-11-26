@@ -56,5 +56,3 @@ public class EvenLt implements Iterator<Integer> {
         return result;
     }
 }
-
-//throw new NoSuchElementException("No such element");

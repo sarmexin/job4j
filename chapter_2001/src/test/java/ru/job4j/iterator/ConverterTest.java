@@ -27,8 +27,8 @@ public class ConverterTest {
         Iterator<Integer> it2 = Arrays.asList(4, 5, 6).iterator();
         Iterator<Integer> it3 = Arrays.asList(7, 8, 9).iterator();
         Iterator<Iterator<Integer>> its = Arrays.asList(it1, it2, it3).iterator();
-        Converter IteratorOfIterators = new Converter();
-        it = IteratorOfIterators.convert(its);
+        Converter iteratorOfIterators = new Converter();
+        it = iteratorOfIterators.convert(its);
     }
 
     @Test
@@ -88,8 +88,8 @@ public class ConverterTest {
         Iterator<Integer> it2 = (new ArrayList<Integer>()).iterator();
         Iterator<Integer> it3 = (new ArrayList<Integer>()).iterator();
         Iterator<Iterator<Integer>> its = Arrays.asList(it1, it2, it3).iterator();
-        Converter IteratorOfIterators = new Converter();
-        it = IteratorOfIterators.convert(its);
+        Converter iteratorOfIterators = new Converter();
+        it = iteratorOfIterators.convert(its);
         assertThat(it.hasNext(), is(false));
     }
 
@@ -97,8 +97,8 @@ public class ConverterTest {
     public void invocationOfNextMethodShouldThrowNoSuchElementException() {
         Iterator<Integer> it1 = Arrays.asList(1, 2, 3).iterator();
         Iterator<Iterator<Integer>> its = Arrays.asList(it1).iterator();
-        Converter IteratorOfIterators = new Converter();
-        it = IteratorOfIterators.convert(its);
+        Converter iteratorOfIterators = new Converter();
+        it = iteratorOfIterators.convert(its);
         assertThat(it.next(), is(1));
         assertThat(it.next(), is(2));
         assertThat(it.next(), is(3));

@@ -1,4 +1,4 @@
-package ru.job4j.list.dynamic;
+package ru.job4j.list.array;
 
 import org.junit.Test;
 

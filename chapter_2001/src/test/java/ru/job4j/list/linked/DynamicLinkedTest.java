@@ -18,41 +18,30 @@ import static org.junit.Assert.*;
  * @since 0.1
  */
 public class DynamicLinkedTest {
-    private DynamicLinked<DynamicLinked.Node> dynamicLinked = new DynamicLinked<>();
+    private DynamicLinked<String> dynamicLinked = new DynamicLinked<>();
 
     @Before
     public void testBefore() {
-        DynamicLinked.Node<String> newLink1 = new DynamicLinked.Node<>("One");
-        DynamicLinked.Node<String> newLink2 = new DynamicLinked.Node<>("One");
-        DynamicLinked.Node<String> newLink3 = new DynamicLinked.Node<>("One");
-//        DynamicLinked.Node<String>
-//        dynamicLinked.add("One");
-//        dynamicLinked.add("Two");
-//        dynamicLinked.add("Three");
-
+        dynamicLinked.add("Two");
+        dynamicLinked.add("One");
     }
 
     @Test(expected = ConcurrentModificationException.class)
-    public void test() {
-        //Iterator<DynamicLinked.Node<String>> iterator = dynamicLinked.new DynamicLinkedIterator();
-        Iterator<DynamicLinked.Node<String>> iterator = dynamicLinked.iterator();
+    public void testIterator() {
+        Iterator iterator = dynamicLinked.iterator();
         assertThat(iterator.hasNext(), is(true));
-        System.out.println(iterator.hasNext());
         iterator.next();
         assertThat(iterator.hasNext(), is(true));
-        System.out.println(iterator.hasNext());
-        iterator.next();
-        assertThat(iterator.hasNext(), is(true));
-        System.out.println(iterator.hasNext());
         iterator.next();
         assertThat(iterator.hasNext(), is(false));
-        System.out.println(iterator.hasNext());
-        //dynamicLinked.add("End");
-        DynamicLinked.Node<String> newLink4 = new DynamicLinked.Node<>("One");
-        assertThat(iterator.hasNext(), is(true));
-        System.out.println(iterator.hasNext());
-        iterator.next();
-        assertThat(iterator.hasNext(), is(false));
-        System.out.println(iterator.hasNext());
+        Iterator iterator2 = dynamicLinked.iterator();
+        dynamicLinked.add("End");
+        assertThat(iterator2.hasNext(), is(true));
+        iterator2.next();
+    }
+    @Test
+    public void testAddAndGeyIndex() {
+        assertThat(dynamicLinked.get(1).getDate(),is("One"));
+        assertThat(dynamicLinked.get(2).getDate(),is("Two"));
     }
 }

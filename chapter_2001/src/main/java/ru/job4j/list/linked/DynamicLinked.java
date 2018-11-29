@@ -3,25 +3,29 @@ package ru.job4j.list.linked;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
-public class DynamicLinked<E> implements Iterable {
+/**
+ * @author Sergey gavrilov (sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
+public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
     private int size;
-    private Node<E> first = null;
+    private Node<M> first;
     private int modCount = 0;
     private int index = 0;
 
-
     @Override
-    public Iterator iterator() {
+    public Iterator<DynamicLinked.Node> iterator() {
         return new DynamicLinkedIterator();
     }
 
-    public class DynamicLinkedIterator implements Iterator<Node<E>> {
+    public class DynamicLinkedIterator implements Iterator<DynamicLinked.Node> {
         private int expectedModCount = modCount;
 
         @Override
         public boolean hasNext() {
             boolean result = false;
-            Node<E> result2 = first;
+            Node<M> result2 = first;
             for (int i = 0; i < index; i++) {
                 result2 = result2.next;
             }
@@ -32,8 +36,8 @@ public class DynamicLinked<E> implements Iterable {
         }
 
         @Override
-        public Node<E> next() {
-            Node<E> result = first;
+        public DynamicLinked.Node next() {
+            Node<M> result = first;
             if (expectedModCount != modCount) {
                 throw new ConcurrentModificationException("Exception!");
             }
@@ -50,20 +54,25 @@ public class DynamicLinked<E> implements Iterable {
      *
      * @param date
      */
-    public void add(E date) {
-        modCount++;
-        Node<E> newLink = new Node<>(date);
-        newLink.next = this.first;
-        this.first = newLink;
-        this.size++;
+    public void add(M date) {
+        if (size == 0) {
+            first = new Node<>(date);
+            this.size++;
+        } else {
+            modCount++;
+            Node<M> newLink = new Node<>(date);
+            newLink.next = this.first;
+            this.first = newLink;
+            this.size++;
+        }
     }
 
     /**
      * Метод получения элемента по индексу
      */
-    public Node<E> get(int index) {
-        Node<E> result = this.first;
-        for (int i = 0; i < index; i++) {
+    public Node<M> get(int index) {
+        Node<M> result = this.first;
+        for (int i = 0; i < index - 1; i++) {
             result = result.next;
         }
         return result;
@@ -74,7 +83,7 @@ public class DynamicLinked<E> implements Iterable {
      *
      * @param <E>
      */
-    public static class Node<E> {
+    public class Node<E> {
         E date;
         Node<E> next;
 

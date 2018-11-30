@@ -41,7 +41,7 @@ public class DynamicLinkedTest {
     }
     @Test
     public void testAddAndGeyIndex() {
-        assertThat(dynamicLinked.get(1).getDate(),is("One"));
-        assertThat(dynamicLinked.get(2).getDate(),is("Two"));
+        assertThat(dynamicLinked.get(1).getDate(), is("One"));
+        assertThat(dynamicLinked.get(2).getDate(), is("Two"));
     }
 }

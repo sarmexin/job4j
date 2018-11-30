@@ -12,15 +12,15 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
     private int size;
     private Node<M> first;
     private int modCount = 0;
-    private int index = 0;
 
     @Override
     public Iterator<DynamicLinked.Node> iterator() {
         return new DynamicLinkedIterator();
     }
 
-    public class DynamicLinkedIterator implements Iterator<DynamicLinked.Node> {
+    private class DynamicLinkedIterator implements Iterator<DynamicLinked.Node> {
         private int expectedModCount = modCount;
+        private int index = 0;
 
         @Override
         public boolean hasNext() {

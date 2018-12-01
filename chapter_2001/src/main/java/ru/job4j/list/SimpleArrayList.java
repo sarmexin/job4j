@@ -116,15 +116,14 @@ public class SimpleArrayList<E> implements Iterable<SimpleArrayList.Node> {
      * @param model
      */
     public void set(int index, E model) {
-        if (index >= 0 && index < size) {
-            Node<E> node = this.first;
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Выход за границы контейнера");
+        }
+        Node<E> node = this.first;
             for (int i = 0; i < index; i++) {
                 node = node.next;
             }
             node.date = model;
-        } else {
-            throw new IndexOutOfBoundsException("Выход за границы контейнера");
-        }
     }
 
     /**

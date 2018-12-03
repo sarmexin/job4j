@@ -15,13 +15,6 @@ public class DynamicContainer<E> implements Iterable<E> {
 
     public DynamicContainer(Object[] container) {
         this.container = container;
-        for (Object element : container) {
-            System.out.println(element);
-        }
-    }
-
-    public Object[] getContainer() {
-        return container;
     }
 
     @Override

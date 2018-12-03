@@ -30,7 +30,6 @@ public class DynamicContainerTest {
         assertThat(it.next(), is(3));
         assertThat(it.hasNext(), is(false));
         dynamicContainer.add(55);
-        assertThat(dynamicContainer.getContainer().length, is(6));
         assertThat(it.hasNext(), is(true));
 
     }

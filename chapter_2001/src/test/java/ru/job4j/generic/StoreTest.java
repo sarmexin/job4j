@@ -54,20 +54,23 @@ public class StoreTest {
     public void deleteUser() {
         UserStore userStore = new UserStore();
         User user1 = new User("user1");
+        User user2 = new User("user2");
         userStore.add(user1);
+        userStore.add(user2);
         userStore.delete("0");
-        assertThat(userStore.findById("0"), is(nullValue()));
+        assertThat(userStore.findById("0").getId(), is("user1"));
     }
 
     @Test
     public void deleteRole() {
         RoleStore roleStore = new RoleStore();
         Role role1 = new Role("role1");
+        Role role2 = new Role("role2");
         roleStore.add(role1);
+        roleStore.add(role2);
         roleStore.delete("0");
-        assertThat(roleStore.findById("0"), is(nullValue()));
+        assertThat(roleStore.findById("0").getId(), is("role1"));
     }
-
 
     @Test
     public void findById() {

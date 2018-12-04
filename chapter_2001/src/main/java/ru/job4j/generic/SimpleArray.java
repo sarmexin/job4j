@@ -75,7 +75,6 @@ public class SimpleArray<T> implements Iterable<T> {
     public void delete(int index) {
         if (this.size(index)) {
             System.arraycopy(array, index, array, index + 1, array.length - index - 1);
-
         }
     }
 

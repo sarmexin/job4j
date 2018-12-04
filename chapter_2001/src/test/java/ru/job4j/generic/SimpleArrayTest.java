@@ -1,22 +1,35 @@
 package ru.job4j.generic;
 
+import org.junit.Before;
 import org.junit.Test;
-
-import javax.swing.text.html.HTMLDocument;
 
 import java.util.Iterator;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.*;
 
+/**
+ * Test.
+ *
+ * @author Sergey Gavrilov (mailto:sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class SimpleArrayTest {
     private SimpleArray<Integer> simpleArray = new SimpleArray<Integer>(20);
 
+    @Before
+    public void before() {
+        simpleArray.add(10);
+        simpleArray.add(20);
+        simpleArray.add(30);
+        simpleArray.add(40);
+        simpleArray.add(50);
+    }
+
     @Test
     public void testAdd() {
-        simpleArray.add(100);
-        assertThat(simpleArray.get(0), is(100));
+        assertThat(simpleArray.get(0), is(10));
     }
 
     @Test
@@ -27,29 +40,24 @@ public class SimpleArrayTest {
 
     @Test
     public void testDelete() {
-        simpleArray.set(5, 15);
-        simpleArray.delete(5);
-        assertThat(simpleArray.get(5), is(nullValue()));
+        simpleArray.delete(3);
+        assertThat(simpleArray.get(5), is(50));
     }
 
-    @Test
+    @Test(expected = ArrayIndexOutOfBoundsException.class)
     public void testIterator() {
-        simpleArray.add(10);
-        simpleArray.add(44);
-        simpleArray.add(null);
-        simpleArray.add(null);
-        simpleArray.add(55);
         Iterator it = simpleArray.iterator();
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(10));
         assertThat(it.hasNext(), is(true));
-        assertThat(it.next(), is(44));
+        assertThat(it.next(), is(20));
         assertThat(it.hasNext(), is(true));
-        assertThat(it.next(), is(55));
+        assertThat(it.next(), is(30));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(40));
+        assertThat(it.hasNext(), is(true));
+        assertThat(it.next(), is(50));
         assertThat(it.hasNext(), is(false));
-        assertThat(it.next(), is(nullValue()));
-        assertThat(it.next(), is(nullValue()));
-        assertThat(it.hasNext(), is(false));
-        assertThat(it.next(), is(nullValue()));
+        it.next();
     }
 }

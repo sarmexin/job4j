@@ -19,10 +19,10 @@ public class SimpleStackTest {
 
     @Test
     public void testStackPushAndPool() {
-        assertThat(simpleStack.pool().getDate(), is(4));
-        assertThat(simpleStack.pool().getDate(), is(3));
+        assertThat(simpleStack.pool(), is(4));
+        assertThat(simpleStack.pool(), is(3));
         simpleStack.push(100);
-        assertThat(simpleStack.pool().getDate(), is(100));
-        assertThat(simpleStack.pool().getDate(), is(2));
+        assertThat(simpleStack.pool(), is(100));
+        assertThat(simpleStack.pool(), is(2));
     }
 }

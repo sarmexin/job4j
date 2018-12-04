@@ -30,12 +30,9 @@ public abstract class AbstractStore<T> {
     public boolean delete(String id) {
         boolean result = false;
         int element = Integer.parseInt(id);
-        for (int i = 0; i < users.length; i++) {
-            if (users[i].equals(users[element])) {
-                users[i] = null;
-                result = true;
-                break;
-            }
+        if (element >= 0 && element <users.length) {
+            users[element] = null;
+            result = true;
         }
         return result;
     }

@@ -39,9 +39,16 @@ public class DynamicLinkedTest {
         assertThat(iterator2.hasNext(), is(true));
         iterator2.next();
     }
+
     @Test
     public void testAddAndGeyIndex() {
         assertThat(dynamicLinked.get(1).getDate(), is("One"));
         assertThat(dynamicLinked.get(2).getDate(), is("Two"));
+    }
+
+    @Test
+    public void testDelete() {
+        dynamicLinked.delete();
+        assertThat(dynamicLinked.get(1).getDate(), is("Two"));
     }
 }

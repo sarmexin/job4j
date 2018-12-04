@@ -78,6 +78,12 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
         return result;
     }
 
+    public Node<M> delete() {
+        Node<M> result = this.first;
+        first = first.next;
+        return result;
+    }
+
     /**
      * Класс предназначен для хранения данных.
      *

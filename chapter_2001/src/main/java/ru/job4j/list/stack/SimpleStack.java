@@ -1,53 +1,30 @@
 package ru.job4j.list.stack;
 
+import ru.job4j.list.linked.DynamicLinked;
+
 /**
  * @author Sergey gavrilov (sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
 public class SimpleStack<T> {
-    private Node<T> first;
-    private int position = 0;
+    private DynamicLinked list = new DynamicLinked();
 
     /**
-     * Метод вставляет в начало списка данные.
+     * Метод кладёт елемент в стек.
      *
      * @param date
      */
     public void push(T date) {
-        if (position == 0) {
-            first = new Node<>(date);
-            this.position++;
-        } else {
-            Node<T> newLink = new Node<>(date);
-            newLink.next = this.first;
-            this.first = newLink;
-            this.position++;
-        }
+        list.add(date);
     }
 
     /**
-     * Метод возвращает значение и удаляет его из коллекции.
+     * Метод LIFU возвращает значение из стека и удаляет его в коллекции.
      *
      * @return
      */
-    public Node<T> pool() {
-        Node<T> result = this.first;
-        first = first.next;
-        System.out.println("pool =" + first.getDate());
-        return result;
-    }
-
-    public class Node<E> {
-        E date;
-        Node<E> next;
-
-        public E getDate() {
-            return date;
-        }
-
-        public Node(E date) {
-            this.date = date;
-        }
+    public T pool() {
+        return (T) list.delete().getDate();
     }
 }

@@ -2,7 +2,6 @@ package ru.job4j.list.linked;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 /**
  * @author Sergey gavrilov (sarmexin@gmail.com)

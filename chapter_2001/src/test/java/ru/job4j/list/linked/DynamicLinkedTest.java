@@ -7,7 +7,6 @@ import static org.hamcrest.Matchers.is;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.*;

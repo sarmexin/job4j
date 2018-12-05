@@ -5,5 +5,5 @@ package ru.job4j.generic;
  * @version $Id$
  * @since 0.1
  */
-public class RoleStore extends AbstractStore<Role> implements Store<Role> {
+public class RoleStore extends AbstractStore<Role> {
 }

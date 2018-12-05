@@ -19,6 +19,7 @@ public class AbstractStore<T extends Base> implements Store<T> {
         for (T next : simpleArray) {
             if (id.equals(next.getId())) {
                 simpleArray.set(counter, model);
+                break;
             }
         }
     }
@@ -28,6 +29,7 @@ public class AbstractStore<T extends Base> implements Store<T> {
         for (T next : simpleArray) {
             if (id.equals(next.getId())) {
                 simpleArray.delete(counter);
+                break;
             }
             counter++;
         }

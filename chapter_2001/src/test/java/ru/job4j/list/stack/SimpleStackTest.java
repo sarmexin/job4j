@@ -9,7 +9,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
 public class SimpleStackTest {
-    SimpleStack<Integer> simpleStack = new SimpleStack<>();
+    private SimpleStack<Integer> simpleStack = new SimpleStack<>();
 
     @Before
     public void before() {

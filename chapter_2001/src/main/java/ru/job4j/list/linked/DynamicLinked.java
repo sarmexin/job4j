@@ -73,23 +73,21 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
      */
     public Node<M> get(int index) {
         Node<M> result = this.first;
-        if (first == null) {
-            throw new NoSuchElementException("The collections is empty");
-        }
-        for (int i = 0; i < index - 1; i++) {
-            result = result.next;
+        if (first != null) {
+            for (int i = 0; i < index - 1; i++) {
+                result = result.next;
+            }
         }
         return result;
     }
 
     public Node<M> delete() {
         Node<M> result = this.first;
-        if (first == null) {
-            throw new NoSuchElementException("The collections is empty");
+        if (first != null) {
+            first = first.next;
+            this.size--;
+            modCount++;
         }
-        first = first.next;
-        this.size--;
-        modCount++;
         return result;
     }
 

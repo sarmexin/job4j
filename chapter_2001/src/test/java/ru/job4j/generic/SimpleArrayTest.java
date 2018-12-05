@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
@@ -44,7 +45,7 @@ public class SimpleArrayTest {
         assertThat(simpleArray.get(5), is(50));
     }
 
-    @Test(expected = ArrayIndexOutOfBoundsException.class)
+    @Test(expected = NoSuchElementException.class)
     public void testIterator() {
         Iterator it = simpleArray.iterator();
         assertThat(it.hasNext(), is(true));

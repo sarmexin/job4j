@@ -1,6 +1,7 @@
 package ru.job4j.generic;
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * @author Sergey gavrilov (sarmexin@gmail.com)
@@ -34,12 +35,10 @@ public class SimpleArray<T> implements Iterable<T> {
 
         @Override
         public T next() {
-            T result = null;
             if (!this.hasNext()) {
-                throw new ArrayIndexOutOfBoundsException("Выход за границы массива");
+                throw new NoSuchElementException();
             }
-            result = array[position++];
-            return result;
+            return array[position++];
         }
     }
 
@@ -75,6 +74,7 @@ public class SimpleArray<T> implements Iterable<T> {
     public void delete(int index) {
         if (this.size(index)) {
             System.arraycopy(array, index, array, index + 1, array.length - index - 1);
+            this.index--;
         }
     }
 

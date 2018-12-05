@@ -80,6 +80,10 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
         return result;
     }
 
+    /**
+     * Метод удаления первого элемента.
+     * @return
+     */
     public Node<M> delete() {
         Node<M> result = this.first;
         if (first != null) {
@@ -87,6 +91,22 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
             this.size--;
             modCount++;
         }
+        return result;
+    }
+
+    public Node<M> deleteFIFO() {
+        Node<M> result = this.first;
+        Node<M> result2 = null;
+        if (first != null) {
+            for (int i = 0; i < size; i++) {
+                //System.out.println("In DynamicLinked :" + result.getDate());
+                result2 = result;
+                result = result.next;
+            }
+            result = result2;
+            size--;
+        }
+        //System.out.println("***1***" + result);
         return result;
     }
 

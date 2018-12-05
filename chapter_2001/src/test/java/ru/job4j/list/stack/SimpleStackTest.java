@@ -3,6 +3,8 @@ package ru.job4j.list.stack;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
@@ -24,5 +26,14 @@ public class SimpleStackTest {
         simpleStack.push(100);
         assertThat(simpleStack.pool(), is(100));
         assertThat(simpleStack.pool(), is(2));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void testPoolException() {
+        simpleStack.pool();
+        simpleStack.pool();
+        simpleStack.pool();
+        simpleStack.pool();
+        simpleStack.pool();
     }
 }

@@ -7,6 +7,7 @@ import static org.hamcrest.Matchers.is;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 import static org.junit.Assert.*;
 
@@ -50,5 +51,19 @@ public class DynamicLinkedTest {
     public void testDelete() {
         dynamicLinked.delete();
         assertThat(dynamicLinked.get(1).getDate(), is("Two"));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void getOnException() {
+        dynamicLinked.delete();
+        dynamicLinked.delete();
+        assertThat(dynamicLinked.get(0).getDate(), is("Two"));
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void deleteOnException() {
+        dynamicLinked.delete();
+        dynamicLinked.delete();
+        dynamicLinked.delete();
     }
 }

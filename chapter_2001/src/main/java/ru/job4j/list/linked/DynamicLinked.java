@@ -2,6 +2,7 @@ package ru.job4j.list.linked;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 /**
  * @author Sergey gavrilov (sarmexin@gmail.com)
@@ -72,6 +73,9 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
      */
     public Node<M> get(int index) {
         Node<M> result = this.first;
+        if (first == null) {
+            throw new NoSuchElementException("The collections is empty");
+        }
         for (int i = 0; i < index - 1; i++) {
             result = result.next;
         }
@@ -80,7 +84,12 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
 
     public Node<M> delete() {
         Node<M> result = this.first;
+        if (first == null) {
+            throw new NoSuchElementException("The collections is empty");
+        }
         first = first.next;
+        this.size--;
+        modCount++;
         return result;
     }
 

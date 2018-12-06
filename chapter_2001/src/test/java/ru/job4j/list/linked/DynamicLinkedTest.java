@@ -20,11 +20,16 @@ import static org.junit.Assert.*;
  */
 public class DynamicLinkedTest {
     private DynamicLinked<String> dynamicLinked = new DynamicLinked<>();
+    private DynamicLinked<Integer> integerDynamicLinked = new DynamicLinked<>();
 
     @Before
     public void testBefore() {
         dynamicLinked.add("Two");
         dynamicLinked.add("One");
+        integerDynamicLinked.add(1);
+        integerDynamicLinked.add(2);
+        integerDynamicLinked.add(3);
+        integerDynamicLinked.add(4);
     }
 
     @Test(expected = ConcurrentModificationException.class)
@@ -65,5 +70,19 @@ public class DynamicLinkedTest {
         dynamicLinked.delete();
         dynamicLinked.delete();
         assertThat(dynamicLinked.delete(), is(nullValue()));
+    }
+
+    @Test
+    public void testHasCycle() {
+        assertThat(integerDynamicLinked.hasCycle(), is(false));
+        integerDynamicLinked.get(4).setNext(integerDynamicLinked.getFirst());
+        assertThat(integerDynamicLinked.hasCycle(), is(true));
+    }
+
+    @Test
+    public void testHasCycle2() {
+        assertThat(integerDynamicLinked.hasCycle(), is(false));
+        integerDynamicLinked.get(3).setNext(integerDynamicLinked.get(1).getNext());
+        assertThat(integerDynamicLinked.hasCycle(), is(true));
     }
 }

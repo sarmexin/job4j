@@ -13,6 +13,10 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
     private Node<M> first;
     private int modCount = 0;
 
+    public Node<M> getFirst() {
+        return first;
+    }
+
     @Override
     public Iterator<DynamicLinked.Node> iterator() {
         return new DynamicLinkedIterator();
@@ -41,7 +45,7 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
             if (expectedModCount != modCount) {
                 throw new ConcurrentModificationException("Exception!");
             }
-            for (int i = 0; i == index; i++) {
+            for (int i = 0; i < index; i++) {
                 result = result.next;
             }
             index++;
@@ -69,6 +73,9 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
 
     /**
      * Метод получения значения по индексу
+     *
+     * @param index
+     * @return
      */
     public Node<M> get(int index) {
         Node<M> result = this.first;
@@ -90,7 +97,7 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
         if (first != null) {
             first = first.next;
             this.size--;
-            modCount++;
+            this.modCount++;
         }
         return result;
     }
@@ -109,7 +116,28 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
                 result = result.next;
             }
             result = result2;
-            size--;
+            this.size--;
+            this.modCount++;
+        }
+        return result;
+    }
+
+    /**
+     * Метод проверяющий связный список на замыкания.
+     *
+     * @return
+     */
+    public boolean hasCycle() {
+        boolean result = false;
+        Iterator iterator = this.iterator();
+        Node<M> el;
+        for (int i = 1; i < size; i++) {
+            el = (Node) iterator.next();
+            for (int y = i; y < size; y++) {
+                if (this.get(y + 1).getNext() == el) {
+                    result = true;
+                }
+            }
         }
         return result;
     }
@@ -122,6 +150,14 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
     public class Node<E> {
         E date;
         Node<E> next;
+
+        public Node<E> getNext() {
+            return next;
+        }
+
+        public void setNext(Node<E> next) {
+            this.next = next;
+        }
 
         public E getDate() {
             return date;

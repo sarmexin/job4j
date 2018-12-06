@@ -68,7 +68,7 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
     }
 
     /**
-     * Метод получения элемента по индексу
+     * Метод получения значения по индексу
      */
     public Node<M> get(int index) {
         Node<M> result = this.first;
@@ -81,7 +81,8 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
     }
 
     /**
-     * Метод удаления первого элемента.
+     * Метод удаления Last Input значения.
+     *
      * @return
      */
     public Node<M> delete() {
@@ -94,19 +95,22 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
         return result;
     }
 
+    /**
+     * Метод удаления First Input значения.
+     *
+     * @return
+     */
     public Node<M> deleteFIFO() {
         Node<M> result = this.first;
         Node<M> result2 = null;
         if (first != null) {
             for (int i = 0; i < size; i++) {
-                //System.out.println("In DynamicLinked :" + result.getDate());
                 result2 = result;
                 result = result.next;
             }
             result = result2;
             size--;
         }
-        //System.out.println("***1***" + result);
         return result;
     }
 

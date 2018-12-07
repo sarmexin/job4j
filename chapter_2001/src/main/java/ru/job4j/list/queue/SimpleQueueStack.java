@@ -15,11 +15,15 @@ public class SimpleQueueStack<T> {
     }
 
     public T pool() {
-        DynamicLinked.Node el = list.deleteFIFO();
+        DynamicLinked.Node el = list.delete();
         T result = (T) "null";
         if (el != null) {
             result = (T) el.getDate();
         }
         return result;
+    }
+
+    public int getSize() {
+        return list.getSize();
     }
 }

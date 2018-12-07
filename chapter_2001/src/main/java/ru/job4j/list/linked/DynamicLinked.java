@@ -17,6 +17,10 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
         return first;
     }
 
+    public int getSize() {
+        return size;
+    }
+
     @Override
     public Iterator<DynamicLinked.Node> iterator() {
         return new DynamicLinkedIterator();
@@ -96,26 +100,6 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
         Node<M> result = this.first;
         if (first != null) {
             first = first.next;
-            this.size--;
-            this.modCount++;
-        }
-        return result;
-    }
-
-    /**
-     * Метод удаления First Input значения.
-     *
-     * @return
-     */
-    public Node<M> deleteFIFO() {
-        Node<M> result = this.first;
-        Node<M> result2 = null;
-        if (first != null) {
-            for (int i = 0; i < size; i++) {
-                result2 = result;
-                result = result.next;
-            }
-            result = result2;
             this.size--;
             this.modCount++;
         }

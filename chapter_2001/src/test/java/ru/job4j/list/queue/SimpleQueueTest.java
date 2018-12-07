@@ -15,20 +15,18 @@ import static org.junit.Assert.*;
 public class SimpleQueueTest {
 
     @Test
-    public void PutInAQueueOf3ValuesThenPickUpThe3ValuesThenPickUpThe3ValuesFromTheStack2() {
+    public void testSimpleQueue() {
         SimpleQueue<String> simpleQueue = new SimpleQueue<>();
         simpleQueue.push("One");
         simpleQueue.push("Two");
         simpleQueue.push("Three");
         assertThat(simpleQueue.pool(), is("One"));
         assertThat(simpleQueue.pool(), is("Two"));
+        simpleQueue.push("Four");
+        simpleQueue.push("Fifth");
         assertThat(simpleQueue.pool(), is("Three"));
+        assertThat(simpleQueue.pool(), is("Four"));
+        assertThat(simpleQueue.pool(), is("Fifth"));
         assertThat(simpleQueue.pool(), is("null"));
-        assertThat(simpleQueue.pool(), is("null"));
-        assertThat(simpleQueue.getStack2().pool(), is("One"));
-        assertThat(simpleQueue.getStack2().pool(), is("Two"));
-        assertThat(simpleQueue.getStack2().pool(), is("Three"));
-        assertThat(simpleQueue.getStack2().pool(), is("null"));
-        assertThat(simpleQueue.getStack2().pool(), is("null"));
     }
 }

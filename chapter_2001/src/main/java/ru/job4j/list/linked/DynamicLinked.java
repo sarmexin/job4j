@@ -112,18 +112,19 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
      * @return
      */
     public boolean hasCycle() {
-        boolean result = false;
-        Iterator iterator = this.iterator();
-        Node<M> el;
-        for (int i = 1; i < size; i++) {
-            el = (Node) iterator.next();
-            for (int y = i; y < size; y++) {
-                if (this.get(y + 1).getNext() == el) {
-                    result = true;
-                }
-            }
+        if ( first == null ) return false;
+
+        Node turtle = first;
+        Node hare = first;
+
+        while ( hare.next != null && hare.next.next != null ) {
+            turtle = turtle.next;
+            hare = hare.next.next;
+
+            if ( turtle == hare ) return true;
         }
-        return result;
+
+        return false;
     }
 
     /**

@@ -1,4 +1,4 @@
-package ru.job4j.generic;
+package ru.job4j.collections.generic;
 
 import java.util.Iterator;
 

@@ -1,7 +1,8 @@
-package ru.job4j.list;
+package ru.job4j.list.array;
 
 import org.junit.Test;
 import org.junit.Before;
+import ru.job4j.list.array.SimpleArrayList;
 
 import java.util.ConcurrentModificationException;
 import java.lang.IndexOutOfBoundsException;

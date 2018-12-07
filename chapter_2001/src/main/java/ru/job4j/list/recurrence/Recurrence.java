@@ -129,7 +129,7 @@ public class Recurrence<M> implements Iterable<Recurrence.Node> {
      *
      * @param <E>
      */
-    public class Node<E> {
+    public static class Node<E> {
         E date;
         Node<E> next;
 

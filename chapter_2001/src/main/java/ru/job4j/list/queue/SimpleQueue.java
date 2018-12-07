@@ -1,15 +1,15 @@
 package ru.job4j.list.queue;
 
+import ru.job4j.list.stack.SimpleStack;
+
 /**
  * @author Sergey gavrilov (sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
 public class SimpleQueue<T> {
-    private int flag = 0;
-    private SimpleQueueStack<T> stack = new SimpleQueueStack<>();
-    private SimpleQueueStack<T> stack2 = new SimpleQueueStack<>();
-    private SimpleQueueStack<T> stack3 = new SimpleQueueStack<>();
+    private SimpleStack<T> stack = new SimpleStack<>();
+    private SimpleStack<T> stack2 = new SimpleStack<>();
 
     /**
      * метод poll - должен возвращать значение и удалять его из коллекции.
@@ -17,9 +17,10 @@ public class SimpleQueue<T> {
      * @return
      */
     public T pool() {
-        if (flag == 1) {
-            this.relaying();
-            flag = 0;
+        if (stack2.isEmpty()) {
+            while (!stack.isEmpty()) {
+                stack2.push(stack.pool());
+            }
         }
         return stack2.pool();
     }
@@ -31,26 +32,5 @@ public class SimpleQueue<T> {
      */
     public void push(T value) {
         stack.push(value);
-        flag = 1;
-    }
-
-    /**
-     * Метод перекладывает значения из выходящего(2) в промежуточный(3), затем из входящего(1) в выходящий(2),
-     * затем их промежуточного(3) в выходящий(2).
-     */
-    public void relaying() {
-        int length;
-        length = stack2.getSize();
-        for (int i = 0; i < length; i++) {
-            stack3.push(stack2.pool());
-        }
-        length = stack.getSize();
-        for (int i = 0; i < length; i++) {
-            stack2.push(stack.pool());
-        }
-        length = stack3.getSize();
-        for (int i = 0; i < length; i++) {
-            stack2.push(stack3.pool());
-        }
     }
 }

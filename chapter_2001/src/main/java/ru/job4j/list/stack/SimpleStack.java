@@ -8,7 +8,7 @@ import ru.job4j.list.linked.DynamicLinked;
  * @since 0.1
  */
 public class SimpleStack<T> {
-    private DynamicLinked list = new DynamicLinked();
+    private DynamicLinked<T> list = new DynamicLinked<>();
 
     /**
      * Метод кладёт елемент в стек.
@@ -20,11 +20,20 @@ public class SimpleStack<T> {
     }
 
     /**
-     * Метод LIFU возвращает значение из стека и удаляет его в коллекции.
+     * Метод возвращает значение из стека и удаляет его в коллекции.
      *
      * @return
      */
     public T pool() {
-        return (T) list.delete().getDate();
+        T t = null;
+        DynamicLinked<T>.Node<T> delete = list.delete();
+        if (delete != null) {
+            t =delete.getDate();
+        }
+        return t;
+    }
+
+    public boolean isEmpty() {
+        return list.getSize() == 0;
     }
 }

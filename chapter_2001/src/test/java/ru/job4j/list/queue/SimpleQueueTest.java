@@ -27,6 +27,6 @@ public class SimpleQueueTest {
         assertThat(simpleQueue.pool(), is("Three"));
         assertThat(simpleQueue.pool(), is("Four"));
         assertThat(simpleQueue.pool(), is("Fifth"));
-        assertThat(simpleQueue.pool(), is("null"));
+        assertNull(simpleQueue.pool());
     }
 }

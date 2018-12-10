@@ -112,7 +112,9 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
      * @return
      */
     public boolean hasCycle() {
-        if ( first == null ) return false;
+        if (first == null) {
+            return  false;
+        }
 
         Node turtle = first;
         Node hare = first;
@@ -121,7 +123,9 @@ public class DynamicLinked<M> implements Iterable<DynamicLinked.Node> {
             turtle = turtle.next;
             hare = hare.next.next;
 
-            if ( turtle == hare ) return true;
+            if (turtle == hare) {
+                return true;
+            }
         }
 
         return false;

@@ -4,6 +4,7 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 /**
+ *
  * @author Sergey gavrilov (sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1
@@ -56,6 +57,10 @@ public class DynamicContainer<E> implements Iterable<E> {
         }
     }
 
+    /**
+     *
+     * @param value
+     */
     public void add(E value) {
         Object[] container2;
         int length = container.length;

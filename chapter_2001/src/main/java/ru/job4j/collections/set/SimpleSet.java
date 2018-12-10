@@ -22,20 +22,31 @@ public class SimpleSet<E> implements Iterable<E> {
         return dynamicContainer.iterator();
     }
 
+    /**
+     * Метод добавляет значение в коллекцию.
+     *
+     * @param e
+     */
     public void add(E e) {
-        Iterator<E> iterator = this.iterator();
-        boolean flag = true;
-        for (int i = 0; i < dynamicContainer.getIndex() + 1; i++) {
-            if (iterator.next().equals(e)) {
-                flag = false;
-            }
-        }
-        if (flag) {
+        if (!contains(e)) {
             dynamicContainer.add(e);
         }
     }
 
-    public E test(int el) {
-        return dynamicContainer.get(el);
+    /**
+     * Метод проверяет на дубликаты в коллекции.
+     *
+     * @param e
+     * @return
+     */
+    private boolean contains(E e) {
+        Iterator<E> iterator = this.iterator();
+        boolean result = false;
+        for (int i = 0; i < dynamicContainer.getIndex() + 1; i++) {
+            if (iterator.next().equals(e)) {
+                result = true;
+            }
+        }
+        return result;
     }
 }

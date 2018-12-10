@@ -1,10 +1,10 @@
 package ru.job4j.collections.list.array;
 
+import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 
 /**
- *
  * @author Sergey gavrilov (sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1
@@ -58,21 +58,34 @@ public class DynamicContainer<E> implements Iterable<E> {
     }
 
     /**
+     * Метод добавляет значение в коллекцию.
      *
      * @param value
      */
     public void add(E value) {
-        Object[] container2;
-        int length = container.length;
         modCount++;
-        if (length >= index) {
-            container2 = new Object[length + 1];
-            System.arraycopy(container, 0, container2, 0, length);
-            container = container2;
+        if (container.length >= index) {
+            container = this.extension();
         }
         container[++index] = value;
     }
 
+    /**
+     * Метод расширяет коллекцию.
+     *
+     * @return
+     */
+    private Object[] extension() {
+        int length = container.length;
+        return Arrays.copyOf(container, length + 1);
+    }
+
+    /**
+     * Метод возвращает значение по индексу.
+     *
+     * @param index
+     * @return
+     */
     public E get(int index) {
         E result = null;
         if (index < container.length && index >= 0) {

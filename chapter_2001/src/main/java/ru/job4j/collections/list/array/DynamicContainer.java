@@ -11,10 +11,15 @@ import java.util.Iterator;
 public class DynamicContainer<E> implements Iterable<E> {
     private Object[] container;
     private int modCount = 0;
-    private int index = 0;
+    private int index;
 
     public DynamicContainer(Object[] container) {
         this.container = container;
+        this.index = container.length - 1;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     @Override
@@ -23,13 +28,14 @@ public class DynamicContainer<E> implements Iterable<E> {
     }
 
     public class ContainerIterator<E> implements Iterator<E> {
+        private int position = 0;
         private int expectedModCount = modCount;
 
         @Override
         public boolean hasNext() {
             boolean result = false;
             if (expectedModCount == modCount) {
-                if (index < container.length && container[index] != null) {
+                if (position < container.length && container[position] != null) {
                     result = true;
                 }
             } else {
@@ -43,15 +49,20 @@ public class DynamicContainer<E> implements Iterable<E> {
             if (expectedModCount != modCount) {
                 throw new ConcurrentModificationException();
             }
-            return (E) container[index++];
+            if (!hasNext()) {
+                return null;
+            }
+            return (E) container[position++];
         }
     }
 
     public void add(E value) {
         Object[] container2;
+        int length = container.length;
         modCount++;
-        if (container.length >= index) {
-            container2 = new Object[index + 3];
+        if (length >= index) {
+            container2 = new Object[length + 1];
+            System.arraycopy(container, 0, container2, 0, length);
             container = container2;
         }
         container[++index] = value;

@@ -27,4 +27,10 @@ public class Calendar {
                 month == calendar.month &&
                 year == calendar.year;
     }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(data, month, year);
+    }
 }

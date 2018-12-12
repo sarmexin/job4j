@@ -19,8 +19,12 @@ public class Calendar {
     }
 
     @Override
-    public int hashCode() {
-
-        return Objects.hash(data, month, year);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Calendar calendar = (Calendar) o;
+        return data == calendar.data &&
+                month == calendar.month &&
+                year == calendar.year;
     }
 }

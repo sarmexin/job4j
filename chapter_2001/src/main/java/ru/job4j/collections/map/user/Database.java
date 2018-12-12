@@ -9,15 +9,16 @@ import java.util.Map;
  * @since 0.1
  */
 public class Database {
-    static User user1 = new User("Maxim", 1, new Calendar(1, 12, 1976));
-    static User user2 = new User("Maxim", 1, new Calendar(1, 12, 1976));
+    private static User user1 = new User("Maxim", 1, new Calendar(1, 12, 1976));
+    private static User user2 = new User("Maxim", 1, new Calendar(1, 12, 1976));
+
     public static void main(String args[]) {
+        System.out.println(user1.equals(user2));
+
         Map<User, Object> map = new HashMap<>();
         map.put(user1, "One");
         map.put(user2, "Two");
-        System.out.println(map.get(user1));
-        System.out.println(map.get(user2));
-        System.out.println(user1.equals(user2));
+        System.out.println(map);
 
     }
 }

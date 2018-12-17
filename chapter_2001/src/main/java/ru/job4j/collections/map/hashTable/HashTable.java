@@ -4,49 +4,55 @@ import java.util.Iterator;
 
 import static java.lang.Math.abs;
 
-public class HashTable<K, V> implements Iterator<Entry<K, V>> {
+public class HashTable<K, V> implements Iterable<Entry<K, V>> {
     private int capacity = 16;
     private Entry[] table;
     private double loadFactor = 0.3;
     private double threshold = capacity * loadFactor;
     private int index = 0;
-    private int position = 0;
 
     public HashTable() {
         table = new Entry[capacity];
     }
 
     @Override
-    public boolean hasNext() {
-        boolean result = false;
-        if (table.length == 0) {
-            return false;
-        }
-        for (int i = 0; i < table.length - position; i++) {
-            if (table[position + i] != null) {
-                result = true;
-                break;
-            }
-        }
-        return result;
-    }
-
-    @Override
-    public Entry<K, V> next() {
-        Entry result = null;
-        if (index < table.length) {
-                for (int i = position; i < table.length; i++) {
-                    if (table[i] != null) {
-                        //System.out.println("next  =" + i);
-                        result = table[i];
-                        position = i + 1;
+    public Iterator<Entry<K, V>> iterator() {
+        return new Iterator<Entry<K, V>>() {
+            int position = 0;
+            @Override
+            public boolean hasNext() {
+                boolean result = false;
+                if (table.length == 0) {
+                    return false;
+                }
+                for (int i = 0; i < table.length - position; i++) {
+                    if (table[position + i] != null) {
+                        result = true;
                         break;
                     }
                 }
+                return result;
 
-        }
-        //System.out.println("next = " + table[index].getValue());
-        return result;
+            }
+
+            @Override
+            public Entry<K, V> next() {
+                Entry result = null;
+                if (index < table.length) {
+                    for (int i = position; i < table.length; i++) {
+                        if (table[i] != null) {
+                            //System.out.println("next  =" + i);
+                            result = table[i];
+                            position = i + 1;
+                            break;
+                        }
+                    }
+
+                }
+                //System.out.println("next = " + table[index].getValue());
+                return result;
+            }
+        };
     }
 
     boolean insert(K key, V value) {
@@ -96,11 +102,12 @@ public class HashTable<K, V> implements Iterator<Entry<K, V>> {
 
     private void extension() {
         //System.out.println(" В методе расширения");
+        Iterator<Entry<K, V>> iterator = this.iterator();
         int capacity2 = capacity * 2;
         Entry[] table2 = new Entry[capacity2];
         int index2 = index;
         for (int i = 0; i < index2; i++) {
-            Entry element = this.next();
+            Entry element = iterator.next();
             //System.out.println(index2 + " перекладываем " + element.getValue());
             table2[this.indexFor((K) element.getKey())] = element;
         }
@@ -117,5 +124,6 @@ public class HashTable<K, V> implements Iterator<Entry<K, V>> {
         int h;
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
+
 
 }

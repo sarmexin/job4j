@@ -14,7 +14,8 @@ public class Database {
 
     public static void main(String args[]) {
         System.out.println(user1.equals(user2));
-
+        System.out.println(user1.hashCode());
+        System.out.println(user2.hashCode());
         Map<User, Object> map = new HashMap<>();
         map.put(user1, "One");
         map.put(user2, "Two");

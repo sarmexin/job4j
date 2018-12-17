@@ -4,25 +4,16 @@ import java.util.Iterator;
 
 import static java.lang.Math.abs;
 
-public class HashTable<K, V> implements Iterator<K> {
-    private int capacity;
-    private Object[] table;
-    private Object[] keys;
+public class HashTable<K, V> implements Iterator<Entry<K, V>> {
+    private int capacity = 16;
+    private Entry[] table;
+    private double loadFactor = 0.3;
+    private double threshold = capacity * loadFactor;
     private int index = 0;
-    private int number = 0;
+    private int position = 0;
 
-    public Object[] getTable() {
-        return table;
-    }
-
-    public Object[] getKeys() {
-        return keys;
-    }
-
-    public HashTable(int capacity) {
-        this.capacity = capacity;
-        table = new Object[capacity];
-        keys = new Object[capacity];
+    public HashTable() {
+        table = new Entry[capacity];
     }
 
     @Override
@@ -31,8 +22,8 @@ public class HashTable<K, V> implements Iterator<K> {
         if (table.length == 0) {
             return false;
         }
-        for (int i = 0; i < table.length - index; i++) {
-            if (table[index + i] != null) {
+        for (int i = 0; i < table.length - position; i++) {
+            if (table[position + i] != null) {
                 result = true;
                 break;
             }
@@ -41,92 +32,82 @@ public class HashTable<K, V> implements Iterator<K> {
     }
 
     @Override
-    public K next() {
-        K result = null;
+    public Entry<K, V> next() {
+        Entry result = null;
         if (index < table.length) {
-            if (table[index] == null) {
-                for (int i = index + 1; i < table.length; i++) {
+                for (int i = position; i < table.length; i++) {
                     if (table[i] != null) {
-                        result = (K) table[i];
-                        index = i;
+                        //System.out.println("next  =" + i);
+                        result = table[i];
+                        position = i + 1;
                         break;
                     }
                 }
-            } else {
-                result = (K) table[index++];
-            }
+
         }
-        //System.out.println("next = " + result);
+        //System.out.println("next = " + table[index].getValue());
         return result;
     }
 
     boolean insert(K key, V value) {
-        int bucket = this.findBucket(key);
-        ;
-        if (table[bucket] != null) {
-            //System.out.println("повтор");
-            return false;
-        }
-        if (number > capacity * 0.2) {
+        if (threshold < index) {
             this.extension();
         }
-        keys[number] = key;
-        //System.out.println("keys" + "[" + number + "] = " +  keys[number]);
-        table[bucket] = value;
-        //System.out.println("table" + "[" + bucket + "] = " +  table[bucket]);
-        //System.out.println("number;" + number);
-        number++;
-        //System.out.println("number++;" + number);
-        //System.out.println("--------------------------------");
-        //System.out.println("Value in " + bucket + " = " + table[bucket]);
+        boolean result = false;
+        if (key == null) {
+            if (table[0] == null) {
+                table[0] = new Entry(key, value);
+                //System.out.println("0");
+                //System.out.println("не занято 0  " + value);
+                index++;
+                result = true;
+            }
+            } else {
+                //System.out.println("ne 0");
+                int bucket = this.indexFor(key);
+                if (table[bucket] == null) {
+                    //System.out.println("не занято " + bucket + "  " + value);
+                    index++;
+                    table[bucket] = new Entry(key, value);
+                    result = true;
+                }
+            }
+
+        return result;
+    }
+
+    V get(K key) {
+        int bucket = this.indexFor(key);
+        if (table[bucket] == null) {
+            return null;
+        }
+        return (V) table[bucket].getValue();
+    }
+
+    boolean delete(K key) {
+        int bucket = this.indexFor(key);
+        if (table[bucket] == null) {
+            return false;
+        }
+        index--;
+        table[bucket] = null;
         return true;
     }
 
     private void extension() {
         //System.out.println(" В методе расширения");
         int capacity2 = capacity * 2;
-        Object[] table2 = new Object[capacity2];
-        for (int i = 0; i < number; i++) {
-            //System.out.println("i " + i);
-            int bucket = this.findBucket((K) keys[i]);
-            //System.out.println(keys[i]);
-            V value = this.get((K) keys[i]);
-            table2[bucket] = value;
+        Entry[] table2 = new Entry[capacity2];
+        int index2 = index;
+        for (int i = 0; i < index2; i++) {
+            Entry element = this.next();
+            //System.out.println(index2 + " перекладываем " + element.getValue());
+            table2[this.indexFor((K) element.getKey())] = element;
         }
-        //System.out.println("Расширился table");
         table = table2;
-        for (int i = 0; i < 20; i++) {
-            //System.out.println(this.next());
-        }
     }
 
-    V get(K key) {
-        int bucket = this.findBucket(key);
-        //System.out.println(bucket);
-        if (table[bucket] == null) {
-            return null;
-        }
-        return (V) table[bucket];
-    }
-
-    boolean delete(K key) {
-        int bucket = this.findBucket(key);
-        if (table[bucket] == null) {
-            return false;
-        }
-        for (int i = 0; i < capacity; i++) {
-            if (keys[i].equals(key)) {
-                keys[i] = null;
-                break;
-            }
-        }
-        number--;
-
-        table[bucket] = null;
-        return true;
-    }
-
-    private int findBucket(K key) {
+    private int indexFor(K key) {
         int h = abs(HashTable.hash(key));
         int bucket = h % capacity;
         return bucket;

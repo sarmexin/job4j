@@ -33,24 +33,23 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
             @Override
             public boolean hasNext() {
                 boolean result = false;
-                if (expectedModCount == modCount) {
-                    if (table.length == 0) {
-                        return false;
-                    }
-                    if (!flagHasNext) {
-                        for (int i = 0; i < table.length - positionElement; i++) {
-                            if (table[positionElement + i] != null) {
-                                result = true;
-                                positionElement = positionElement + i;
-                                flagHasNext = true;
-                                break;
-                            }
+                if (expectedModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
+                if (table.length == 0) {
+                    return false;
+                }
+                if (!flagHasNext) {
+                    for (int i = 0; i < table.length - positionElement; i++) {
+                        if (table[positionElement + i] != null) {
+                            result = true;
+                            positionElement = positionElement + i;
+                            flagHasNext = true;
+                            break;
                         }
-                    } else {
-                        result = true;
                     }
                 } else {
-                    throw new ConcurrentModificationException();
+                    result = true;
                 }
                 return result;
             }

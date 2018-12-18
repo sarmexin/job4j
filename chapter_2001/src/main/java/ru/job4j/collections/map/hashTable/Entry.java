@@ -1,5 +1,10 @@
 package ru.job4j.collections.map.hashTable;
 
+/**
+ * @author Sergey gavrilov (sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class Entry<K, V> {
     private K key;
     private V value;
@@ -15,13 +20,5 @@ public class Entry<K, V> {
 
     public V getValue() {
         return value;
-    }
-
-    public void setKey(K key) {
-        this.key = key;
-    }
-
-    public void setValue(V value) {
-        this.value = value;
     }
 }

@@ -36,21 +36,13 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                if (table.length == 0) {
-                    return false;
-                }
-                if (!flagHasNext) {
-                    for (int i = 0; i < table.length - positionElement; i++) {
-                        if (table[positionElement + i] != null) {
+                    for (int i = positionElement; i < table.length; i++) {
+                        if (table[i] != null) {
                             result = true;
-                            positionElement = positionElement + i;
-                            flagHasNext = true;
+                            positionElement = i;
                             break;
                         }
                     }
-                } else {
-                    result = true;
-                }
                 return result;
             }
 
@@ -59,14 +51,7 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
                 if (!this.hasNext()) {
                     throw new NoSuchElementException();
                 }
-                Entry result = null;
-                flagHasNext = false;
-                if (index < table.length) {
-                    result = table[positionElement];
-                    positionElement += 1;
-
-                }
-                return result;
+                return table[positionElement++];
             }
         };
     }

@@ -28,7 +28,6 @@ public class HashTable<K, V> implements Iterable<Entry<K, V>> {
         return new Iterator<Entry<K, V>>() {
             private int expectedModCount = modCount;
             private int positionElement = 0;
-            boolean flagHasNext = false;
 
             @Override
             public boolean hasNext() {

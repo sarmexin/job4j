@@ -1,25 +1,27 @@
 package ru.job4j.collections.tree;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Optional;
-import java.util.Queue;
+import java.util.*;
 
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     private Node<E> root;
+    private int size;
+    private int mod = 0;
 
-    Tree(Integer value) {
-        this.root = new Node<E>((E) value);
+    Tree(E value) {
+        this.root = new Node<E>(value);
     }
 
     @Override
     public boolean add(E parent, E child) {
         boolean result = false;
         if (!this.findBy(child).isPresent()) {
-            if (this.findBy(parent).isPresent()) {
+            Optional<Node<E>> pr = this.findBy(parent);
+            if (pr.isPresent()) {
                 result = true;
-                Node<E> el = this.findBy(parent).get();
+                Node<E> el = pr.get();
                 el.add(new Node<>(child));
+                size++;
+                mod++;
             }
         }
         return result;
@@ -49,32 +51,29 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     public class TreeIterator implements Iterator<E> {
+        private int expectedMod = mod;
+        private int index;
+        ArrayDeque<Node<E>> states = new ArrayDeque<>();
+        TreeIterator() {
+            states.offer(root);
+        }
 
         @Override
         public boolean hasNext() {
-            Node<E> parent1;
-            Node<E> child1;
-
-
-            return false;
+            if (expectedMod != mod) {
+                throw new ConcurrentModificationException();
+            }
+            return index < size;
         }
 
         @Override
         public E next() {
-            return null;
+            if (!this.hasNext()) {
+                throw new NoSuchElementException();
+            }
+            Node<E> el = root;
+            el = findBy(states.poll().getValue()).get();
+            return el.getValue();
         }
     }
-//    private boolean bypass(E child) {
-//        boolean result = false;
-//        Iterator<E> iterator = this.iterator();
-//        boolean flag = true;
-//        while (flag)
-//        if (iterator.hasNext()) {
-//            if (iterator.next().equals(child)) {
-//                flag = false;
-//                result = true;
-//            }
-//        }
-//        return result;
-//    }
 }

@@ -7,6 +7,10 @@ public class Node <E extends Comparable<E>> {
     private final List<Node<E>> children = new ArrayList<>();  //множество детей
     private final E value;  //значение и есть ключ
 
+    public E getValue() {
+        return value;
+    }
+
     public Node(final E value) {
         this.value = value;
     }

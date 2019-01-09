@@ -71,8 +71,12 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             if (!this.hasNext()) {
                 throw new NoSuchElementException();
             }
-            Node<E> el = root;
-            el = findBy(states.poll().getValue()).get();
+            Node<E> el = states.poll();
+            if (el.leaves() != null) {
+                for (Node<E> node : el.leaves()) {
+                    states.offer(node);
+                }
+            }
             return el.getValue();
         }
     }

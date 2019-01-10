@@ -13,15 +13,19 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     public boolean isBinary() {
         boolean result = true;
-        Iterator<E> iterator = this.iterator();
-        while (iterator.hasNext()) {
-            Optional<Node<E>> node = this.findBy(iterator.next());
-            if (node.isPresent()) {
-                if (node.get().leaves().size() > 2) {
-                    result = false;
-                    break;
+        ArrayDeque<Node<E>> arrayDeque = new ArrayDeque<>();
+        arrayDeque.offer(root);
+        Node<E> el = arrayDeque.poll();
+        while (el != null) {
+            if (el.leaves() != null && el.leaves().size() <= 2) {
+                for (Node<E> node : el.leaves()) {
+                    arrayDeque.offer(node);
                 }
+            } else {
+                result = false;
+                break;
             }
+            el = arrayDeque.poll();
         }
         return result;
     }

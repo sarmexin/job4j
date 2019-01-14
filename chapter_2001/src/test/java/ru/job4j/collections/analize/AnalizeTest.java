@@ -45,5 +45,4 @@ public class AnalizeTest {
         boolean rls = expected.equals(result);
         assertThat(rls, is(true));
     }
-
 }

@@ -21,23 +21,20 @@ public class Analize {
         for (User user : current) {
             hashMap.put(user.getId(), user.getName());
         }
-        int added;
+        int added = 0;
         int changed = 0;
-        int deleted = previous.size();
+        int deleted = 0;
         for (User user : previous) {
-            if (hashMap.containsKey(user.getId()) && !hashMap.containsValue(user.getName())) {
-                changed++;
+            Object user1 = hashMap.remove(user.getId());
+            if (user1 == null) {
+                deleted++;
+            } else {
+                if (!user.getName().equals(user1)) {
+                    changed++;
+                }
             }
         }
-        int result = 0;
-        for (User user : previous) {
-            if (hashMap.containsKey(user.getId())) {
-                result++;
-                deleted--;
-            }
-        }
-        added = current.size() - result;
-        Info info = new Info(added, changed, deleted);
-        return info;
+        added = hashMap.size();
+        return new Info(added, changed, deleted);
     }
 }

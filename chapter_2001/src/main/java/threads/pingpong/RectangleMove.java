@@ -15,10 +15,6 @@ public class RectangleMove implements Runnable {
     public void run() {
         while (true) {
             this.rect.setX(this.rect.getX() + step);
-            if (this.rect.getX() + step > 300) {
-                step = -1;
-                wait();
-            }
             try {
                 Thread.sleep(20);
             } catch (InterruptedException e) {

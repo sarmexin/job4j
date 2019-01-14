@@ -17,13 +17,13 @@ public class Analize {
      * @return
      */
     public Info diff(List<User> previous, List<User> current) {
+        int added = 0;
+        int changed = 0;
+        int deleted = 0;
         HashMap hashMap = new HashMap();
         for (User user : current) {
             hashMap.put(user.getId(), user.getName());
         }
-        int added = 0;
-        int changed = 0;
-        int deleted = 0;
         for (User user : previous) {
             Object user1 = hashMap.remove(user.getId());
             if (user1 == null) {

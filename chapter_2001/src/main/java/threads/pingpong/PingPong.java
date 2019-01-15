@@ -1,5 +1,6 @@
 package threads.pingpong;
 
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -16,7 +17,6 @@ public class PingPong extends Application {
         Group group = new Group();
         Rectangle rect = new Rectangle(50, 100, 10, 10);
         group.getChildren().add(rect);
-        new Thread(new RectangleMove(rect)).start();
         new Thread(new RectangleMove(rect)).start();
         stage.setScene(new Scene(group, limitX, limitY));
         stage.setTitle(JOB4J);

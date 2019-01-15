@@ -4,8 +4,7 @@ import javafx.scene.shape.Rectangle;
 
 public class RectangleMove implements Runnable {
     private final Rectangle rect;
-    boolean suspendFlag;
-    int step;
+    int step = 1;
 
     public RectangleMove(Rectangle rect) {
         this.rect = rect;
@@ -15,8 +14,14 @@ public class RectangleMove implements Runnable {
     public void run() {
         while (true) {
             this.rect.setX(this.rect.getX() + step);
+            if (this.rect.getX() + step == 300) {
+                step = -1;
+            }
+            if (this.rect.getX() + step == 0) {
+                step = 1;
+            }
             try {
-                Thread.sleep(20);
+                Thread.sleep(40);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

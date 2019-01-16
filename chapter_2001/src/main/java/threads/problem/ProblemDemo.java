@@ -1,7 +1,10 @@
 package threads.problem;
 
-import java.util.ArrayList;
-
+/**
+ * @author Sergey gavrilov (sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class ProblemDemo {
     int value = 0;
 

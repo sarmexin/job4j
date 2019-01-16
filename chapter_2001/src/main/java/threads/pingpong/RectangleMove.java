@@ -2,6 +2,11 @@ package threads.pingpong;
 
 import javafx.scene.shape.Rectangle;
 
+/**
+ * @author Sergey gavrilov (sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class RectangleMove implements Runnable {
     private final Rectangle rect;
     int step = 1;
@@ -11,7 +16,7 @@ public class RectangleMove implements Runnable {
     }
 
     @Override
-    public void run()  {
+    public void run() {
         double position;
         while (!Thread.currentThread().isInterrupted()) {
             position = this.rect.getX() + step;

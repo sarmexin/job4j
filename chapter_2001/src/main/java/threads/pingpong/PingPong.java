@@ -1,10 +1,16 @@
 package threads.pingpong;
+
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+/**
+ * @author Sergey gavrilov (sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class PingPong extends Application {
     private static final String JOB4J = "Пинг-понг www.job4j.ru";
 

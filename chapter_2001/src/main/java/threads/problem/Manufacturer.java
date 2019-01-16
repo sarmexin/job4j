@@ -1,5 +1,10 @@
 package threads.problem;
 
+/**
+ * @author Sergey gavrilov (sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class Manufacturer implements Runnable {
     ProblemDemo problemDemo = new ProblemDemo();
     Thread t;

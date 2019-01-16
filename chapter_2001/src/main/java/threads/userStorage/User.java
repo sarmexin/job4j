@@ -6,14 +6,9 @@ package threads.userStorage;
  * @since 0.1
  */
 
-import net.jcip.annotations.GuardedBy;
-import net.jcip.annotations.ThreadSafe;
-
 import java.util.Objects;
 
-@ThreadSafe
 public class User {
-    @GuardedBy("this")
     private int id;
     private int amount;
 

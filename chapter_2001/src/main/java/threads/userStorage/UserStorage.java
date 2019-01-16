@@ -4,19 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
+
 /**
  * @author Sergey gavrilov (sarmexin@gmail.com)
  * @version $Id$
  * @since 0.1
  */
+@ThreadSafe
 public class UserStorage {
+    @GuardedBy("this")
     private Map map = new HashMap();
 
-    public Map getMap() {
-        return map;
-    }
-
-    boolean add(User user) {
+    synchronized boolean add(User user) {
         boolean result = false;
         if (!map.containsKey(user.getId())) {
             map.put(user.getId(), user.getAmount());
@@ -25,7 +26,7 @@ public class UserStorage {
         return result;
     }
 
-    boolean update(User user) {
+    synchronized boolean update(User user) {
         boolean result = false;
         if (map.containsKey(user.getId())) {
             map.put(user.getId(), user.getAmount());
@@ -34,7 +35,7 @@ public class UserStorage {
         return result;
     }
 
-    boolean delete(User user) {
+    synchronized boolean delete(User user) {
         boolean result = false;
         if (map.containsKey(user.getId())) {
             map.remove(user.getId());
@@ -43,7 +44,7 @@ public class UserStorage {
         return result;
     }
 
-    boolean transfer(int fromId, int foId, int amount) {
+    synchronized boolean transfer(int fromId, int foId, int amount) {
         boolean result = false;
         if (map.containsKey(fromId) && map.containsKey(foId) && (int) map.get(fromId) > amount) {
             int transfer = (int) map.get(fromId) - amount;

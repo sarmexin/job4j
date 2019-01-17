@@ -14,6 +14,8 @@ public class DynamicContainer<E> implements Iterable<E> {
     private int modCount = 0;
     private int index;
 
+
+
     public DynamicContainer(Object[] container) {
         this.container = container;
         this.index = container.length - 1;

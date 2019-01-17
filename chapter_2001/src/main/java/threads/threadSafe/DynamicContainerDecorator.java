@@ -7,27 +7,11 @@ import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
 
 @ThreadSafe
-public class DynamicContainerDecorator<E> extends DynamicContainer {
+public abstract class DynamicContainerDecorator<E> implements Iterable<E> {
     @GuardedBy("this")
-    private DynamicContainer dynamicContainer;
+    protected DynamicContainer dynamicContainer;
 
-    public DynamicContainerDecorator(Object[] container, DynamicContainer dynamicContainer) {
-        super(container);
+    public DynamicContainerDecorator(DynamicContainer dynamicContainer) {
         this.dynamicContainer = dynamicContainer;
-    }
-
-    @Override
-    public synchronized void add(<E> value) {
-        dynamicContainer.add(value);
-    }
-
-    @Override
-    public Object get(int index) {
-        return super.get(index);
-    }
-
-    @Override
-    public Iterator iterator() {
-        return super.iterator();
     }
 }

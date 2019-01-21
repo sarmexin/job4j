@@ -41,14 +41,10 @@ public class SimpleBlockingQueue<T> {
      *
      * @return
      */
-    public synchronized T poll() {
+    public synchronized T poll() throws InterruptedException {
         while (queue.size() == 0) {
-            try {
                 wait();
-            } catch (InterruptedException e) {
-                System.out.println("InterruptedException");
             }
-        }
         notify();
         return queue.poll();
     }

@@ -18,6 +18,10 @@ public class SimpleBlockingQueue<T> {
     @GuardedBy("this")
     private Queue<T> queue = new LinkedList<>();
 
+    public Queue<T> getQueue() {
+        return queue;
+    }
+
     /**
      * Метод кладёт значение в очередь.
      *

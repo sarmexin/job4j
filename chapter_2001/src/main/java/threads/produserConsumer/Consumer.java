@@ -23,7 +23,11 @@ public class Consumer<T> implements Runnable {
             } catch (InterruptedException e) {
                 System.out.println("InterruptedException");
             }
-            //System.out.println("Взял ---- " + simpleBlockingQueue.poll());
+            try {
+                System.out.println("Взял ---- " + simpleBlockingQueue.poll());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

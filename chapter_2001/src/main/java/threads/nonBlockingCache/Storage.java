@@ -6,32 +6,26 @@ public class Storage {
     protected ConcurrentHashMap<Integer, Base> concurrentHashMap = new ConcurrentHashMap<>();
 
     /**
-     *
      * @param model
      */
-    public void add(Base model){
+    public void add(Base model) {
         concurrentHashMap.putIfAbsent(model.getId(), model);
     }
 
     /**
-     *
      * @param model
-     * @return
      */
-    public  void update(Base model) {
+    public void update(Base model) {
         concurrentHashMap.computeIfPresent(model.getId(), (key, modelM) -> {
-            if (concurrentHashMap.get(key).getVersion() == model.getVersion()) {
-                System.out.println("Успел" );
-                model.setId(model.getId() + 1);
-                return model;
-            } else {
+            if (modelM.getVersion() > model.getVersion()) {
                 throw new OptimisticException("Throw Exception in Thread");
             }
+            model.setVersion(model.getVersion() + 1);
+            return model;
         });
     }
 
     /**
-     *
      * @param model
      * @return
      */

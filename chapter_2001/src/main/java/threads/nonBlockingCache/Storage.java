@@ -19,10 +19,11 @@ public class Storage {
      * @return
      */
     public  void update(Base model) {
-        int key = model.getId();
-        concurrentHashMap.computeIfPresent(key, (key, model) -> {
+        concurrentHashMap.computeIfPresent(model.getId(), (key, modelM) -> {
             if (concurrentHashMap.get(key).getVersion() == model.getVersion()) {
-                return concurrentHashMap.put(key, model);
+                System.out.println("Успел" );
+                model.setId(model.getId() + 1);
+                return model;
             } else {
                 throw new OptimisticException("Throw Exception in Thread");
             }

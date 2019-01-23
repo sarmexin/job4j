@@ -5,6 +5,16 @@ public class Base {
     private int version;
     private String name;
 
+    public Base(int id, int version, String name) {
+        this.id = id;
+        this.version = version;
+        this.name = name;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }

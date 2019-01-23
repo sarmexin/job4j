@@ -2,8 +2,6 @@ package threads.nonBlockingCache;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-import static javafx.scene.input.KeyCode.V;
-
 public class Storage {
     protected ConcurrentHashMap<Integer, Base> concurrentHashMap = new ConcurrentHashMap<>();
 
@@ -11,8 +9,8 @@ public class Storage {
      *
      * @param model
      */
-    public synchronized void add(Base model){
-        concurrentHashMap.put(model.getId(), model);
+    public void add(Base model){
+        concurrentHashMap.putIfAbsent(model.getId(), model);
     }
 
     /**
@@ -20,17 +18,15 @@ public class Storage {
      * @param model
      * @return
      */
-    public  boolean update(Base model) {
-        //public Base computeIfPresent(Base model.getId(), BiFunction <concurrentHashMap.get(model.getId()), U, R> -> concurrentHashMap.put(model.getId(),model));
-
-        int versionModel = model.getVersion();
-        int versionMap = concurrentHashMap.get(model.getId()).getVersion();
-        if (versionModel == versionMap) {
-            concurrentHashMap.put(model.getId(), model);
-        } else {
-            throw new OptimisticException("Throw Exception in Thread");
-        }
-        return false;
+    public  void update(Base model) {
+        int key = model.getId();
+        concurrentHashMap.computeIfPresent(key, (key, model) -> {
+            if (concurrentHashMap.get(key).getVersion() == model.getVersion()) {
+                return concurrentHashMap.put(key, model);
+            } else {
+                throw new OptimisticException("Throw Exception in Thread");
+            }
+        });
     }
 
     /**
@@ -38,12 +34,7 @@ public class Storage {
      * @param model
      * @return
      */
-    public synchronized boolean delete(Base model) {
-
-        concurrentHashMap.remove(model.getId());
-        return false;
+    public void delete(Base model) {
+        concurrentHashMap.remove(model.getId(), model);
     }
-    private void newVersion() {}
-
-
 }

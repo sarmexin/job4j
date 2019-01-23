@@ -5,8 +5,7 @@ import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicReference;
 
-import static com.sun.org.apache.xerces.internal.util.PropertyState.is;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.is;import static org.junit.Assert.*;
 
 public class StorageTest {
     @Test

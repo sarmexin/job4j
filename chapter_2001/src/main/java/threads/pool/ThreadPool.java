@@ -4,8 +4,6 @@ import threads.produserConsumer.SimpleBlockingQueue;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * @author Sergey gavrilov (sarmexin@gmail.com)
@@ -27,13 +25,14 @@ public class ThreadPool {
     private class Action implements Runnable {
         @Override
         public void run() {
-            while (true) {
+            while (!Thread.interrupted()) {
                 try {
-                    tasks.poll();
+                    tasks.poll().run();
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                  Thread.currentThread().interrupt();
                 }
             }
+            System.out.println("Stop Thread");
         }
     }
 
@@ -47,8 +46,6 @@ public class ThreadPool {
             threads.add(thread);
             thread.start();
         }
-        System.out.println(threads);
-
     }
 
     /**
@@ -67,6 +64,5 @@ public class ThreadPool {
         for (int i = 0; i < size; i++) {
             threads.get(i).interrupt();
         }
-        System.out.println("end");
     }
 }

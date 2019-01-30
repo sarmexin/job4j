@@ -2,10 +2,16 @@ package threads.bomberman;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
+/**
+ * Test.
+ *
+ * @author Sergey Gavrilov (mailto:sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class BomberManTest {
-    BomberMan bomberMan = new BomberMan();
+    private final BomberMan bomberMan = new BomberMan();
+
     @Test
     public void test() {
         Position position = new Position(0, 0);

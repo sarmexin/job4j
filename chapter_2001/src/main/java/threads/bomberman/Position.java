@@ -1,8 +1,13 @@
 package threads.bomberman;
 
+/**
+ * @author Sergey gavrilov (sarmexin@gmail.com)
+ * @version $Id$
+ * @since 0.1
+ */
 public class Position {
-    int posX;
-    int posY;
+    private int posX;
+    private int posY;
 
     public Position(int posX, int posY) {
         this.posX = posX;

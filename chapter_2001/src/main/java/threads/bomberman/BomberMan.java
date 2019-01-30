@@ -15,6 +15,7 @@ public class BomberMan {
         Thread hero = new Thread(new Hero());
         Thread monster = new Thread(new Monster());
         hero.start();
+        monster.setDaemon(true);
         monster.start();
         try {
             hero.join();
@@ -30,7 +31,8 @@ public class BomberMan {
     class Hero implements Runnable {
         @Override
         public void run() {
-            Position dist;
+            Position dist = new Position(6, 7);
+            ;
             Position position = new Position(7, 7);
             board.boards[position.getPosX()][position.getPosY()].lock();
             while (!Thread.currentThread().isInterrupted()) {
@@ -42,6 +44,9 @@ public class BomberMan {
                 System.out.println("hero");
                 try {
                     Thread.sleep(2000);
+                    if (board.boards[dist.getPosX()][dist.getPosY()].hasQueuedThreads()) {
+                        Thread.currentThread().interrupt();
+                    }
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                 }
@@ -81,22 +86,22 @@ public class BomberMan {
      */
     public synchronized Position step(Position position) {
         int step = (int) (Math.random() * 4);
-        System.out.println("step in = " + step);
+        int pos;
         if (step == 0) {
-            int x = position.getPosX() + 1;
-            position.setPosX(x);
+            pos = position.getPosX() + 1;
+            position.setPosX(pos);
         }
         if (step == 1) {
-            int x = position.getPosX() - 1;
-            position.setPosX(x);
+            pos = position.getPosX() - 1;
+            position.setPosX(pos);
         }
         if (step == 2) {
-            int x = position.getPosY() + 1;
-            position.setPosY(x);
+            pos = position.getPosY() + 1;
+            position.setPosY(pos);
         }
         if (step == 3) {
-            int x = position.getPosY() - 1;
-            position.setPosY(x);
+            pos = position.getPosY() - 1;
+            position.setPosY(pos);
         }
         return position;
     }

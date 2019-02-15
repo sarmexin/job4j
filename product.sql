@@ -60,4 +60,5 @@ select * from product as u
 where u.expired_date < now() + interval '10 day';
 
 --8. Вывести все продукты и их тип.
-select u.name, u. type_id from product as u;
+select (c.name, i.id) from type as i
+inner join product as c on i.id = c.type_id;

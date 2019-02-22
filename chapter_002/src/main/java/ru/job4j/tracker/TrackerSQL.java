@@ -25,15 +25,6 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         //Connection connection = null;
         try {
             connection = DriverManager.getConnection(url, username, password);
-//        try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
-//            Properties config = new Properties();
-//            config.load(in);
-//            Class.forName(config.getProperty("driver-class-name"));
-//            this.connection = DriverManager.getConnection(
-//                    config.getProperty("jdbc:postgresql://localhost:5432/tracker"),
-//                    config.getProperty("postgres"),
-//                    config.getProperty("322132")
-//            );
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
@@ -42,13 +33,11 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     @Override
     public Item add(Item item) {
-        System.out.println("перед");
         this.init();
-        System.out.println("после");
         try {
             System.out.println("запрос ушёл 1" + connection);
             PreparedStatement statement = connection.prepareStatement("INSERT INTO application(name, descc) values(?, ?)");
-            statement.setString(1, "Заявка 1");
+            statement.setString(1, "Заяв 1");
             statement.setString(2, "1111");
             statement.executeUpdate();
         } catch (Exception e) {
@@ -62,6 +51,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                 }
             }
         }
+
         return item;
     }
 

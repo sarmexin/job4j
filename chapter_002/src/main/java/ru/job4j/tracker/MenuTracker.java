@@ -18,7 +18,7 @@ public class MenuTracker {
     /**
      * @param хранит ссылку на объект .
      */
-    private Tracker tracker;
+    private ITracker tracker;
     /**
      * @param хранит ссылку на массив типа UserAction.
      */
@@ -30,7 +30,7 @@ public class MenuTracker {
      * @param input   объект типа Input
      * @param tracker объект типа Tracker
      */
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, ITracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -84,7 +84,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             System.out.println("-------------Список всех заявок --------------------");
             for (Item str : tracker.findAll()) {
                 System.out.println(str);
@@ -101,7 +101,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String id = input.ask("Введите Id заяки :");
             if (tracker.findById(id) != null) {
                 Item item = tracker.findById(id);
@@ -126,7 +126,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String id = input.ask("Введите Id заяки :");
             if (tracker.delete(id)) {
                 System.out.println("Заявка : " + id + " удалена");
@@ -145,7 +145,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String id = input.ask("Введите Id заяки :");
             Item item = tracker.findById(id);
             if (item != null) {
@@ -165,7 +165,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String name = input.ask("Введите имя заявки :");
             List<Item> array = tracker.findByName(name);
             if (array.size() != 0) {
@@ -195,7 +195,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             this.ui.stop();
         }
 

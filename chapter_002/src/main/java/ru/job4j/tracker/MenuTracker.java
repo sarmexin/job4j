@@ -71,7 +71,7 @@ public class MenuTracker {
      * @param key ключ операции
      */
     public void select(int key) {
-        this.actions.get(key).execute(this.input, this.tracker);
+        this.actions.get(key).execute(this.input, tracker);
     }
 
     /**
@@ -170,7 +170,7 @@ public class MenuTracker {
             List<Item> array = tracker.findByName(name);
             if (array.size() != 0) {
                 for (Item str : array) {
-                    System.out.println(str);
+                    System.out.println(str.getName());
                 }
             } else {
                 System.out.println("Заявки с именем : " + name + " не найдено.");

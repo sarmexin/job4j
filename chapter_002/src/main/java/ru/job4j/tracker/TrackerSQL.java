@@ -2,6 +2,7 @@ package ru.job4j.tracker;
 
 import java.io.InputStream;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import org.slf4j.Logger;
@@ -32,13 +33,13 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     }
 
     @Override
-    public Item add(Item item) {
+    public Item add(Item item) { //работает
         this.init();
         try {
-            System.out.println("запрос ушёл 1" + connection);
-            PreparedStatement statement = connection.prepareStatement("INSERT INTO application(name, descc) values(?, ?)");
-            statement.setString(1, "Заяв 1");
-            statement.setString(2, "1111");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO application(name, descc, created) values(?, ?, ?)");
+            statement.setString(1, item.getName());
+            statement.setString(2, item.getDescription());
+            statement.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
             statement.executeUpdate();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -51,7 +52,6 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                 }
             }
         }
-
         return item;
     }
 
@@ -61,13 +61,53 @@ return true;
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(String id) {  //работает
+        this.init();
+        try {
+            PreparedStatement statement = connection.prepareStatement("DELETE FROM application WHERE id=?");
+            statement.setInt(1, Integer.parseInt(id));
+            statement.executeUpdate();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
+        }
 return true;
     }
 
     @Override
     public List<Item> findByName(String key) {
-        return null;
+        this.init();
+        List<Item> list = new ArrayList<Item>();
+        try {
+            PreparedStatement statement = connection.prepareStatement("select * from application where name=?");
+            statement.setString(1, key);
+            ResultSet resultSet = statement.executeQuery ();
+            System.out.println(">>>" + resultSet.getString("name"));
+           // statement.executeUpdate();
+           // List<Item> list = new ArrayList<Item>();
+            while (resultSet.next()) {
+                list.add((Item) resultSet);
+                System.out.println("+" + list);
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
+        }
+        return list;
     }
 
     @Override

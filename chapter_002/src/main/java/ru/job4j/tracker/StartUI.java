@@ -47,7 +47,7 @@ public class StartUI {
             Consumer<List<UserAction>> consumer = x -> {
                 for (UserAction action : x) {
                     if (action != null) {
-                        System.out.println(action.info());
+                        System.out.println("unit " + action.info());
                     }
                 }
             };

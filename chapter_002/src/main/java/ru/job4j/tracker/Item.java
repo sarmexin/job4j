@@ -13,11 +13,12 @@ public class Item {
     private String id;
     private String name;
     private String desc;
-    private long created;
+    private String created;
 
     public Item() {
 
     }
+
 
     /**
      * Конструктор инициализирующий поля
@@ -26,11 +27,18 @@ public class Item {
      * @param description
      * @param created
      */
-    public Item(String name, String description, long created) {
+    public Item(String name, String description, String created) {
         this.name = name;
         this.desc = description;
         this.created = created;
     }
+
+
+//    public Item(String id,String name, String description, String created) {
+//        this.name = name;
+//        this.desc = description;
+//        this.created = created;
+//    }
 
     /**
      * Конструктор инициализирующий поля.
@@ -52,68 +60,35 @@ public class Item {
         return "Id: " + this.getId() + " name: " + this.getName() + " desc: " + this.getDescription() + " created " + this.getCreated();
     }
 
-    /**
-     * @return возвращает Id.
-     */
     public String getId() {
         return this.id;
     }
 
-    /**
-     * @return возвращает name.
-     */
     public String getName() {
         return this.name;
     }
 
-    /**
-     * @return возвращает desc.
-     */
     public String getDescription() {
         return this.desc;
     }
 
-    /**
-     * @return возвращает created.
-     */
-    public long getCreated() {
+    public String getCreated() {
         return created;
     }
 
-    /**
-     * Принимает Id.
-     *
-     * @param id
-     */
     public void setId(String id) {
         this.id = id;
     }
 
-    /**
-     * Принимает name.
-     *
-     * @param name
-     */
     public void setName(String name) {
         this.name = name;
     }
-
-    /**
-     * Принимает desc.
-     *
-     * @param desc
-     */
 
     public void setDesc(String desc) {
         this.desc = desc;
     }
 
-    /**
-     * Принимает created.
-     *
-     * @param created
-     */
-    public void setCreated(long created) {
+    public void setCreated(String created) {
         this.created = created;
     }
 

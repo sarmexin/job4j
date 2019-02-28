@@ -83,6 +83,7 @@ return true;
 
     @Override
     public List<Item> findByName(String key) {
+        System.out.println("key  " + key);
         this.init();
         List<Item> list = new ArrayList<Item>();
         try {
@@ -90,11 +91,10 @@ return true;
             statement.setString(1, key);
             ResultSet resultSet = statement.executeQuery ();
             System.out.println(">>>" + resultSet.getString("name"));
-           // statement.executeUpdate();
-           // List<Item> list = new ArrayList<Item>();
             while (resultSet.next()) {
-                list.add((Item) resultSet);
-                System.out.println("+" + list);
+                Item item = new Item(resultSet.getString("name"), resultSet.getString("descc"), String.format("%s", resultSet.getTimestamp("created")));
+                item.setId(String.valueOf(resultSet.getInt("id")));
+                list.add(item);
             }
         } catch (Exception e) {
             log.error(e.getMessage(), e);
@@ -112,7 +112,32 @@ return true;
 
     @Override
     public Item findById(String id) {
-        return null;
+        this.init();
+        Item item = null;
+        System.out.println(id);
+        try {
+            PreparedStatement statement = connection.prepareStatement("select * from application where id=?");
+            statement.setInt(1, Integer.parseInt(id));
+            ResultSet resultSet = statement.executeQuery ();
+            System.out.println(resultSet.getString("name"));
+            System.out.println(">>>" + resultSet.getString("name"));
+            while (resultSet.next()) {
+                item = new Item(resultSet.getString("name"), resultSet.getString("descc"), String.format("%s", resultSet.getTimestamp("created")));
+                item.setId(String.valueOf(resultSet.getInt("id")));
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
+        }
+        System.out.println(item.getName());
+        return item;
     }
 
     @Override
@@ -121,7 +146,28 @@ return true;
     }
 
     @Override
-    public List<Item> findAll() {
-        return null;
+    public List<Item> findAll() {  //работает
+        this.init();
+        List<Item> list = new ArrayList<Item>();
+        try {
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery ("select * from application;");
+            while (resultSet.next()) {
+                Item item = new Item(resultSet.getString("name"), resultSet.getString("descc"), String.format("%s", resultSet.getTimestamp("created")));
+                item.setId(String.valueOf(resultSet.getInt("id")));
+                list.add(item);
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                    log.error(e.getMessage(), e);
+                }
+            }
+        }
+        return list;
     }
 }

@@ -23,7 +23,7 @@ public class TrackerTest {
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
-        Item item = new Item("test1", "testDescription", 123L);
+        Item item = new Item("test1", "testDescription", "123L");
         Item result = tracker.add(item);
         assertThat(result, is(item));
     }
@@ -35,9 +35,9 @@ public class TrackerTest {
     @Test
     public void whenReplaceNameThenReturnNewName() {
         Tracker tracker = new Tracker();
-        Item previous1 = new Item("test1", "testDescription", 123L);
+        Item previous1 = new Item("test1", "testDescription", "123L");
         tracker.add(previous1);
-        Item previous2 = new Item("test2", "testDescription2", 1234L);
+        Item previous2 = new Item("test2", "testDescription2", "1234L");
         tracker.add(previous2);
         previous2.setId(previous1.getId());
         tracker.replace(previous1.getId(), previous2);
@@ -51,15 +51,15 @@ public class TrackerTest {
     @Test
     public void whenDelete() {
         Tracker tracker = new Tracker();
-        Item previous1 = new Item("test1", "testDescription", 123L);
+        Item previous1 = new Item("test1", "testDescription", "123L");
         tracker.add(previous1);
-        Item previous2 = new Item("test2", "testDescription", 123L);
+        Item previous2 = new Item("test2", "testDescription", "123L");
         tracker.add(previous2);
-        Item previous3 = new Item("test3", "testDescription", 123L);
+        Item previous3 = new Item("test3", "testDescription", "123L");
         tracker.add(previous3);
-        Item previous4 = new Item("test4", "testDescription", 123L);
+        Item previous4 = new Item("test4", "testDescription", "123L");
         tracker.add(previous4);
-        Item previous5 = new Item("test5", "testDescription", 123L);
+        Item previous5 = new Item("test5", "testDescription", "123L");
         tracker.add(previous5);
         String prov = previous3.getId();
         tracker.delete(prov);
@@ -74,13 +74,13 @@ public class TrackerTest {
     @Test
     public void whenGetAListOfAllApplications() {
         Tracker tracker = new Tracker();
-        Item previous1 = new Item("test1", "testDescription", 123L);
+        Item previous1 = new Item("test1", "testDescription", "123L");
         tracker.add(previous1);
-        Item previous2 = new Item("test2", "testDescription", 123L);
+        Item previous2 = new Item("test2", "testDescription", "123L");
         tracker.add(previous2);
-        Item previous3 = new Item("test3", "testDescription", 123L);
+        Item previous3 = new Item("test3", "testDescription", "123L");
         tracker.add(previous3);
-        Item previous4 = new Item("test4", "testDescription", 123L);
+        Item previous4 = new Item("test4", "testDescription", "123L");
         tracker.add(previous4);
         List<Item> result = tracker.findAll();
         List<Item> expect = new ArrayList<>();
@@ -99,13 +99,13 @@ public class TrackerTest {
     public void whenGetAListOfNamed() {
         Tracker tracker = new Tracker();
         Item prov = null;
-        Item previous1 = new Item("test1", "testDescription", 123L);
+        Item previous1 = new Item("test1", "testDescription", "123L");
         tracker.add(previous1);
-        Item previous2 = new Item("test2", "testDescription", 123L);
+        Item previous2 = new Item("test2", "testDescription", "123L");
         tracker.add(previous2);
-        Item previous3 = new Item("test1", "testDescription", 123L);
+        Item previous3 = new Item("test1", "testDescription", "23L");
         tracker.add(previous3);
-        Item previous4 = new Item("test4", "testDescription", 123L);
+        Item previous4 = new Item("test4", "testDescription", "123L");
         tracker.add(previous4);
         List<Item> result = tracker.findByName("test2");
         List<Item> expect = new ArrayList<>();
@@ -120,13 +120,13 @@ public class TrackerTest {
     @Test
     public void whenTheReceiptOfTheApplicationForId() {
         Tracker tracker = new Tracker();
-        Item previous1 = new Item("test1", "testDescription", 123L);
+        Item previous1 = new Item("test1", "testDescription", "123L");
         tracker.add(previous1);
-        Item previous2 = new Item("test2", "testDescription", 123L);
+        Item previous2 = new Item("test2", "testDescription", "123L");
         tracker.add(previous2);
-        Item previous3 = new Item("test3", "testDescription", 123L);
+        Item previous3 = new Item("test3", "testDescription", "123L");
         tracker.add(previous3);
-        Item previous4 = new Item("test4", "testDescription", 123L);
+        Item previous4 = new Item("test4", "testDescription", "123L");
         tracker.add(previous4);
         String idProv = previous3.getId();
         assertThat(tracker.findById(idProv), is(previous3));

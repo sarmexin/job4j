@@ -51,6 +51,7 @@ public class Tracker implements ITracker {
      * @param item
      */
     public boolean replace(String id, Item item) {
+        System.out.println("in old tracker");
         boolean result = false;
         if (this.findById(id) != null) {
             result = items.stream()

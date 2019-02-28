@@ -170,7 +170,7 @@ public class MenuTracker {
             List<Item> array = tracker.findByName(name);
             if (array.size() != 0) {
                 for (Item str : array) {
-                    System.out.println(str.getName());
+                    System.out.println(str);
                 }
             } else {
                 System.out.println("Заявки с именем : " + name + " не найдено.");

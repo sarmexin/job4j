@@ -1,4 +1,4 @@
-package hire;
+package NewProjects;
 
 public class Cars {
     private final String name;
